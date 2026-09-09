@@ -1,20 +1,20 @@
-import { Trophy, Users, Calendar, Target, Brain, Flame, Award, Lightbulb, Compass, Sparkles } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export default function StatsBanner() {
   const stats = [
-    { number: "16", label: "SCHOOLS", sub: "Elite Senior Teams", icon: Users, color: "text-essd-gold" },
-    { number: "02", label: "DAYS", sub: "16th & 17th Oct 2026", icon: Calendar, color: "text-essd-orange" },
-    { number: "01", label: "CHAMPION", sub: "Gold Trophy & Scholarship", icon: Trophy, color: "text-essd-gold" },
-    { number: "01", label: "STATE-WIDE STAGE", sub: "Enugu Secretariat Complex", icon: Target, color: "text-essd-cream" },
+    { number: "16", label: "SCHOOLS", sub: "Elite Senior Teams", icon: Icons.Users, color: "text-essd-gold" },
+    { number: "02", label: "DAYS", sub: "16th & 17th Oct 2026", icon: Icons.Calendar, color: "text-essd-orange" },
+    { number: "01", label: "CHAMPION", sub: "Gold Trophy & Scholarship", icon: Icons.Trophy, color: "text-essd-gold" },
+    { number: "01", label: "STATE-WIDE STAGE", sub: "Enugu Secretariat Complex", icon: Icons.Target, color: "text-essd-cream" },
   ];
 
   const competencies = [
-    { name: "Critical Thinking", desc: "Rigorous logical analysis of complex AI policies & educational paradigms", icon: Brain },
-    { name: "Public Speaking", desc: "Commanding poise, eloquent delivery, and persuasion under pressure", icon: Flame },
-    { name: "Deep Research", desc: "Evidence-backed arguments drawing from global and Nigerian pedagogical data", icon: Lightbulb },
-    { name: "Reasoning & Logic", desc: "Dissecting fallacies, crafting resilient rebuttals in real-time", icon: Compass },
-    { name: "Confidence & Poise", desc: "Commanding the podium before state adjudicators and thousands of peers", icon: Award },
-    { name: "Intellectual Curiosity", desc: "Challenging conventional assumptions about technology and human agency", icon: Sparkles },
+    { name: "Critical Thinking", desc: "Rigorous logical analysis of complex AI policies & educational paradigms", icon: Icons.Brain },
+    { name: "Public Speaking", desc: "Commanding poise, eloquent delivery, and persuasion under pressure", icon: Icons.Flame },
+    { name: "Deep Research", desc: "Evidence-backed arguments drawing from global and Nigerian pedagogical data", icon: Icons.Lightbulb },
+    { name: "Reasoning & Logic", desc: "Dissecting fallacies, crafting resilient rebuttals in real-time", icon: Icons.Compass },
+    { name: "Confidence & Poise", desc: "Commanding the podium before state adjudicators and thousands of peers", icon: Icons.Award },
+    { name: "Intellectual Curiosity", desc: "Challenging conventional assumptions about technology and human agency", icon: Icons.Sparkles },
   ];
 
   return (
@@ -27,7 +27,7 @@ export default function StatsBanner() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 bg-essd-gold/10 border border-essd-gold px-3 py-1 text-essd-gold font-mono text-xs font-bold uppercase tracking-widest mb-3">
-            <Brain className="w-3.5 h-3.5" />
+            <Icons.Brain className="w-3.5 h-3.5" />
             Empowering Enugu's Youth
           </div>
           <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-tight text-essd-cream leading-tight">

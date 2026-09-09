@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Brain, Sparkles, BookOpen, Shield, Target, Award, ArrowRight, Lightbulb, Users, Compass } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export const metadata = {
   title: "About ESSD 2026 | Beyond the Algorithm",
@@ -12,25 +12,25 @@ export default function AboutPage() {
     {
       title: "Education & Pedagogy",
       desc: "Examining how adaptive algorithms, personalized tutoring, and automated assessment fundamentally alter secondary school classrooms.",
-      icon: BookOpen,
+      icon: Icons.BookOpen,
       color: "border-essd-gold",
     },
     {
       title: "Human Intelligence vs AI",
       desc: "Distinguishing the irreplaceable moral, emotional, and creative sovereignty of human reason from algorithmic computation.",
-      icon: Brain,
+      icon: Icons.Brain,
       color: "border-essd-orange",
     },
     {
       title: "Critical Thinking & Originality",
       desc: "Protecting deep independent research and intellectual rigor against the risks of cognitive passivity and synthetic content generation.",
-      icon: Lightbulb,
+      icon: Icons.Lightbulb,
       color: "border-essd-gold",
     },
     {
       title: "Ethical & Societal Equity",
       desc: "Debating the digital divide across Nigerian urban and rural communities, algorithmic bias, and the sovereignty of indigenous African knowledge.",
-      icon: Compass,
+      icon: Icons.Compass,
       color: "border-essd-orange",
     },
   ];
@@ -90,7 +90,7 @@ export default function AboutPage() {
                 className="inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[4px_4px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all"
               >
                 Register Your School
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <Icons.ArrowRight className="w-4 h-4 ml-2" />
               </Link>
               <Link
                 href="/championship"

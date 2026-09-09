@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { MatchData, SchoolData } from "@/lib/types";
 import MatchModal from "@/components/match-modal";
-import { Calendar, Clock, MapPin, Trophy, Users, Search, Filter, Flame, Eye, Award } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 interface FixturesClientProps {
   initialMatches: MatchData[];
@@ -146,7 +146,7 @@ export default function FixturesClient({ initialMatches, schools }: FixturesClie
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-essd-black border border-essd-border focus:border-essd-gold pl-8 pr-3 py-2 text-xs text-essd-cream font-sans focus:outline-none"
               />
-              <Search className="w-3.5 h-3.5 text-essd-cream-muted absolute left-2.5 top-2.5" />
+              <Icons.Search className="w-3.5 h-3.5 text-essd-cream-muted absolute left-2.5 top-2.5" />
             </div>
           </div>
 
@@ -289,17 +289,17 @@ export default function FixturesClient({ initialMatches, schools }: FixturesClie
               <div className="pt-3 border-t border-essd-border/60 flex items-center justify-between text-[11px] font-mono text-essd-cream-muted">
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-essd-gold" />
+                    <Icons.Calendar className="w-3.5 h-3.5 text-essd-gold" />
                     {m.date}
                   </span>
                   <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-essd-orange" />
+                    <Icons.Clock className="w-3.5 h-3.5 text-essd-orange" />
                     {m.time}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-1 text-essd-gold font-bold group-hover:underline">
-                  <Eye className="w-3.5 h-3.5" />
+                  <Icons.Eye className="w-3.5 h-3.5" />
                   <span>View Details</span>
                 </div>
               </div>
@@ -310,7 +310,7 @@ export default function FixturesClient({ initialMatches, schools }: FixturesClie
 
       {filteredMatches.length === 0 && (
         <div className="p-12 text-center bg-essd-charcoal border-2 border-dashed border-essd-border">
-          <Trophy className="w-10 h-10 text-essd-cream-muted mx-auto mb-3 opacity-40" />
+          <Icons.Trophy className="w-10 h-10 text-essd-cream-muted mx-auto mb-3 opacity-40" />
           <h3 className="text-base font-bold font-display uppercase text-essd-cream">
             No Match Fixtures Found
           </h3>

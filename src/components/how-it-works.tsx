@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { UserPlus, Shuffle, Mic2, TrendingUp, Trophy, ArrowRight, CheckCircle } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export default function HowItWorks() {
   const steps = [
@@ -7,8 +7,8 @@ export default function HowItWorks() {
       step: "01",
       title: "REGISTER",
       subtitle: "Schools Enter Roster",
-      description: "Secondary schools across Enugu State register their official delegation (3 debaters, captain, and coordinator) through the portal.",
-      icon: UserPlus,
+      description: "Secondary schools across Enugu State register their official delegation (2 debaters with designated captain, and 1 teacher coordinator).",
+      icon: Icons.User,
       highlight: "Online Registration Portal",
     },
     {
@@ -16,7 +16,7 @@ export default function HowItWorks() {
       title: "QUALIFY",
       subtitle: "Seeding & Group Draw",
       description: "Accredited schools enter the official state championship draw and receive their Round of 16 tournament bracket seedings and motions.",
-      icon: Shuffle,
+      icon: Icons.Shuffle,
       highlight: "16-School Knockout Draw",
     },
     {
@@ -24,7 +24,7 @@ export default function HowItWorks() {
       title: "DEBATE",
       subtitle: "Live State Battles",
       description: "Squads lock horns at the Enugu State Secretariat Auditorium under strict WSDC rules (Matter, Manner, Method, Cross-Examination).",
-      icon: Mic2,
+      icon: Icons.Mic,
       highlight: "16th & 17th Oct 2026",
     },
     {
@@ -32,7 +32,7 @@ export default function HowItWorks() {
       title: "ADVANCE",
       subtitle: "Knockout Progression",
       description: "Winners of each round advance automatically through Quarter-Finals and Semi-Finals on the live tournament digital bracket.",
-      icon: TrendingUp,
+      icon: Icons.TrendingUp,
       highlight: "Real-time Bracket Updates",
     },
     {
@@ -40,7 +40,7 @@ export default function HowItWorks() {
       title: "CHAMPION",
       subtitle: "The Grand Coronation",
       description: "The supreme finalists clash in the Grand Final. The champion claims international scholarships, millions in cash, and the Gold Trophy.",
-      icon: Trophy,
+      icon: Icons.Trophy,
       highlight: "Scholarship & Gold Trophy",
     },
   ];
@@ -111,7 +111,7 @@ export default function HowItWorks() {
                   </div>
 
                   <div className="pt-3 border-t border-essd-border/60 flex items-center gap-1.5 text-[10px] font-mono text-essd-cream font-bold">
-                    <CheckCircle className="w-3 h-3 text-essd-gold" />
+                    <Icons.CheckCircle className="w-3.5 h-3.5 text-essd-gold" />
                     <span>{item.highlight}</span>
                   </div>
                 </div>
@@ -136,7 +136,7 @@ export default function HowItWorks() {
             className="flex-shrink-0 inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-colors"
           >
             Register Team Today
-            <ArrowRight className="w-4 h-4 ml-2" />
+            <Icons.ArrowRight className="w-4 h-4 ml-2" />
           </Link>
         </div>
 

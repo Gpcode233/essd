@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import { SchoolData, ENUGU_LGAS } from "@/lib/types";
-import { Trophy, Users, Award, MapPin, Search, School, Sparkles, CheckCircle2 } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 interface SchoolsClientProps {
   initialSchools: SchoolData[];
@@ -106,7 +107,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-essd-black border border-essd-border focus:border-essd-gold pl-8 pr-3 py-2 text-xs text-essd-cream font-sans focus:outline-none"
               />
-              <Search className="w-3.5 h-3.5 text-essd-cream-muted absolute left-2.5 top-2.5" />
+              <Icons.Search className="w-3.5 h-3.5 text-essd-cream-muted absolute left-2.5 top-2.5" />
             </div>
           </div>
 
@@ -115,100 +116,121 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
 
       {/* Directory Count */}
       <div className="flex items-center justify-between text-xs font-mono text-essd-cream-muted">
-        <span>Showing {filteredSchools.length} of {initialSchools.length} Participating Schools</span>
+        <span>Showing {filteredSchools.length} of {initialSchools.length} Registered Schools</span>
       </div>
 
       {/* School Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredSchools.map((school, idx) => {
-          const initials = getInitials(school.name);
-          const captain = school.teamMembers?.find((m) => m.role === "CAPTAIN");
-          const speakers = school.teamMembers?.filter((m) => m.role !== "CAPTAIN") || [];
+      {filteredSchools.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredSchools.map((school) => {
+            const initials = getInitials(school.name);
+            const captain = school.teamMembers?.find((m) => m.role === "CAPTAIN");
+            const speakers = school.teamMembers?.filter((m) => m.role !== "CAPTAIN") || [];
 
-          return (
-            <div
-              key={school.id}
-              className="bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold p-6 flex flex-col justify-between shadow-[4px_4px_0px_#0A0A0C] hover:shadow-[6px_6px_0px_#E8A927] hover:-translate-y-1 transition-all duration-200 group"
-            >
-              <div>
-                {/* Top Header with Monogram */}
-                <div className="flex items-start gap-4 mb-4">
-                  {/* Elegant Monogram Crest */}
-                  <div className="w-14 h-14 rounded-full bg-essd-black border-2 border-essd-gold flex items-center justify-center text-essd-gold font-display font-black text-base shadow-[0_0_12px_rgba(232,169,39,0.3)] flex-shrink-0 group-hover:bg-essd-gold group-hover:text-essd-black transition-colors">
-                    {initials}
-                  </div>
-
-                  <div className="overflow-hidden">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="px-2 py-0.5 bg-essd-dark text-essd-gold border border-essd-gold/30 font-mono text-[9px] font-bold uppercase">
-                        {getTypeLabel(school.type)}
-                      </span>
-                      {school.seedRank && (
-                        <span className="text-[10px] font-mono text-essd-cream-muted">
-                          Seed #{school.seedRank}
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="text-base font-black font-display uppercase text-essd-cream leading-snug group-hover:text-essd-gold transition-colors">
-                      {school.name}
-                    </h3>
-                  </div>
-                </div>
-
-                {/* Location & Motto */}
-                <div className="space-y-1 text-xs font-mono text-essd-cream-muted mb-4 pb-3 border-b border-essd-border/80">
-                  <div className="flex items-center gap-1.5 text-essd-cream">
-                    <MapPin className="w-3.5 h-3.5 text-essd-orange flex-shrink-0" />
-                    <span>{school.lga} LGA, Enugu</span>
-                  </div>
-                  {school.motto && (
-                    <p className="italic text-[11px] text-essd-cream-muted/70 truncate">
-                      "{school.motto}"
-                    </p>
-                  )}
-                </div>
-
-                {/* Squad Members */}
-                <div className="space-y-2 mb-4">
-                  <span className="text-[10px] font-mono font-bold uppercase text-essd-gold block">
-                    Accredited Debaters:
-                  </span>
-                  
-                  {captain && (
-                    <div className="flex items-center justify-between text-xs font-mono bg-essd-black p-2 border border-essd-border">
-                      <span className="font-bold text-essd-cream truncate">
-                        👑 {captain.fullName}
-                      </span>
-                      <span className="text-[10px] text-essd-gold font-bold">{captain.classGrade} (Captain)</span>
-                    </div>
-                  )}
-
-                  <div className="space-y-1">
-                    {speakers.map((sp) => (
-                      <div key={sp.id} className="flex items-center justify-between text-[11px] font-mono text-essd-cream-muted px-2 py-1 bg-essd-dark/40">
-                        <span className="truncate">{sp.fullName}</span>
-                        <span className="text-[10px] text-essd-cream-muted/60">{sp.classGrade}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Tournament Stats Footer */}
-              <div className="pt-3 border-t border-essd-border/80 flex items-center justify-between text-xs font-mono">
+            return (
+              <div
+                key={school.id}
+                className="bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold p-6 flex flex-col justify-between shadow-[4px_4px_0px_#0A0A0C] hover:shadow-[6px_6px_0px_#E8A927] hover:-translate-y-1 transition-all duration-200 group"
+              >
                 <div>
-                  <span className="text-essd-cream-muted block text-[10px]">Points Rating:</span>
-                  <span className="font-bold text-essd-gold text-sm">{school.points} pts</span>
+                  {/* Top Header with Monogram */}
+                  <div className="flex items-start gap-4 mb-4">
+                    {/* Monogram Crest */}
+                    <div className="w-14 h-14 rounded-full bg-essd-black border-2 border-essd-gold flex items-center justify-center text-essd-gold font-display font-black text-base shadow-[0_0_12px_rgba(232,169,39,0.3)] flex-shrink-0 group-hover:bg-essd-gold group-hover:text-essd-black transition-colors">
+                      {initials}
+                    </div>
+
+                    <div className="overflow-hidden">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="px-2 py-0.5 bg-essd-dark text-essd-gold border border-essd-gold/30 font-mono text-[9px] font-bold uppercase">
+                          {getTypeLabel(school.type)}
+                        </span>
+                        {school.seedRank && (
+                          <span className="text-[10px] font-mono text-essd-cream-muted">
+                            Seed #{school.seedRank}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-base font-black font-display uppercase text-essd-cream leading-snug group-hover:text-essd-gold transition-colors">
+                        {school.name}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Location & Motto */}
+                  <div className="space-y-1 text-xs font-mono text-essd-cream-muted mb-4 pb-3 border-b border-essd-border/80">
+                    <div className="flex items-center gap-1.5 text-essd-cream">
+                      <Icons.Location className="w-3.5 h-3.5 text-essd-orange flex-shrink-0" />
+                      <span>{school.lga} LGA, Enugu</span>
+                    </div>
+                    {school.motto && (
+                      <p className="italic text-[11px] text-essd-cream-muted/70 truncate">
+                        "{school.motto}"
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Squad Members */}
+                  <div className="space-y-2 mb-4">
+                    <span className="text-[10px] font-mono font-bold uppercase text-essd-gold block">
+                      Accredited Debaters:
+                    </span>
+                    
+                    {captain && (
+                      <div className="flex items-center justify-between text-xs font-mono bg-essd-black p-2 border border-essd-border">
+                        <span className="font-bold text-essd-cream truncate">
+                          👑 {captain.fullName}
+                        </span>
+                        <span className="text-[10px] text-essd-gold font-bold">{captain.classGrade} (Captain)</span>
+                      </div>
+                    )}
+
+                    <div className="space-y-1">
+                      {speakers.map((sp) => (
+                        <div key={sp.id} className="flex items-center justify-between text-[11px] font-mono text-essd-cream-muted px-2 py-1 bg-essd-dark/40">
+                          <span className="truncate">{sp.fullName}</span>
+                          <span className="text-[10px] text-essd-cream-muted/60">{sp.classGrade}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <span className="text-essd-cream-muted block text-[10px]">Record (W-L):</span>
-                  <span className="font-bold text-essd-cream text-sm">{school.wins}W - {school.losses}L</span>
+
+                {/* Tournament Stats Footer */}
+                <div className="pt-3 border-t border-essd-border/80 flex items-center justify-between text-xs font-mono">
+                  <div>
+                    <span className="text-essd-cream-muted block text-[10px]">Points Rating:</span>
+                    <span className="font-bold text-essd-gold text-sm">{school.points} pts</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-essd-cream-muted block text-[10px]">Record (W-L):</span>
+                    <span className="font-bold text-essd-cream text-sm">{school.wins}W - {school.losses}L</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="p-12 text-center bg-essd-charcoal border-2 border-dashed border-essd-border space-y-4">
+          <Icons.School className="w-12 h-12 text-essd-gold mx-auto opacity-70" />
+          <h3 className="text-xl font-bold font-display uppercase text-essd-cream">
+            Awaiting School Registrations
+          </h3>
+          <p className="text-xs sm:text-sm text-essd-cream-muted max-w-md mx-auto font-sans">
+            School delegations are currently being registered across Enugu State. As secondary schools submit their registrations, they will appear here and in the tournament bracket.
+          </p>
+          <div className="pt-2">
+            <Link
+              href="/register"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-xs uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all"
+            >
+              <Icons.Sparkles className="w-4 h-4 fill-current" />
+              Register Your School Now
+            </Link>
+          </div>
+        </div>
+      )}
 
     </div>
   );

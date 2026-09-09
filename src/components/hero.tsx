@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Sparkles, Trophy, Calendar, MapPin, ArrowRight, Shield, Mic, CheckCircle2 } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export default function Hero() {
   const [timeLeft, setTimeLeft] = useState({
@@ -43,12 +43,12 @@ export default function Hero() {
         
         {/* Subtle decorative geometric stamps */}
         <div className="absolute top-6 left-6 hidden sm:flex items-center gap-2 bg-essd-black text-essd-cream px-3 py-1.5 font-mono text-xs uppercase font-bold border-2 border-essd-cream shadow-[3px_3px_0px_rgba(0,0,0,0.5)] rotate-[-2deg]">
-          <Shield className="w-3.5 h-3.5 text-essd-gold" />
+          <Icons.Shield className="w-3.5 h-3.5 text-essd-gold" />
           <span>Official State Championship</span>
         </div>
 
         <div className="absolute top-6 right-6 hidden sm:flex items-center gap-2 bg-essd-orange text-white px-3 py-1.5 font-mono text-xs uppercase font-bold border-2 border-essd-black shadow-[3px_3px_0px_#0A0A0C] rotate-[2deg]">
-          <Mic className="w-3.5 h-3.5" />
+          <Icons.Mic className="w-3.5 h-3.5" />
           <span>16 Elite Secondary Schools</span>
         </div>
 
@@ -153,7 +153,7 @@ export default function Hero() {
               {/* Event Dates Stamp */}
               <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-3">
                 <div className="bg-essd-black text-essd-cream px-5 py-2.5 border-3 border-essd-gold shadow-[4px_4px_0px_#0A0A0C] flex items-center gap-3">
-                  <Calendar className="w-5 h-5 text-essd-gold flex-shrink-0" />
+                  <Icons.Calendar className="w-5 h-5 text-essd-gold flex-shrink-0" />
                   <div className="text-left">
                     <span className="text-[10px] font-mono uppercase font-bold text-essd-gold block">
                       Official Date
@@ -165,7 +165,7 @@ export default function Hero() {
                 </div>
 
                 <div className="bg-essd-black text-essd-cream px-4 py-2.5 border-3 border-essd-orange shadow-[4px_4px_0px_#0A0A0C] flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-essd-orange flex-shrink-0" />
+                  <Icons.Location className="w-5 h-5 text-essd-orange flex-shrink-0" />
                   <div className="text-left">
                     <span className="text-[10px] font-mono uppercase font-bold text-essd-orange block">
                       Venue
@@ -183,16 +183,16 @@ export default function Hero() {
                   href="/register"
                   className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-essd-black text-essd-gold hover:bg-essd-orange hover:text-white font-display text-base font-black uppercase tracking-wider border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all group"
                 >
-                  <Sparkles className="w-5 h-5 mr-2 text-essd-gold group-hover:text-white group-hover:rotate-12 transition-transform" />
+                  <Icons.Sparkles className="w-5 h-5 mr-2 text-essd-gold group-hover:text-white transition-transform" />
                   Register Your School
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <Icons.ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
 
                 <Link
                   href="/championship"
                   className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-4 bg-essd-cream text-essd-black hover:bg-essd-gold font-display text-base font-black uppercase tracking-wider border-4 border-essd-black shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all"
                 >
-                  <Trophy className="w-5 h-5 mr-2 text-essd-orange" />
+                  <Icons.Trophy className="w-5 h-5 mr-2 text-essd-orange" />
                   View Championship
                 </Link>
               </div>

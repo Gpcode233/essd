@@ -6,7 +6,7 @@ import TournamentBracket from "@/components/tournament-bracket";
 import PrizeShowcase from "@/components/prize-showcase";
 import FAQSection from "@/components/faq-section";
 import Link from "next/link";
-import { Trophy, ArrowRight, Sparkles } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export const dynamic = "force-dynamic";
 
@@ -29,7 +29,7 @@ export default async function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
               <div className="inline-flex items-center gap-2 bg-essd-gold/10 border border-essd-gold px-3 py-1 text-essd-gold font-mono text-xs font-bold uppercase tracking-widest mb-3">
-                <Trophy className="w-3.5 h-3.5 text-essd-gold" />
+                <Icons.Trophy className="w-3.5 h-3.5 text-essd-gold" />
                 Live Tournament Progression
               </div>
               <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-tight text-essd-cream">
@@ -44,7 +44,7 @@ export default async function HomePage() {
                 className="inline-flex items-center justify-center px-5 py-2.5 bg-essd-gold text-essd-black hover:bg-essd-orange hover:text-white font-display font-black text-xs uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] transition-all"
               >
                 Explore Full Tournament Hub
-                <ArrowRight className="w-4 h-4 ml-1.5" />
+                <Icons.ArrowRight className="w-4 h-4 ml-1.5" />
               </Link>
             </div>
           </div>
@@ -87,7 +87,7 @@ export default async function HomePage() {
               href="/register"
               className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-essd-black text-essd-gold hover:bg-essd-orange hover:text-white font-display text-base font-black uppercase tracking-wider border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all"
             >
-              <Sparkles className="w-5 h-5 mr-2 text-essd-gold" />
+              <Icons.Sparkles className="w-5 h-5 mr-2 text-essd-gold" />
               Register Your School
             </Link>
 

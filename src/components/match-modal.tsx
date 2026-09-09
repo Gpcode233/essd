@@ -1,7 +1,7 @@
 "use client";
 
 import { MatchData } from "@/lib/types";
-import { X, Trophy, Calendar, Clock, MapPin, Users, Flame, Shield, CheckCircle2, Award } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 interface MatchModalProps {
   match: MatchData | null;
@@ -24,7 +24,7 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
           className="absolute top-4 right-4 p-2 bg-essd-dark text-essd-cream hover:text-essd-orange hover:bg-essd-black transition-colors border border-essd-border"
           aria-label="Close modal"
         >
-          <X className="w-5 h-5" />
+          <Icons.Close className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
@@ -72,7 +72,7 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
               )}
               {match.winnerId === match.schoolA?.id && (
                 <div className="mt-2 inline-flex items-center gap-1 text-xs font-mono font-bold text-essd-gold uppercase">
-                  <Award className="w-3.5 h-3.5" />
+                  <Icons.Award className="w-3.5 h-3.5" />
                   Winner / Advanced
                 </div>
               )}
@@ -105,7 +105,7 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
               )}
               {match.winnerId === match.schoolB?.id && (
                 <div className="mt-2 inline-flex items-center gap-1 text-xs font-mono font-bold text-essd-gold uppercase">
-                  <Award className="w-3.5 h-3.5" />
+                  <Icons.Award className="w-3.5 h-3.5" />
                   Winner / Advanced
                 </div>
               )}
@@ -128,22 +128,22 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono mb-6">
           <div className="p-3 bg-essd-black border border-essd-border space-y-2">
             <div className="flex items-center gap-2 text-essd-gold font-bold">
-              <Calendar className="w-4 h-4" />
+              <Icons.Calendar className="w-4 h-4" />
               <span>{match.date}</span>
             </div>
             <div className="flex items-center gap-2 text-essd-cream-muted">
-              <Clock className="w-4 h-4 text-essd-orange" />
+              <Icons.Clock className="w-4 h-4 text-essd-orange" />
               <span>{match.time} WAT</span>
             </div>
             <div className="flex items-start gap-2 text-essd-cream-muted">
-              <MapPin className="w-4 h-4 text-essd-gold flex-shrink-0 mt-0.5" />
+              <Icons.Location className="w-4 h-4 text-essd-gold flex-shrink-0 mt-0.5" />
               <span>{match.venueName}</span>
             </div>
           </div>
 
           <div className="p-3 bg-essd-black border border-essd-border space-y-2">
             <div className="flex items-center gap-2 text-essd-gold font-bold">
-              <Users className="w-4 h-4" />
+              <Icons.Users className="w-4 h-4" />
               <span>Adjudication Panel:</span>
             </div>
             <p className="text-essd-cream-muted text-[11px] leading-relaxed">

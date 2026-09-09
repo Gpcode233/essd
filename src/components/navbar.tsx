@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Trophy, Sparkles, ChevronRight, Phone } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -60,9 +60,9 @@ export default function Navbar() {
             <span className="text-essd-border">|</span>
             <a
               href="tel:+2349038296513"
-              className="flex items-center gap-1 text-essd-cream hover:text-essd-gold transition-colors"
+              className="flex items-center gap-1.5 text-essd-cream hover:text-essd-gold transition-colors"
             >
-              <Phone className="w-3 h-3 text-essd-gold" />
+              <Icons.Phone className="w-3.5 h-3.5 text-essd-gold" />
               +234 903 829 6513
             </a>
           </div>
@@ -82,7 +82,7 @@ export default function Navbar() {
             href="/"
             className="flex items-center gap-3 group focus:outline-none"
           >
-            {/* Circular Logo Frame that prominent/overlaps */}
+            {/* Circular Logo Frame */}
             <div className="relative flex-shrink-0">
               <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-gradient-to-tr from-essd-black via-essd-dark to-essd-gold/30 p-[3px] shadow-[0_0_15px_rgba(232,169,39,0.35)] group-hover:shadow-[0_0_22px_rgba(242,90,25,0.6)] transition-all duration-300">
                 <div className="w-full h-full rounded-full bg-essd-black border-2 border-essd-gold/80 overflow-hidden flex items-center justify-center p-1.5 relative">
@@ -101,8 +101,6 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
-              {/* Outer decorative ring accent */}
-              <div className="absolute -inset-1 rounded-full border border-essd-gold/20 -z-10 animate-spin-slow pointer-events-none"></div>
             </div>
 
             {/* Brand Title */}
@@ -145,7 +143,7 @@ export default function Navbar() {
               href="/register"
               className="relative inline-flex items-center justify-center px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-none font-display text-xs sm:text-sm font-black uppercase tracking-wider text-essd-black bg-essd-gold hover:bg-essd-orange hover:text-white border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:shadow-[1px_1px_0px_#0A0A0C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150"
             >
-              <Sparkles className="w-3.5 h-3.5 mr-1.5 fill-current" />
+              <Icons.Sparkles className="w-4 h-4 mr-1.5 fill-current" />
               Register Your School
             </Link>
           </div>
@@ -164,9 +162,9 @@ export default function Navbar() {
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? (
-                <X className="w-6 h-6 text-essd-gold" />
+                <Icons.Close className="w-6 h-6 text-essd-gold" />
               ) : (
-                <Menu className="w-6 h-6 text-essd-gold" />
+                <Icons.Menu className="w-6 h-6 text-essd-gold" />
               )}
             </button>
           </div>
@@ -188,7 +186,7 @@ export default function Navbar() {
                   }`}
                 >
                   <span>{link.name}</span>
-                  <ChevronRight className="w-4 h-4 opacity-70" />
+                  <Icons.ChevronRight className="w-4 h-4 opacity-70" />
                 </Link>
               ))}
             </div>
@@ -199,7 +197,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full flex items-center justify-center py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C]"
               >
-                <Sparkles className="w-4 h-4 mr-2" />
+                <Icons.Sparkles className="w-4 h-4 mr-2" />
                 Register Your School
               </Link>
               <Link
@@ -207,7 +205,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className="w-full flex items-center justify-center py-2.5 bg-essd-charcoal text-essd-cream hover:text-essd-gold font-mono font-bold text-xs uppercase tracking-wider border border-essd-border"
               >
-                <Trophy className="w-3.5 h-3.5 mr-2 text-essd-gold" />
+                <Icons.Trophy className="w-3.5 h-3.5 mr-2 text-essd-gold" />
                 View Championship Bracket
               </Link>
             </div>

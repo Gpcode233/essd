@@ -1,7 +1,7 @@
 import { getSafeMatches } from "@/lib/data-service";
 import TournamentBracket from "@/components/tournament-bracket";
 import Link from "next/link";
-import { Trophy, Sparkles, Flame, Shield, Calendar, Clock, MapPin, ArrowRight } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export const dynamic = "force-dynamic";
 
@@ -26,7 +26,7 @@ export default async function ChampionshipPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 bg-essd-black text-essd-gold px-3 py-1 font-mono text-xs font-black uppercase border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] mb-3">
-                <Trophy className="w-3.5 h-3.5" />
+                <Icons.Trophy className="w-3.5 h-3.5" />
                 Knockout Tournament Central
               </div>
               <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display uppercase tracking-tight text-essd-black leading-none text-shadow-hard">

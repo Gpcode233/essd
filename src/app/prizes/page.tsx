@@ -1,7 +1,7 @@
 import { getSafePrizes } from "@/lib/data-service";
 import PrizeShowcase from "@/components/prize-showcase";
 import Link from "next/link";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export const dynamic = "force-dynamic";
 
@@ -52,9 +52,9 @@ export default async function PrizesPage() {
               href="/register"
               className="inline-flex items-center justify-center px-8 py-4 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[4px_4px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all"
             >
-              <Sparkles className="w-4 h-4 mr-2 fill-current" />
+              <Icons.Sparkles className="w-4 h-4 mr-2 fill-current" />
               Register Your School Today
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <Icons.ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </div>
         </div>

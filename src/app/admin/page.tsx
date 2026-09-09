@@ -1,6 +1,6 @@
 import { getSafeSchools, getSafeMatches, getSafePrizes, getSafeRegistrations } from "@/lib/data-service";
 import Link from "next/link";
-import { Users, Trophy, Calendar, Sparkles, FileText, Settings } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export const dynamic = "force-dynamic";
 
@@ -59,8 +59,8 @@ export default async function AdminDashboardPage() {
           
           <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-essd-cream-muted">
-              <span>Seeded Schools</span>
-              <Users className="w-4 h-4 text-essd-gold" />
+              <span>Confirmed Roster</span>
+              <Icons.Users className="w-4 h-4 text-essd-gold" />
             </div>
             <div className="text-3xl font-black font-display text-essd-gold">
               {schools.length}
@@ -73,7 +73,7 @@ export default async function AdminDashboardPage() {
           <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-essd-cream-muted">
               <span>Portal Registrations</span>
-              <FileText className="w-4 h-4 text-essd-orange" />
+              <Icons.FileText className="w-4 h-4 text-essd-orange" />
             </div>
             <div className="text-3xl font-black font-display text-essd-orange">
               {registrations.length}
@@ -86,7 +86,7 @@ export default async function AdminDashboardPage() {
           <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-essd-cream-muted">
               <span>Matches Tracked</span>
-              <Trophy className="w-4 h-4 text-green-400" />
+              <Icons.Trophy className="w-4 h-4 text-green-400" />
             </div>
             <div className="text-3xl font-black font-display text-green-400">
               {completedMatches.length} / {matches.length}
@@ -99,7 +99,7 @@ export default async function AdminDashboardPage() {
           <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2">
             <div className="flex items-center justify-between text-xs font-mono text-essd-cream-muted">
               <span>Prizes Configured</span>
-              <Sparkles className="w-4 h-4 text-essd-gold" />
+              <Icons.Sparkles className="w-4 h-4 text-essd-gold" />
             </div>
             <div className="text-3xl font-black font-display text-essd-cream">
               {prizes.length}
@@ -120,7 +120,7 @@ export default async function AdminDashboardPage() {
                 <span className="text-xs font-mono font-bold text-essd-gold uppercase">
                   Tournament Control
                 </span>
-                <Trophy className="w-5 h-5 text-essd-gold" />
+                <Icons.Trophy className="w-5 h-5 text-essd-gold" />
               </div>
               <h3 className="text-lg font-black font-display uppercase text-essd-cream">
                 Fixtures &amp; Live Scorekeeper
@@ -143,7 +143,7 @@ export default async function AdminDashboardPage() {
                 <span className="text-xs font-mono font-bold text-essd-orange uppercase">
                   School Accreditation
                 </span>
-                <Users className="w-5 h-5 text-essd-orange" />
+                <Icons.Users className="w-5 h-5 text-essd-orange" />
               </div>
               <h3 className="text-lg font-black font-display uppercase text-essd-cream">
                 Registrations &amp; Rosters
@@ -166,7 +166,7 @@ export default async function AdminDashboardPage() {
                 <span className="text-xs font-mono font-bold text-essd-gold uppercase">
                   Event Settings
                 </span>
-                <Settings className="w-5 h-5 text-essd-gold" />
+                <Icons.Settings className="w-5 h-5 text-essd-gold" />
               </div>
               <h3 className="text-lg font-black font-display uppercase text-essd-cream">
                 Prizes &amp; Content Editor

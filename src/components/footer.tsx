@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Calendar, Trophy, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export default function Footer() {
   return (
@@ -54,43 +54,43 @@ export default function Footer() {
             <ul className="space-y-2 text-xs font-mono">
               <li>
                 <Link href="/" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3 h-3 text-essd-gold" />
+                  <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
                   Home
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3 h-3 text-essd-gold" />
+                  <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
                   About Championship
                 </Link>
               </li>
               <li>
                 <Link href="/championship" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3 h-3 text-essd-gold" />
+                  <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
                   Knockout Bracket
                 </Link>
               </li>
               <li>
                 <Link href="/fixtures" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3 h-3 text-essd-gold" />
+                  <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
                   Fixtures &amp; Results
                 </Link>
               </li>
               <li>
                 <Link href="/schools" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3 h-3 text-essd-gold" />
+                  <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
                   Participating Schools
                 </Link>
               </li>
               <li>
                 <Link href="/prizes" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3 h-3 text-essd-gold" />
+                  <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
                   Prizes &amp; Awards
                 </Link>
               </li>
               <li>
                 <Link href="/register" className="text-essd-orange font-bold hover:underline transition-colors flex items-center gap-1.5">
-                  <ArrowUpRight className="w-3 h-3 text-essd-orange" />
+                  <Icons.ArrowUpRight className="w-3 h-3 text-essd-orange" />
                   Register School
                 </Link>
               </li>
@@ -105,7 +105,7 @@ export default function Footer() {
             </h4>
             <div className="space-y-3 text-xs">
               <div className="flex items-start gap-3">
-                <Calendar className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
+                <Icons.Calendar className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
                 <div>
                   <span className="text-essd-cream font-bold block">16th &amp; 17th October 2026</span>
                   <span className="text-essd-cream-muted text-[11px]">Two-Day Championship Tournament</span>
@@ -113,7 +113,7 @@ export default function Footer() {
               </div>
 
               <div className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-essd-orange mt-0.5 flex-shrink-0" />
+                <Icons.Phone className="w-4 h-4 text-essd-orange mt-0.5 flex-shrink-0" />
                 <div>
                   <a
                     href="tel:+2349038296513"
@@ -126,7 +126,7 @@ export default function Footer() {
               </div>
 
               <div className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
+                <Icons.Mail className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
                 <div>
                   <a
                     href="mailto:theplaceeconsults@gmail.com"
@@ -139,7 +139,7 @@ export default function Footer() {
               </div>
 
               <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-essd-cream-muted mt-0.5 flex-shrink-0" />
+                <Icons.Location className="w-4 h-4 text-essd-cream-muted mt-0.5 flex-shrink-0" />
                 <span className="text-essd-cream-muted text-[11px]">
                   Independence Layout, Enugu, Enugu State, Nigeria
                 </span>
@@ -154,7 +154,7 @@ export default function Footer() {
               Governance
             </h4>
             <div className="p-3 bg-essd-dark/80 border border-essd-border rounded text-center space-y-2">
-              <ShieldCheck className="w-6 h-6 text-essd-gold mx-auto" />
+              <Icons.Shield className="w-6 h-6 text-essd-gold mx-auto" />
               <span className="block text-[11px] font-mono font-bold text-essd-cream uppercase">
                 Adjudication Standard
               </span>

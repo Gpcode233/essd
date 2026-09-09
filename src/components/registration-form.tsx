@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ENUGU_LGAS } from "@/lib/types";
-import { Sparkles, CheckCircle2, AlertCircle, ArrowRight, Printer, School, User, Users, ShieldCheck, Trophy, Phone, Mail } from "lucide-react";
+import { Icons } from "@/components/icons";
 import confetti from "canvas-confetti";
 
 export default function RegistrationForm() {
@@ -130,7 +130,7 @@ export default function RegistrationForm() {
         {/* Success Header */}
         <div className="text-center mb-8 pb-6 border-b border-essd-border">
           <div className="w-16 h-16 rounded-full bg-essd-gold text-essd-black flex items-center justify-center mx-auto mb-4 border-2 border-essd-cream shadow-[0_0_20px_rgba(232,169,39,0.5)]">
-            <CheckCircle2 className="w-10 h-10" />
+            <Icons.CheckCircle className="w-10 h-10" />
           </div>
           <span className="px-3 py-1 bg-essd-orange text-white font-mono text-xs font-black uppercase tracking-wider inline-block mb-2">
             Registration Confirmed 🎉
@@ -207,7 +207,7 @@ export default function RegistrationForm() {
 
           <div className="pt-4 border-t border-essd-border/80 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-essd-cream-muted gap-2">
             <div className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-essd-gold" />
+              <Icons.Shield className="w-4 h-4 text-essd-gold" />
               <span>Accreditation Valid for 2 Student Debaters + 1 Coordinator</span>
             </div>
             <span className="text-essd-gold font-bold">
@@ -222,7 +222,7 @@ export default function RegistrationForm() {
             onClick={handlePrint}
             className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[4px_4px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all"
           >
-            <Printer className="w-4 h-4 mr-2" />
+            <Icons.Printer className="w-4 h-4 mr-2" />
             Print / Save Pass (PDF)
           </button>
 
@@ -267,7 +267,7 @@ export default function RegistrationForm() {
     >
       {errorMsg && (
         <div className="p-4 bg-red-950/80 border-2 border-red-500 text-red-200 text-xs font-mono flex items-start gap-3">
-          <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+          <Icons.Alert className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
           <div>
             <strong className="block font-bold uppercase">Submission Error</strong>
             {errorMsg}
@@ -277,7 +277,7 @@ export default function RegistrationForm() {
 
       {/* Info notice about 2 debaters per school */}
       <div className="p-4 bg-essd-gold/10 border-2 border-essd-gold text-xs font-mono text-essd-cream flex items-start gap-3">
-        <Trophy className="w-5 h-5 text-essd-gold flex-shrink-0 mt-0.5" />
+        <Icons.Trophy className="w-5 h-5 text-essd-gold flex-shrink-0 mt-0.5" />
         <div>
           <span className="font-bold uppercase text-essd-gold block">
             Official 2-Student Delegation Format:
@@ -289,7 +289,7 @@ export default function RegistrationForm() {
       {/* Section 1: School Information */}
       <div>
         <div className="flex items-center gap-2 pb-3 mb-6 border-b-2 border-essd-gold">
-          <School className="w-5 h-5 text-essd-gold" />
+          <Icons.School className="w-5 h-5 text-essd-gold" />
           <h3 className="text-lg font-black font-display uppercase tracking-wide text-essd-cream">
             1. School Profile &amp; Location
           </h3>
@@ -396,7 +396,7 @@ export default function RegistrationForm() {
       {/* Section 2: Contact Person / Coordinator */}
       <div>
         <div className="flex items-center gap-2 pb-3 mb-6 border-b-2 border-essd-orange">
-          <User className="w-5 h-5 text-essd-orange" />
+          <Icons.User className="w-5 h-5 text-essd-orange" />
           <h3 className="text-lg font-black font-display uppercase tracking-wide text-essd-cream">
             2. Teacher / Coordinator Contact
           </h3>
@@ -468,7 +468,7 @@ export default function RegistrationForm() {
       {/* Section 3: The 2 Student Debaters */}
       <div>
         <div className="flex items-center gap-2 pb-3 mb-6 border-b-2 border-essd-gold">
-          <Users className="w-5 h-5 text-essd-gold" />
+          <Icons.Users className="w-5 h-5 text-essd-gold" />
           <div>
             <h3 className="text-lg font-black font-display uppercase tracking-wide text-essd-cream">
               3. The Two (2) Student Debaters
@@ -615,9 +615,9 @@ export default function RegistrationForm() {
             <span>Securing Registration &amp; Slot...</span>
           ) : (
             <>
-              <Sparkles className="w-5 h-5 fill-current" />
+              <Icons.Sparkles className="w-5 h-5 fill-current" />
               Register 2 Debaters &amp; Secure Slot
-              <ArrowRight className="w-5 h-5" />
+              <Icons.ArrowRight className="w-5 h-5" />
             </>
           )}
         </button>

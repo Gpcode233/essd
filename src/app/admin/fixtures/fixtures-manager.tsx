@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MatchData, SchoolData } from "@/lib/types";
 import Link from "next/link";
-import { Trophy, ArrowLeft, Save, Sparkles, CheckCircle2, AlertCircle, Clock, Calendar, MapPin, Award, RefreshCw } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 interface FixturesManagerProps {
   initialMatches: MatchData[];
@@ -118,7 +118,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
             href="/admin"
             className="inline-flex items-center text-xs font-mono text-essd-gold hover:underline gap-1 mb-1"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
+            <Icons.ArrowLeft className="w-3.5 h-3.5" />
             Back to Dashboard
           </Link>
           <h1 className="text-2xl sm:text-3xl font-black font-display uppercase tracking-tight text-essd-cream">
@@ -135,7 +135,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
             disabled={saving}
             className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-essd-orange hover:bg-essd-orange-dark text-white font-mono font-bold text-xs uppercase shadow-[3px_3px_0px_#0A0A0C] transition-all"
           >
-            <Sparkles className="w-4 h-4" />
+            <Icons.Sparkles className="w-4 h-4" />
             ⚡ Auto-Match Registered Schools
           </button>
         </div>
@@ -150,9 +150,9 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
           }`}
         >
           {message.type === "success" ? (
-            <CheckCircle2 className="w-4 h-4 text-green-400" />
+            <Icons.CheckCircle className="w-4 h-4 text-green-400" />
           ) : (
-            <AlertCircle className="w-4 h-4 text-red-400" />
+            <Icons.Alert className="w-4 h-4 text-red-400" />
           )}
           <span>{message.text}</span>
         </div>
@@ -319,7 +319,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
                 disabled={saving}
                 className="px-6 py-2 bg-essd-gold text-essd-black font-mono font-black text-xs uppercase hover:bg-essd-orange hover:text-white transition-colors flex items-center gap-1.5"
               >
-                <Save className="w-3.5 h-3.5" />
+                <Icons.Save className="w-3.5 h-3.5" />
                 {saving ? "Saving Updates..." : "Save Match & Advance"}
               </button>
             </div>

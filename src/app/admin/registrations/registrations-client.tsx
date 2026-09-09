@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { RegistrationData, ENUGU_LGAS } from "@/lib/types";
 import Link from "next/link";
-import { FileText, Download, CheckCircle2, XCircle, Clock, Eye, Search, ArrowLeft, School, Phone, Mail, User, ShieldCheck } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 interface RegistrationsClientProps {
   initialRegistrations: RegistrationData[];
@@ -73,7 +73,7 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
             href="/admin"
             className="inline-flex items-center text-xs font-mono text-essd-gold hover:underline gap-1 mb-1"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
+            <Icons.ArrowLeft className="w-3.5 h-3.5" />
             Back to Dashboard
           </Link>
           <h1 className="text-2xl sm:text-3xl font-black font-display uppercase tracking-tight text-essd-cream">
@@ -86,7 +86,7 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
             onClick={exportCSV}
             className="inline-flex items-center px-4 py-2 bg-essd-gold text-essd-black font-mono font-bold text-xs uppercase hover:bg-essd-orange hover:text-white transition-colors"
           >
-            <Download className="w-3.5 h-3.5 mr-1.5" />
+            <Icons.Download className="w-3.5 h-3.5 mr-1.5" />
             Export CSV ({filtered.length})
           </button>
         </div>
@@ -104,7 +104,7 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-essd-black border border-essd-border focus:border-essd-gold pl-8 pr-3 py-1.5 text-essd-cream font-sans focus:outline-none"
             />
-            <Search className="w-3.5 h-3.5 text-essd-cream-muted absolute left-2.5 top-2" />
+            <Icons.Search className="w-3.5 h-3.5 text-essd-cream-muted absolute left-2.5 top-2" />
           </div>
         </div>
 

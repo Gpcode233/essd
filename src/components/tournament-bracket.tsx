@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MatchData } from "@/lib/types";
 import { organizeMatchesByRound } from "@/lib/tournament-logic";
 import MatchModal from "./match-modal";
-import { Trophy, Clock, Flame, ChevronRight, Eye, Calendar, Sparkles, Award } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 interface TournamentBracketProps {
   matches: MatchData[];
@@ -113,7 +113,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
           </span>
           <div className="flex items-center gap-1">
             {getStatusBadge(m.status)}
-            <Eye className="w-3 h-3 text-essd-cream-muted opacity-0 group-hover:opacity-100 transition-opacity ml-1" />
+            <Icons.Eye className="w-3 h-3 text-essd-cream-muted opacity-0 group-hover:opacity-100 transition-opacity ml-1" />
           </div>
         </div>
 
@@ -179,7 +179,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
 
         <div className="p-3 bg-gradient-to-r from-essd-black to-essd-charcoal border-2 border-essd-gold shadow-[0_0_15px_rgba(232,169,39,0.3)]">
           <span className="text-sm font-black uppercase tracking-wider text-essd-gold block font-display flex items-center justify-center gap-1">
-            <Trophy className="w-4 h-4 text-essd-gold" />
+            <Icons.Trophy className="w-4 h-4 text-essd-gold" />
             GRAND FINAL
           </span>
           <span className="text-[10px] text-essd-cream-muted uppercase font-bold">
@@ -250,8 +250,8 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
 
               <div className="space-y-4">
                 {/* Champion Badge Banner */}
-                <div className="p-3 bg-gradient-to-r from-essd-gold via-essd-orange to-essd-gold text-essd-black font-display font-black text-xs uppercase tracking-wider text-center border-2 border-essd-cream shadow-[0_0_20px_rgba(232,169,39,0.5)] flex items-center justify-center gap-1.5 animate-bounce">
-                  <Trophy className="w-4 h-4 fill-current" />
+                <div className="p-3 bg-gradient-to-r from-essd-gold via-essd-orange to-essd-gold text-essd-black font-display font-black text-xs uppercase tracking-wider text-center border-2 border-essd-cream shadow-[0_0_20px_rgba(232,169,39,0.5)] flex items-center justify-center gap-1.5">
+                  <Icons.Trophy className="w-4 h-4 fill-current" />
                   <span>🏆 ESSD 2026 GRAND CHAMPION</span>
                 </div>
 

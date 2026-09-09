@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PrizeData } from "@/lib/types";
-import { Trophy, Award, Sparkles, GraduationCap, DollarSign, Star, Gift, CheckCircle2, ArrowRight } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 interface PrizeShowcaseProps {
   prizes?: PrizeData[];
@@ -48,10 +48,6 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
 
   return (
     <section className="relative bg-essd-black text-essd-cream py-16 sm:py-24 border-b border-essd-border overflow-hidden">
-      {/* Background accents */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-essd-gold/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-essd-orange/5 rounded-full blur-3xl pointer-events-none"></div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
@@ -74,19 +70,18 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
             <div className="relative bg-gradient-to-br from-essd-charcoal via-essd-black to-essd-charcoal p-6 sm:p-10 border-4 border-essd-gold shadow-[8px_8px_0px_#0A0A0C] hover:shadow-[12px_12px_0px_#E8A927] transition-all duration-300">
               
               <div className="absolute -top-4 left-6 sm:left-10 bg-essd-gold text-essd-black font-mono text-xs sm:text-sm font-black uppercase px-4 py-1 border-2 border-essd-black shadow-[3px_3px_0px_#0A0A0C] flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 fill-current" />
+                <Icons.Sparkles className="w-4 h-4 fill-current" />
                 Supreme Honor
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-2">
                 
                 {/* Trophy Graphic / Icon Column */}
-                <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-essd-black border-2 border-essd-gold/50 shadow-inner text-center relative overflow-hidden">
-                  <div className="absolute inset-0 halftone-bg opacity-15"></div>
+                <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-essd-black border-2 border-essd-gold/50 text-center relative overflow-hidden">
                   <div className="relative z-10">
-                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-essd-gold-dark via-essd-gold to-essd-gold-light p-1 flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(232,169,39,0.5)]">
+                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-essd-gold/20 border-2 border-essd-gold p-1 flex items-center justify-center mx-auto mb-4">
                       <div className="w-full h-full rounded-full bg-essd-black flex items-center justify-center">
-                        <Trophy className="w-12 h-12 sm:w-14 sm:h-14 text-essd-gold animate-bounce" />
+                        <Icons.Trophy className="w-12 h-12 sm:w-14 sm:h-14 text-essd-gold" />
                       </div>
                     </div>
                     <span className="text-xs font-mono font-black text-essd-gold tracking-widest uppercase block">
@@ -101,7 +96,7 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
                 {/* Details Column */}
                 <div className="lg:col-span-8 space-y-4">
                   <div className="inline-flex items-center gap-2 px-3 py-1 bg-essd-gold/10 text-essd-gold border border-essd-gold/30 text-xs font-mono font-bold uppercase">
-                    <GraduationCap className="w-4 h-4" />
+                    <Icons.GraduationCap className="w-4 h-4" />
                     Global Education Pathway
                   </div>
 
@@ -115,15 +110,15 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-essd-border/80">
                     <div className="flex items-center gap-2 text-xs font-mono text-essd-cream">
-                      <CheckCircle2 className="w-4 h-4 text-essd-gold flex-shrink-0" />
+                      <Icons.CheckCircle className="w-4 h-4 text-essd-gold flex-shrink-0" />
                       <span>International Scholarship</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs font-mono text-essd-cream">
-                      <CheckCircle2 className="w-4 h-4 text-essd-gold flex-shrink-0" />
+                      <Icons.CheckCircle className="w-4 h-4 text-essd-gold flex-shrink-0" />
                       <span>Cash Prize for Society</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs font-mono text-essd-cream">
-                      <CheckCircle2 className="w-4 h-4 text-essd-gold flex-shrink-0" />
+                      <Icons.CheckCircle className="w-4 h-4 text-essd-gold flex-shrink-0" />
                       <span>State Gold Trophy</span>
                     </div>
                   </div>
@@ -146,7 +141,7 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
                   <span className="text-[11px] font-mono font-bold text-essd-orange uppercase">
                     {p.title}
                   </span>
-                  <Award className="w-5 h-5 text-essd-orange opacity-80 group-hover:opacity-100" />
+                  <Icons.Award className="w-5 h-5 text-essd-orange opacity-80 group-hover:opacity-100" />
                 </div>
 
                 <h4 className="text-lg font-black font-display uppercase text-essd-cream tracking-wide mb-2 leading-snug">

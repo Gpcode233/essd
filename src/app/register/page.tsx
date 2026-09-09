@@ -1,5 +1,5 @@
 import RegistrationForm from "@/components/registration-form";
-import { Sparkles, Trophy, Calendar, MapPin, CheckCircle, ShieldCheck, Phone, Mail } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export const metadata = {
   title: "Register Your School | ESSD 2026",
@@ -8,10 +8,11 @@ export const metadata = {
 
 export default function RegisterPage() {
   const steps = [
-    "Complete School Profile & Contact details",
-    "Designate Debate Team Captain & 3-4 Debaters",
-    "Assign Supervising Teacher / Patron Coordinator",
-    "Submit to receive instant Registration ID & Accreditation Pass",
+    "Complete School Profile & Location details",
+    "Register 2 Student Debaters (Speaker 1 & 2)",
+    "Designate Team Captain from the 2 Speakers",
+    "Assign Supervising Teacher Coordinator",
+    "Submit to receive instant Registration ID & Printable Pass",
   ];
 
   return (
@@ -47,13 +48,13 @@ export default function RegisterPage() {
             {/* Essential Details Box */}
             <div className="p-6 bg-essd-charcoal border-2 border-essd-gold shadow-[4px_4px_0px_#0A0A0C] space-y-4">
               <span className="text-xs font-mono font-black uppercase tracking-wider text-essd-gold flex items-center gap-1.5">
-                <Trophy className="w-4 h-4 text-essd-gold" />
+                <Icons.Trophy className="w-4 h-4 text-essd-gold" />
                 Tournament Overview
               </span>
 
               <div className="space-y-3 text-xs font-mono">
                 <div className="flex items-start gap-2.5">
-                  <Calendar className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
+                  <Icons.Calendar className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
                   <div>
                     <span className="font-bold text-essd-cream block">16th &amp; 17th October 2026</span>
                     <span className="text-essd-cream-muted text-[10px]">Two-Day Championship</span>
@@ -61,7 +62,7 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="flex items-start gap-2.5">
-                  <MapPin className="w-4 h-4 text-essd-orange mt-0.5 flex-shrink-0" />
+                  <Icons.Location className="w-4 h-4 text-essd-orange mt-0.5 flex-shrink-0" />
                   <div>
                     <span className="font-bold text-essd-cream block">Enugu State Secretariat Complex</span>
                     <span className="text-essd-cream-muted text-[10px]">Main Auditorium, Independence Layout</span>
@@ -69,10 +70,10 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="flex items-start gap-2.5">
-                  <ShieldCheck className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
+                  <Icons.Shield className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
                   <div>
                     <span className="font-bold text-essd-cream block">WSDC Debate Standard</span>
-                    <span className="text-essd-cream-muted text-[10px]">3 Debaters + 1 Captain + Coordinator</span>
+                    <span className="text-essd-cream-muted text-[10px]">2 Debaters (Speaker 1 & 2) + Coordinator</span>
                   </div>
                 </div>
               </div>
@@ -86,7 +87,7 @@ export default function RegisterPage() {
               <ul className="space-y-2 text-xs font-mono text-essd-cream-muted">
                 {steps.map((st, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-essd-gold mt-0.5 flex-shrink-0" />
+                    <Icons.CheckCircle className="w-3.5 h-3.5 text-essd-gold mt-0.5 flex-shrink-0" />
                     <span>{st}</span>
                   </li>
                 ))}
@@ -106,14 +107,14 @@ export default function RegisterPage() {
                   href="tel:+2349038296513"
                   className="flex items-center gap-2 text-essd-cream font-bold hover:text-essd-gold transition-colors"
                 >
-                  <Phone className="w-3.5 h-3.5 text-essd-gold" />
+                  <Icons.Phone className="w-3.5 h-3.5 text-essd-gold" />
                   +234 903 829 6513
                 </a>
                 <a
                   href="mailto:theplaceeconsults@gmail.com"
                   className="flex items-center gap-2 text-essd-cream font-bold hover:text-essd-gold transition-colors break-all"
                 >
-                  <Mail className="w-3.5 h-3.5 text-essd-gold" />
+                  <Icons.Mail className="w-3.5 h-3.5 text-essd-gold" />
                   theplaceeconsults@gmail.com
                 </a>
               </div>

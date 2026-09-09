@@ -5,6 +5,7 @@ import Footer from "@/components/footer";
 import TextureOverlay from "@/components/texture-overlay";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://essd.ng"),
   title: "ESSD 2026 | Enugu State Secondary Schools Debate Championship",
   description:
     "Official championship website for the Enugu State Secondary Schools Debate Championship. Theme: 'Beyond the Algorithm: Reimagining Education in the Age of AI'. 16th & 17th October 2026.",

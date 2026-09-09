@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, HelpCircle, Phone, Mail } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 export default function FAQSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
@@ -9,11 +9,11 @@ export default function FAQSection() {
   const faqs = [
     {
       q: "Which secondary schools are eligible to register for ESSD 2026?",
-      a: "All accredited public, private, mission/faith-based, and federal unity secondary schools situated across all 17 Local Government Areas of Enugu State are eligible. Each school registers an official delegation comprising 3 primary student debaters, 1 alternate/researcher, and 1 teacher coordinator.",
+      a: "All accredited public, private, mission/faith-based, and federal unity secondary schools situated across all 17 Local Government Areas of Enugu State are eligible. Each school registers an official delegation comprising exactly 2 student debaters (Speaker 1 and Speaker 2, with one selected as team captain) and 1 supervising teacher coordinator.",
     },
     {
       q: "What is the official debate format and timing standard?",
-      a: "ESSD 2026 adheres to the World Schools Debating Championship (WSDC) format. Each round features 8-minute substantive speeches from Proposition and Opposition speakers, followed by 4-minute reply speeches, with Points of Information (POIs) accepted between the 1st and 7th minute.",
+      a: "ESSD 2026 adheres to the World Schools Debating Championship (WSDC) format. Each round features structured substantive speeches from Proposition and Opposition speakers, followed by reply speeches, with Points of Information (POIs) accepted during the designated speech windows.",
     },
     {
       q: "How are tournament motions selected and announced?",
@@ -40,7 +40,7 @@ export default function FAQSection() {
         {/* Section Header */}
         <div className="text-center mb-14">
           <span className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold bg-essd-gold/10 px-3 py-1 border border-essd-gold inline-block mb-3">
-            <HelpCircle className="w-3.5 h-3.5 inline mr-1" />
+            <Icons.HelpCircle className="w-3.5 h-3.5 inline mr-1" />
             Knowledge Base
           </span>
           <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-tight text-essd-cream">
@@ -67,7 +67,7 @@ export default function FAQSection() {
                   <span className="text-sm sm:text-base font-bold font-display uppercase text-essd-cream tracking-wide">
                     {faq.q}
                   </span>
-                  <ChevronDown
+                  <Icons.ChevronDown
                     className={`w-5 h-5 text-essd-gold flex-shrink-0 transition-transform duration-200 ${
                       isOpen ? "rotate-180 text-essd-orange" : ""
                     }`}
@@ -99,14 +99,14 @@ export default function FAQSection() {
               href="tel:+2349038296513"
               className="inline-flex items-center gap-1.5 px-4 py-2 bg-essd-gold text-essd-black font-mono font-bold text-xs uppercase"
             >
-              <Phone className="w-3.5 h-3.5" />
+              <Icons.Phone className="w-3.5 h-3.5" />
               Call Secretariat
             </a>
             <a
               href="mailto:theplaceeconsults@gmail.com"
               className="inline-flex items-center gap-1.5 px-4 py-2 bg-essd-charcoal text-essd-cream hover:text-essd-gold border border-essd-border font-mono font-bold text-xs uppercase"
             >
-              <Mail className="w-3.5 h-3.5" />
+              <Icons.Mail className="w-3.5 h-3.5" />
               Email Us
             </a>
           </div>
