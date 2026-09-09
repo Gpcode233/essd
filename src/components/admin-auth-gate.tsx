@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { Icons } from "./icons";
 
 interface AdminAuthGateProps {
@@ -61,8 +62,14 @@ export default function AdminAuthGate({ children }: AdminAuthGateProps) {
         <div className="w-full max-w-md bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-8 shadow-[8px_8px_0px_#0A0A0C] text-essd-cream space-y-6 rounded-2xl">
           
           <div className="text-center space-y-3">
-            <div className="w-14 h-14 rounded-full bg-essd-black border-2 border-essd-gold flex items-center justify-center mx-auto text-essd-gold shadow-[0_0_15px_rgba(232,169,39,0.3)]">
-              <Icons.Shield size={28} />
+            <div className="w-20 h-20 rounded-full bg-essd-black border-2 border-essd-gold p-0.5 flex items-center justify-center mx-auto overflow-hidden shadow-[0_0_20px_rgba(232,169,39,0.35)]">
+              <Image
+                src="/images/essd-logo.jpg"
+                alt="ESSD 2026 Logo"
+                width={80}
+                height={80}
+                className="w-full h-full object-cover rounded-full"
+              />
             </div>
             <div>
               <span className="text-[10px] font-mono uppercase font-bold text-essd-gold block">

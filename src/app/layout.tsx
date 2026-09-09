@@ -19,6 +19,11 @@ export const metadata: Metadata = {
     "Debate Tournament",
   ],
   authors: [{ name: "The Placee Consults" }],
+  icons: {
+    icon: "/images/essd-logo.jpg",
+    shortcut: "/images/essd-logo.jpg",
+    apple: "/images/essd-logo.jpg",
+  },
   openGraph: {
     title: "ESSD 2026 | Enugu State Secondary Schools Debate Championship",
     description:

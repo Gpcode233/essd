@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Icons } from "@/components/icons";
 
 export default function Footer() {
@@ -14,11 +15,14 @@ export default function Footer() {
           <div className="lg:col-span-5 space-y-5">
             <div className="flex items-center gap-3">
               {/* Circular ESSD Badge in Footer */}
-              <div className="w-14 h-14 rounded-full bg-essd-black border-2 border-essd-gold p-1 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(232,169,39,0.3)]">
-                <div className="w-full h-full rounded-full bg-essd-charcoal flex flex-col items-center justify-center text-center">
-                  <span className="text-xs font-black font-display text-essd-gold">ESSD</span>
-                  <span className="text-[6px] font-bold text-essd-cream-muted uppercase">2026</span>
-                </div>
+              <div className="w-14 h-14 rounded-full bg-essd-black border-2 border-essd-gold overflow-hidden flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(232,169,39,0.3)]">
+                <Image
+                  src="/images/essd-logo.jpg"
+                  alt="Enugu State Secondary Schools Debate Championship Logo"
+                  width={56}
+                  height={56}
+                  className="w-full h-full object-cover rounded-full"
+                />
               </div>
 
               <div>

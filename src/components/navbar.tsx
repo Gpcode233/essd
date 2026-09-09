@@ -84,21 +84,16 @@ export default function Navbar() {
           >
             {/* Circular Logo Frame */}
             <div className="relative flex-shrink-0">
-              <div className="w-13 h-13 sm:w-16 sm:h-16 rounded-full bg-gradient-to-tr from-essd-black via-essd-dark to-essd-gold/30 p-[3px] shadow-[0_0_15px_rgba(232,169,39,0.35)] group-hover:shadow-[0_0_22px_rgba(242,90,25,0.6)] transition-all duration-300">
-                <div className="w-full h-full rounded-full bg-essd-black border-2 border-essd-gold/80 overflow-hidden flex items-center justify-center p-1.5 relative">
-                  {/* SVG / Logo Graphic representing ESSD Crest */}
-                  <div className="w-full h-full rounded-full bg-essd-charcoal flex flex-col items-center justify-center text-center p-0.5 relative">
-                    <span className="text-[10px] sm:text-[11px] font-black tracking-tighter text-essd-gold leading-none font-display">
-                      ESSD
-                    </span>
-                    <span className="text-[5px] sm:text-[6px] font-extrabold text-essd-cream-muted uppercase tracking-tight">
-                      2026
-                    </span>
-                    <div className="w-3 h-[1px] bg-essd-orange my-0.5"></div>
-                    <span className="text-[4px] sm:text-[5px] font-bold text-essd-orange uppercase">
-                      ENUGU
-                    </span>
-                  </div>
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-essd-black via-essd-dark to-essd-gold/40 p-[2px] shadow-[0_0_15px_rgba(232,169,39,0.35)] group-hover:shadow-[0_0_22px_rgba(242,90,25,0.6)] transition-all duration-300">
+                <div className="w-full h-full rounded-full bg-essd-black border-2 border-essd-gold/80 overflow-hidden flex items-center justify-center relative">
+                  <Image
+                    src="/images/essd-logo.jpg"
+                    alt="Enugu State Secondary Schools Debate Championship Logo"
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-cover rounded-full"
+                    priority
+                  />
                 </div>
               </div>
             </div>

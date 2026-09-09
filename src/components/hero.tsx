@@ -58,15 +58,15 @@ export default function Hero() {
           <div className="text-center mb-4 sm:mb-6">
             <div className="inline-block relative">
               {/* Circular ESSD Logo Badge at Top of Poster */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 rounded-full bg-essd-black border-3 border-essd-gold p-1 shadow-2xl flex items-center justify-center">
-                <div className="w-full h-full rounded-full bg-essd-charcoal border border-essd-gold/40 flex flex-col items-center justify-center text-center p-1">
-                  <span className="text-xs sm:text-sm font-black font-display text-essd-gold leading-none">
-                    ESSD
-                  </span>
-                  <span className="text-[6px] font-bold text-essd-cream-muted uppercase mt-0.5">
-                    ENUGU STATE
-                  </span>
-                </div>
+              <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 rounded-full bg-essd-black border-3 border-essd-gold p-0.5 shadow-2xl flex items-center justify-center overflow-hidden">
+                <Image
+                  src="/images/essd-logo.jpg"
+                  alt="Enugu State Secondary Schools Debate Championship Official Logo"
+                  width={80}
+                  height={80}
+                  className="w-full h-full object-cover rounded-full"
+                  priority
+                />
               </div>
               <p className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] font-black text-essd-black/80">
                 The Placee Consults &amp; Partners Presents
