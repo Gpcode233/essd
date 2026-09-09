@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getSafeMatches } from "@/lib/data-service";
 import TournamentBracket from "@/components/tournament-bracket";
 import Link from "next/link";
 import { Trophy, Sparkles, Flame, Shield, Calendar, Clock, MapPin, ArrowRight } from "lucide-react";
@@ -11,16 +11,7 @@ export const metadata = {
 };
 
 export default async function ChampionshipPage() {
-  const matches = await prisma.match.findMany({
-    include: {
-      schoolA: true,
-      schoolB: true,
-      winner: true,
-    },
-    orderBy: {
-      matchNumber: "asc",
-    },
-  });
+  const matches = await getSafeMatches();
 
   const liveMatches = matches.filter((m) => m.status === "LIVE");
   const upcomingMatches = matches.filter((m) => m.status === "UPCOMING");
@@ -74,7 +65,7 @@ export default async function ChampionshipPage() {
         </div>
       </section>
 
-      {/* Main Tournament Interactive Bracket Canvas */}
+      {/* Main Tournament Interactive Tree Bracket Canvas */}
       <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Helper guide */}
@@ -96,7 +87,7 @@ export default async function ChampionshipPage() {
         </div>
 
         {/* The 16-School Interactive Bracket */}
-        <TournamentBracket matches={matches as any} />
+        <TournamentBracket matches={matches} />
 
       </section>
 
@@ -110,7 +101,7 @@ export default async function ChampionshipPage() {
                 Stage 1: Round of 16
               </span>
               <p className="text-essd-cream-muted leading-relaxed font-sans text-xs">
-                8 dual clashes across 2 parallel halls. Standard 8-minute substantive speeches with open POIs.
+                8 dual clashes across 2 parallel halls. Standard speeches with open POIs.
               </p>
             </div>
 

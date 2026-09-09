@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getSafeSchools } from "@/lib/data-service";
 import SchoolsClient from "./schools-client";
 
 export const dynamic = "force-dynamic";
@@ -9,16 +9,7 @@ export const metadata = {
 };
 
 export default async function SchoolsPage() {
-  const schools = await prisma.school.findMany({
-    include: {
-      teamMembers: true,
-      wonMatches: true,
-    },
-    orderBy: [
-      { points: "desc" },
-      { name: "asc" },
-    ],
-  });
+  const schools = await getSafeSchools();
 
   return (
     <div className="w-full bg-essd-black text-essd-cream min-h-screen">
@@ -37,7 +28,7 @@ export default async function SchoolsPage() {
               </span>
             </h1>
             <p className="mt-3 text-sm sm:text-base font-bold text-essd-black/90 font-sans">
-              16 accredited institutions competing across all 17 LGAs of Enugu State.
+              Accredited secondary school institutions across all 17 LGAs of Enugu State.
             </p>
           </div>
         </div>
@@ -45,7 +36,7 @@ export default async function SchoolsPage() {
 
       {/* Directory Client */}
       <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SchoolsClient initialSchools={schools as any} />
+        <SchoolsClient initialSchools={schools} />
       </section>
 
     </div>

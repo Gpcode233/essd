@@ -1,7 +1,7 @@
-import { prisma } from "@/lib/prisma";
+import { getSafePrizes } from "@/lib/data-service";
 import PrizeShowcase from "@/components/prize-showcase";
 import Link from "next/link";
-import { Sparkles, ArrowRight, ShieldCheck } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -11,9 +11,7 @@ export const metadata = {
 };
 
 export default async function PrizesPage() {
-  const prizes = await prisma.prize.findMany({
-    orderBy: { displayOrder: "asc" },
-  });
+  const prizes = await getSafePrizes();
 
   return (
     <div className="w-full bg-essd-black text-essd-cream min-h-screen">
@@ -38,7 +36,7 @@ export default async function PrizesPage() {
       </section>
 
       {/* Main Prize Showcase */}
-      <PrizeShowcase prizes={prizes as any} />
+      <PrizeShowcase prizes={prizes} />
 
       {/* Call to action */}
       <section className="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">

@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getSafeMatches, getSafePrizes } from "@/lib/data-service";
 import Hero from "@/components/hero";
 import StatsBanner from "@/components/stats-banner";
 import HowItWorks from "@/components/how-it-works";
@@ -6,25 +6,13 @@ import TournamentBracket from "@/components/tournament-bracket";
 import PrizeShowcase from "@/components/prize-showcase";
 import FAQSection from "@/components/faq-section";
 import Link from "next/link";
-import { Trophy, ArrowRight, Sparkles, Flame, Shield, Users } from "lucide-react";
+import { Trophy, ArrowRight, Sparkles } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const matches = await prisma.match.findMany({
-    include: {
-      schoolA: true,
-      schoolB: true,
-      winner: true,
-    },
-    orderBy: {
-      matchNumber: "asc",
-    },
-  });
-
-  const prizes = await prisma.prize.findMany({
-    orderBy: { displayOrder: "asc" },
-  });
+  const matches = await getSafeMatches();
+  const prizes = await getSafePrizes();
 
   return (
     <div className="w-full">
@@ -61,8 +49,8 @@ export default async function HomePage() {
             </div>
           </div>
 
-          {/* Interactive Knockout Bracket View */}
-          <TournamentBracket matches={matches as any} />
+          {/* Interactive Knockout Tree Bracket View */}
+          <TournamentBracket matches={matches} />
 
         </div>
       </section>
@@ -71,7 +59,7 @@ export default async function HomePage() {
       <HowItWorks />
 
       {/* 5. Prizes & Opportunities Showcase */}
-      <PrizeShowcase prizes={prizes as any} />
+      <PrizeShowcase prizes={prizes} />
 
       {/* 6. Frequently Asked Questions */}
       <FAQSection />

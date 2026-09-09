@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getSafeMatches, getSafeSchools } from "@/lib/data-service";
 import FixturesClient from "./fixtures-client";
 
 export const dynamic = "force-dynamic";
@@ -9,20 +9,8 @@ export const metadata = {
 };
 
 export default async function FixturesPage() {
-  const matches = await prisma.match.findMany({
-    include: {
-      schoolA: true,
-      schoolB: true,
-      winner: true,
-    },
-    orderBy: {
-      matchNumber: "asc",
-    },
-  });
-
-  const schools = await prisma.school.findMany({
-    orderBy: { name: "asc" },
-  });
+  const matches = await getSafeMatches();
+  const schools = await getSafeSchools();
 
   return (
     <div className="w-full bg-essd-black text-essd-cream min-h-screen">
@@ -49,7 +37,7 @@ export default async function FixturesPage() {
 
       {/* Interactive Fixtures Filter & Card List */}
       <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <FixturesClient initialMatches={matches as any} schools={schools as any} />
+        <FixturesClient initialMatches={matches} schools={schools} />
       </section>
 
     </div>

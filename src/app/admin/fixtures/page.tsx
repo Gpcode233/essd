@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+import { getSafeMatches, getSafeSchools } from "@/lib/data-service";
 import FixturesManager from "./fixtures-manager";
 
 export const dynamic = "force-dynamic";
@@ -10,23 +10,14 @@ export const metadata = {
 
 export default async function AdminFixturesPage() {
   const [matches, schools] = await Promise.all([
-    prisma.match.findMany({
-      include: {
-        schoolA: true,
-        schoolB: true,
-        winner: true,
-      },
-      orderBy: { matchNumber: "asc" },
-    }),
-    prisma.school.findMany({
-      orderBy: { name: "asc" },
-    }),
+    getSafeMatches(),
+    getSafeSchools(),
   ]);
 
   return (
     <div className="w-full bg-essd-black text-essd-cream min-h-screen py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-6">
-        <FixturesManager initialMatches={matches as any} schools={schools as any} />
+        <FixturesManager initialMatches={matches} schools={schools} />
       </div>
     </div>
   );

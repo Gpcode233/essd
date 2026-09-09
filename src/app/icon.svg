@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <circle cx="32" cy="32" r="30" fill="#0A0A0C" stroke="#E8A927" stroke-width="4"/>
+  <circle cx="32" cy="32" r="24" fill="#141418" stroke="#F25A19" stroke-width="2"/>
+  <text x="32" y="30" font-family="Arial, sans-serif" font-weight="900" font-size="16" fill="#E8A927" text-anchor="middle" dominant-baseline="middle">ESSD</text>
+  <text x="32" y="44" font-family="Arial, sans-serif" font-weight="700" font-size="9" fill="#FAF6EB" text-anchor="middle" dominant-baseline="middle">2026</text>
+</svg>
