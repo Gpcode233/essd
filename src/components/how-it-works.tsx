@@ -55,10 +55,10 @@ export default function HowItWorks() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <span className="text-xs font-mono font-black uppercase tracking-widest text-essd-orange bg-essd-orange/10 px-3 py-1 border border-essd-orange inline-block mb-3">
+            <span className="text-xs font-mono font-black uppercase tracking-widest text-essd-orange bg-essd-orange/10 px-3.5 py-1 border border-essd-orange inline-block mb-3 rounded-full">
               Championship Roadmap
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-tight text-essd-cream">
+            <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-wide text-essd-cream">
               HOW THE TOURNAMENT <br />
               <span className="text-essd-gold">UNFOLDS</span>
             </h2>
@@ -81,7 +81,7 @@ export default function HowItWorks() {
               return (
                 <div
                   key={idx}
-                  className={`relative p-6 border-2 transition-all duration-200 shadow-[4px_4px_0px_#0A0A0C] hover:-translate-y-2 flex flex-col justify-between ${
+                  className={`relative p-6 border-2 transition-all duration-200 shadow-[4px_4px_0px_#0A0A0C] hover:-translate-y-2 flex flex-col justify-between rounded-2xl ${
                     isLast
                       ? "bg-gradient-to-b from-essd-charcoal to-essd-black border-essd-gold shadow-[6px_6px_0px_#E8A927]"
                       : "bg-essd-charcoal border-essd-border hover:border-essd-orange"
@@ -122,7 +122,7 @@ export default function HowItWorks() {
         </div>
 
         {/* CTA Bar below timeline */}
-        <div className="mt-14 p-6 sm:p-8 bg-essd-dark border-3 border-essd-gold flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[6px_6px_0px_#0A0A0C]">
+        <div className="mt-14 p-6 sm:p-8 bg-essd-dark border-3 border-essd-gold flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[6px_6px_0px_#0A0A0C] rounded-2xl">
           <div>
             <h4 className="text-lg sm:text-xl font-black font-display uppercase text-essd-cream">
               Ready to Represent Your Secondary School?
@@ -133,7 +133,7 @@ export default function HowItWorks() {
           </div>
           <Link
             href="/register"
-            className="flex-shrink-0 inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-colors"
+            className="flex-shrink-0 inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-colors rounded-xl"
           >
             Register Team Today
             <Icons.ArrowRight className="w-4 h-4 ml-2" />

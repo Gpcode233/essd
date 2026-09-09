@@ -29,7 +29,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["'Bebas Neue'", "Impact", "sans-serif"],
+        display: ["'Oswald'", "system-ui", "sans-serif"],
         sans: ["'Plus Jakarta Sans'", "Inter", "system-ui", "sans-serif"],
         mono: ["'JetBrains Mono'", "monospace"],
       },

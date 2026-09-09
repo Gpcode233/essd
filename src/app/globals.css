@@ -6,7 +6,7 @@
   :root {
     --background: #0A0A0C;
     --foreground: #FAF6EB;
-    --font-display: 'Bebas Neue', Impact, sans-serif;
+    --font-display: 'Oswald', system-ui, sans-serif;
     --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
@@ -15,6 +15,11 @@
     color: var(--foreground);
     font-family: var(--font-sans);
     overflow-x: hidden;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: 0.035em;
   }
 
   ::selection {
@@ -43,19 +48,22 @@
   background-size: 16px 16px;
 }
 
-/* Crisp Paper Sticker Borders */
+/* Crisp Paper Sticker Borders with Rounded Radii */
 .sticker-border {
   border: 3px solid #FAF6EB;
+  border-radius: 16px;
   box-shadow: 4px 4px 0px #0A0A0C;
 }
 
 .sticker-border-gold {
   border: 3px solid #E8A927;
+  border-radius: 16px;
   box-shadow: 4px 4px 0px #0A0A0C;
 }
 
 .sticker-border-orange {
   border: 3px solid #F25A19;
+  border-radius: 16px;
   box-shadow: 4px 4px 0px #0A0A0C;
 }
 

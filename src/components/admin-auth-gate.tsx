@@ -58,7 +58,7 @@ export default function AdminAuthGate({ children }: AdminAuthGateProps) {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-essd-black flex items-center justify-center p-4">
-        <div className="w-full max-w-md bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-8 shadow-[8px_8px_0px_#0A0A0C] text-essd-cream space-y-6">
+        <div className="w-full max-w-md bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-8 shadow-[8px_8px_0px_#0A0A0C] text-essd-cream space-y-6 rounded-2xl">
           
           <div className="text-center space-y-3">
             <div className="w-14 h-14 rounded-full bg-essd-black border-2 border-essd-gold flex items-center justify-center mx-auto text-essd-gold shadow-[0_0_15px_rgba(232,169,39,0.3)]">
@@ -78,7 +78,7 @@ export default function AdminAuthGate({ children }: AdminAuthGateProps) {
           </div>
 
           {errorMsg && (
-            <div className="p-3 bg-red-950/90 border border-red-500 text-red-200 text-xs font-mono flex items-start gap-2">
+            <div className="p-3 bg-red-950/90 border border-red-500 text-red-200 text-xs font-mono flex items-start gap-2 rounded-xl">
               <Icons.Alert size={16} className="text-red-400 flex-shrink-0 mt-0.5" />
               <span>{errorMsg}</span>
             </div>
@@ -95,7 +95,7 @@ export default function AdminAuthGate({ children }: AdminAuthGateProps) {
                 placeholder="Enter password..."
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
-                className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none transition-colors"
+                className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none transition-colors rounded-xl"
                 autoFocus
               />
             </div>
@@ -103,7 +103,7 @@ export default function AdminAuthGate({ children }: AdminAuthGateProps) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-essd-gold text-essd-black hover:bg-essd-orange hover:text-white font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:translate-x-0.5 hover:translate-y-0.5 transition-all flex items-center justify-center gap-2"
+              className="w-full py-3 bg-essd-gold text-essd-black hover:bg-essd-orange hover:text-white font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:translate-x-0.5 hover:translate-y-0.5 transition-all flex items-center justify-center gap-2 rounded-xl"
             >
               <Icons.Shield size={16} />
               Unlock Organizer Dashboard

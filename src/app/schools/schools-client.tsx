@@ -54,7 +54,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
   return (
     <div className="space-y-8">
       {/* Search and Filters */}
-      <div className="bg-essd-charcoal border-2 border-essd-border p-5 shadow-[4px_4px_0px_#0A0A0C]">
+      <div className="bg-essd-charcoal border-2 border-essd-border p-5 shadow-[4px_4px_0px_#0A0A0C] rounded-2xl">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           
           {/* LGA Filter */}
@@ -65,7 +65,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
             <select
               value={selectedLGA}
               onChange={(e) => setSelectedLGA(e.target.value)}
-              className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none"
+              className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none rounded-xl"
             >
               <option value="ALL">All 17 LGAs</option>
               {ENUGU_LGAS.map((lga) => (
@@ -84,7 +84,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value)}
-              className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none"
+              className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none rounded-xl"
             >
               <option value="ALL">All Categories</option>
               <option value="PUBLIC">State Public Schools</option>
@@ -105,7 +105,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
                 placeholder="Search by name..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-essd-black border border-essd-border focus:border-essd-gold pl-8 pr-3 py-2 text-xs text-essd-cream font-sans focus:outline-none"
+                className="w-full bg-essd-black border border-essd-border focus:border-essd-gold pl-8 pr-3 py-2 text-xs text-essd-cream font-sans focus:outline-none rounded-xl"
               />
               <Icons.Search className="w-3.5 h-3.5 text-essd-cream-muted absolute left-2.5 top-2.5" />
             </div>
@@ -130,7 +130,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
             return (
               <div
                 key={school.id}
-                className="bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold p-6 flex flex-col justify-between shadow-[4px_4px_0px_#0A0A0C] hover:shadow-[6px_6px_0px_#E8A927] hover:-translate-y-1 transition-all duration-200 group"
+                className="bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold p-6 flex flex-col justify-between shadow-[4px_4px_0px_#0A0A0C] hover:shadow-[6px_6px_0px_#E8A927] hover:-translate-y-1 transition-all duration-200 group rounded-2xl"
               >
                 <div>
                   {/* Top Header with Monogram */}
@@ -142,7 +142,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
 
                     <div className="overflow-hidden">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="px-2 py-0.5 bg-essd-dark text-essd-gold border border-essd-gold/30 font-mono text-[9px] font-bold uppercase">
+                        <span className="px-2.5 py-0.5 bg-essd-dark text-essd-gold border border-essd-gold/30 font-mono text-[9px] font-bold uppercase rounded-full">
                           {getTypeLabel(school.type)}
                         </span>
                         {school.seedRank && (
@@ -177,7 +177,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
                     </span>
                     
                     {captain && (
-                      <div className="flex items-center justify-between text-xs font-mono bg-essd-black p-2 border border-essd-border">
+                      <div className="flex items-center justify-between text-xs font-mono bg-essd-black p-2 border border-essd-border rounded-lg">
                         <span className="font-bold text-essd-cream truncate">
                           👑 {captain.fullName}
                         </span>
@@ -187,7 +187,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
 
                     <div className="space-y-1">
                       {speakers.map((sp) => (
-                        <div key={sp.id} className="flex items-center justify-between text-[11px] font-mono text-essd-cream-muted px-2 py-1 bg-essd-dark/40">
+                        <div key={sp.id} className="flex items-center justify-between text-[11px] font-mono text-essd-cream-muted px-2 py-1 bg-essd-dark/40 rounded-md">
                           <span className="truncate">{sp.fullName}</span>
                           <span className="text-[10px] text-essd-cream-muted/60">{sp.classGrade}</span>
                         </div>
@@ -212,7 +212,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
           })}
         </div>
       ) : (
-        <div className="p-12 text-center bg-essd-charcoal border-2 border-dashed border-essd-border space-y-4">
+        <div className="p-12 text-center bg-essd-charcoal border-2 border-dashed border-essd-border space-y-4 rounded-2xl">
           <Icons.School className="w-12 h-12 text-essd-gold mx-auto opacity-70" />
           <h3 className="text-xl font-bold font-display uppercase text-essd-cream">
             Awaiting School Registrations
@@ -223,7 +223,7 @@ export default function SchoolsClient({ initialSchools }: SchoolsClientProps) {
           <div className="pt-2">
             <Link
               href="/register"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-xs uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-xs uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all rounded-xl"
             >
               <Icons.Sparkles className="w-4 h-4 fill-current" />
               Register Your School Now

@@ -26,11 +26,11 @@ export default function StatsBanner() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 bg-essd-gold/10 border border-essd-gold px-3 py-1 text-essd-gold font-mono text-xs font-bold uppercase tracking-widest mb-3">
+          <div className="inline-flex items-center gap-2 bg-essd-gold/10 border border-essd-gold px-3.5 py-1 text-essd-gold font-mono text-xs font-bold uppercase tracking-widest mb-3 rounded-full">
             <Icons.Brain className="w-3.5 h-3.5" />
             Empowering Enugu's Youth
           </div>
-          <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-tight text-essd-cream leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-wide text-essd-cream leading-tight">
             THE NEXT GENERATION <br className="hidden sm:block" />
             <span className="text-essd-gold underline decoration-essd-orange decoration-4">OF THINKERS</span>
           </h2>
@@ -46,7 +46,7 @@ export default function StatsBanner() {
             return (
               <div
                 key={idx}
-                className="relative bg-essd-charcoal p-6 sm:p-8 border-2 border-essd-border hover:border-essd-gold transition-all duration-200 shadow-[4px_4px_0px_#0A0A0C] hover:shadow-[6px_6px_0px_#E8A927] hover:-translate-y-1 group"
+                className="relative bg-essd-charcoal p-6 sm:p-8 border-2 border-essd-border hover:border-essd-gold transition-all duration-200 shadow-[4px_4px_0px_#0A0A0C] hover:shadow-[6px_6px_0px_#E8A927] hover:-translate-y-1 group rounded-2xl"
               >
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-xs font-mono font-bold text-essd-cream-muted/50 uppercase">
@@ -54,7 +54,7 @@ export default function StatsBanner() {
                   </span>
                   <Icon className={`w-5 h-5 ${item.color} opacity-80 group-hover:opacity-100 transition-opacity`} />
                 </div>
-                <div className={`text-4xl sm:text-6xl font-black font-display ${item.color} leading-none tracking-tight mb-2`}>
+                <div className={`text-4xl sm:text-6xl font-black font-display ${item.color} leading-none tracking-wide mb-2`}>
                   {item.number}
                 </div>
                 <div className="text-base sm:text-lg font-black font-display uppercase text-essd-cream tracking-wide">
@@ -85,9 +85,9 @@ export default function StatsBanner() {
               return (
                 <div
                   key={idx}
-                  className="bg-essd-dark/60 border border-essd-border p-5 rounded-none hover:bg-essd-charcoal hover:border-essd-orange/60 transition-all flex items-start gap-4"
+                  className="bg-essd-dark/60 border border-essd-border p-5 rounded-2xl hover:bg-essd-charcoal hover:border-essd-orange/60 transition-all flex items-start gap-4"
                 >
-                  <div className="p-3 bg-essd-black border border-essd-gold/40 text-essd-gold flex-shrink-0">
+                  <div className="p-3 bg-essd-black border border-essd-gold/40 text-essd-gold flex-shrink-0 rounded-xl">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>

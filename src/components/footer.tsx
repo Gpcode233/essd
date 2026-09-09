@@ -31,7 +31,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="p-4 bg-essd-charcoal border-l-4 border-essd-orange text-xs text-essd-cream-muted leading-relaxed">
+            <div className="p-4 bg-essd-charcoal border-l-4 border-essd-orange text-xs text-essd-cream-muted leading-relaxed rounded-2xl">
               <span className="font-bold text-essd-orange block font-mono text-[11px] uppercase mb-1">
                 Event Theme:
               </span>
@@ -153,7 +153,7 @@ export default function Footer() {
               <span className="w-2 h-2 bg-essd-gold rounded-full"></span>
               Governance
             </h4>
-            <div className="p-3 bg-essd-dark/80 border border-essd-border rounded text-center space-y-2">
+            <div className="p-3 bg-essd-dark/80 border border-essd-border rounded-2xl text-center space-y-2">
               <Icons.Shield className="w-6 h-6 text-essd-gold mx-auto" />
               <span className="block text-[11px] font-mono font-bold text-essd-cream uppercase">
                 Adjudication Standard

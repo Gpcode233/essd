@@ -25,20 +25,20 @@ export default async function ChampionshipPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 bg-essd-black text-essd-gold px-3 py-1 font-mono text-xs font-black uppercase border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] mb-3">
+              <div className="inline-flex items-center gap-2 bg-essd-black text-essd-gold px-3.5 py-1 font-mono text-xs font-black uppercase border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] mb-3 rounded-full">
                 <Icons.Trophy className="w-3.5 h-3.5" />
                 Knockout Tournament Central
               </div>
-              <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display uppercase tracking-tight text-essd-black leading-none text-shadow-hard">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display uppercase tracking-wide text-essd-black leading-none text-shadow-hard">
                 CHAMPIONSHIP <br />
-                <span className="text-essd-orange bg-essd-black px-3 py-1 inline-block mt-1 border-3 border-essd-cream">
+                <span className="text-essd-orange bg-essd-black px-3.5 py-1 inline-block mt-1 border-3 border-essd-cream rounded-xl">
                   TOURNAMENT HUB
                 </span>
               </h1>
             </div>
 
             {/* Quick Live Status Widget */}
-            <div className="bg-essd-black text-essd-cream p-5 border-3 border-essd-cream shadow-[5px_5px_0px_#0A0A0C] max-w-sm">
+            <div className="bg-essd-black text-essd-cream p-5 border-3 border-essd-cream shadow-[5px_5px_0px_#0A0A0C] max-w-sm rounded-2xl">
               <div className="flex items-center justify-between text-xs font-mono mb-2">
                 <span className="text-essd-gold font-bold uppercase flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-essd-orange animate-pulse"></span>
@@ -47,15 +47,15 @@ export default async function ChampionshipPage() {
                 <span className="text-essd-cream-muted">16 Teams • 15 Matches</span>
               </div>
               <div className="grid grid-cols-3 gap-2 text-center text-xs font-mono">
-                <div className="p-2 bg-essd-charcoal border border-essd-border">
+                <div className="p-2 bg-essd-charcoal border border-essd-border rounded-lg">
                   <span className="block text-lg font-black text-essd-orange">{liveMatches.length}</span>
                   <span className="text-[9px] text-essd-cream-muted uppercase">Live</span>
                 </div>
-                <div className="p-2 bg-essd-charcoal border border-essd-border">
+                <div className="p-2 bg-essd-charcoal border border-essd-border rounded-lg">
                   <span className="block text-lg font-black text-essd-gold">{upcomingMatches.length}</span>
                   <span className="text-[9px] text-essd-cream-muted uppercase">Upcoming</span>
                 </div>
-                <div className="p-2 bg-essd-charcoal border border-essd-border">
+                <div className="p-2 bg-essd-charcoal border border-essd-border rounded-lg">
                   <span className="block text-lg font-black text-green-400">{completedMatches.length}</span>
                   <span className="text-[9px] text-essd-cream-muted uppercase">Final</span>
                 </div>
@@ -69,9 +69,9 @@ export default async function ChampionshipPage() {
       <section className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Helper guide */}
-        <div className="p-4 bg-essd-charcoal border-2 border-essd-border mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+        <div className="p-4 bg-essd-charcoal border-2 border-essd-border mb-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono rounded-xl">
           <div className="flex items-center gap-2 text-essd-cream-muted">
-            <span className="px-2 py-0.5 bg-essd-gold text-essd-black font-bold uppercase text-[10px]">
+            <span className="px-2 py-0.5 bg-essd-gold text-essd-black font-bold uppercase text-[10px] rounded-full">
               Tip
             </span>
             <span>Click any match card on the bracket to view motions, judges, debate lineup, and rubrics.</span>
@@ -96,7 +96,7 @@ export default async function ChampionshipPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-xs font-mono">
             
-            <div className="p-4 bg-essd-black border border-essd-border space-y-2">
+            <div className="p-4 bg-essd-black border border-essd-border space-y-2 rounded-2xl">
               <span className="text-essd-gold font-bold block uppercase">
                 Stage 1: Round of 16
               </span>
@@ -105,7 +105,7 @@ export default async function ChampionshipPage() {
               </p>
             </div>
 
-            <div className="p-4 bg-essd-black border border-essd-border space-y-2">
+            <div className="p-4 bg-essd-black border border-essd-border space-y-2 rounded-2xl">
               <span className="text-essd-gold font-bold block uppercase">
                 Stage 2: Quarter-Finals
               </span>
@@ -114,7 +114,7 @@ export default async function ChampionshipPage() {
               </p>
             </div>
 
-            <div className="p-4 bg-essd-black border border-essd-border space-y-2">
+            <div className="p-4 bg-essd-black border border-essd-border space-y-2 rounded-2xl">
               <span className="text-essd-orange font-bold block uppercase">
                 Stage 3: Semi-Finals
               </span>
@@ -123,7 +123,7 @@ export default async function ChampionshipPage() {
               </p>
             </div>
 
-            <div className="p-4 bg-essd-black border border-essd-gold space-y-2">
+            <div className="p-4 bg-essd-black border border-essd-gold space-y-2 rounded-2xl">
               <span className="text-essd-gold font-bold block uppercase">
                 Stage 4: Grand Final
               </span>

@@ -41,12 +41,12 @@ export default function AboutPage() {
       <section className="relative halftone-bg py-16 sm:py-20 border-b-4 border-essd-black text-essd-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <span className="inline-block bg-essd-black text-essd-gold font-mono text-xs font-black uppercase px-3 py-1 border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] mb-4">
+            <span className="inline-block bg-essd-black text-essd-gold font-mono text-xs font-black uppercase px-3.5 py-1 border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] mb-4 rounded-full">
               Championship Manifesto
             </span>
-            <h1 className="text-4xl sm:text-6xl font-black font-display uppercase tracking-tight text-essd-black leading-none text-shadow-hard">
+            <h1 className="text-4xl sm:text-6xl font-black font-display uppercase tracking-wide text-essd-black leading-none text-shadow-hard">
               BEYOND THE <br />
-              <span className="text-essd-orange bg-essd-black px-3 py-1 inline-block mt-2 border-3 border-essd-cream">
+              <span className="text-essd-orange bg-essd-black px-3.5 py-1 inline-block mt-2 border-3 border-essd-cream rounded-xl">
                 ALGORITHM
               </span>
             </h1>
@@ -62,15 +62,15 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <div className="lg:col-span-7 space-y-6">
-            <span className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold bg-essd-gold/10 px-3 py-1 border border-essd-gold inline-block">
+            <span className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold bg-essd-gold/10 px-3.5 py-1 border border-essd-gold inline-block rounded-full">
               The Defining Question of Our Generation
             </span>
 
-            <h2 className="text-3xl sm:text-4xl font-black font-display uppercase text-essd-cream tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-black font-display uppercase text-essd-cream tracking-wide leading-tight">
               HOW SHOULD EDUCATION EVOLVE WHEN ALGORITHMS LEARN FASTER THAN CURRICULA?
             </h2>
 
-            <div className="p-5 bg-essd-charcoal border-l-4 border-essd-orange space-y-2 text-sm text-essd-cream-muted leading-relaxed font-sans">
+            <div className="p-5 bg-essd-charcoal border-l-4 border-essd-orange space-y-2 text-sm text-essd-cream-muted leading-relaxed font-sans rounded-2xl">
               <p className="italic text-essd-cream font-medium">
                 “Artificial intelligence is not merely a tool in the classroom; it is a profound epistemological shift that challenges how human beings think, construct arguments, and discover truth.”
               </p>
@@ -87,14 +87,14 @@ export default function AboutPage() {
             <div className="pt-4 flex flex-wrap items-center gap-4">
               <Link
                 href="/register"
-                className="inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[4px_4px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all"
+                className="inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[4px_4px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all rounded-xl"
               >
                 Register Your School
                 <Icons.ArrowRight className="w-4 h-4 ml-2" />
               </Link>
               <Link
                 href="/championship"
-                className="inline-flex items-center justify-center px-6 py-3 bg-essd-dark text-essd-cream hover:text-essd-gold font-mono font-bold text-xs uppercase border border-essd-border"
+                className="inline-flex items-center justify-center px-6 py-3 bg-essd-dark text-essd-cream hover:text-essd-gold font-mono font-bold text-xs uppercase border border-essd-border rounded-xl"
               >
                 View Tournament Fixtures
               </Link>
@@ -103,8 +103,8 @@ export default function AboutPage() {
 
           {/* Visual Poster Frame */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative p-3 bg-essd-charcoal border-4 border-essd-gold shadow-[10px_10px_0px_#0A0A0C] rotate-[1deg]">
-              <div className="w-72 sm:w-80 h-96 relative overflow-hidden bg-essd-dark">
+            <div className="relative p-3.5 bg-essd-charcoal border-4 border-essd-gold shadow-[10px_10px_0px_#0A0A0C] rotate-[1deg] rounded-2xl">
+              <div className="w-72 sm:w-80 h-96 relative overflow-hidden bg-essd-dark rounded-xl">
                 <Image
                   src="/images/essd-poster.jpg"
                   alt="ESSD Official Poster"
@@ -112,7 +112,7 @@ export default function AboutPage() {
                   className="object-cover contrast-110"
                 />
               </div>
-              <div className="mt-3 p-2 bg-essd-black border border-essd-border text-center">
+              <div className="mt-3 p-2 bg-essd-black border border-essd-border text-center rounded-lg">
                 <span className="text-[11px] font-mono font-bold text-essd-gold uppercase block">
                   Official ESSD 2026 Poster Artwork
                 </span>
@@ -144,9 +144,9 @@ export default function AboutPage() {
               return (
                 <div
                   key={idx}
-                  className={`p-6 bg-essd-black border-2 ${p.color} shadow-[4px_4px_0px_#0A0A0C] space-y-3`}
+                  className={`p-6 bg-essd-black border-2 ${p.color} shadow-[4px_4px_0px_#0A0A0C] space-y-3 rounded-2xl`}
                 >
-                  <div className="p-3 bg-essd-dark w-fit border border-essd-border text-essd-gold">
+                  <div className="p-3 bg-essd-dark w-fit border border-essd-border text-essd-gold rounded-xl">
                     <Icon className="w-6 h-6" />
                   </div>
                   <h4 className="text-base font-black font-display uppercase text-essd-cream tracking-wide">
@@ -166,7 +166,7 @@ export default function AboutPage() {
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
-          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-3">
+          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-3 rounded-2xl">
             <span className="text-xs font-mono font-bold text-essd-gold uppercase block">
               Organizer &amp; Host
             </span>
@@ -178,7 +178,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-3">
+          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-3 rounded-2xl">
             <span className="text-xs font-mono font-bold text-essd-orange uppercase block">
               Championship Venue
             </span>
@@ -190,7 +190,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-3">
+          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-3 rounded-2xl">
             <span className="text-xs font-mono font-bold text-essd-gold uppercase block">
               Adjudication Protocol
             </span>

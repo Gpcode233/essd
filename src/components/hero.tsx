@@ -42,12 +42,12 @@ export default function Hero() {
       <div className="relative w-full halftone-bg py-12 md:py-20 lg:py-24 border-b-8 border-essd-black px-4 sm:px-6 lg:px-8">
         
         {/* Subtle decorative geometric stamps */}
-        <div className="absolute top-6 left-6 hidden sm:flex items-center gap-2 bg-essd-black text-essd-cream px-3 py-1.5 font-mono text-xs uppercase font-bold border-2 border-essd-cream shadow-[3px_3px_0px_rgba(0,0,0,0.5)] rotate-[-2deg]">
+        <div className="absolute top-6 left-6 hidden sm:flex items-center gap-2 bg-essd-black text-essd-cream px-4 py-1.5 font-mono text-xs uppercase font-bold border-2 border-essd-cream rounded-full shadow-[3px_3px_0px_rgba(0,0,0,0.5)] rotate-[-2deg]">
           <Icons.Shield className="w-3.5 h-3.5 text-essd-gold" />
           <span>Official State Championship</span>
         </div>
 
-        <div className="absolute top-6 right-6 hidden sm:flex items-center gap-2 bg-essd-orange text-white px-3 py-1.5 font-mono text-xs uppercase font-bold border-2 border-essd-black shadow-[3px_3px_0px_#0A0A0C] rotate-[2deg]">
+        <div className="absolute top-6 right-6 hidden sm:flex items-center gap-2 bg-essd-orange text-white px-4 py-1.5 font-mono text-xs uppercase font-bold border-2 border-essd-black rounded-full shadow-[3px_3px_0px_#0A0A0C] rotate-[2deg]">
           <Icons.Mic className="w-3.5 h-3.5" />
           <span>16 Elite Secondary Schools</span>
         </div>
@@ -71,7 +71,7 @@ export default function Hero() {
               <p className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] font-black text-essd-black/80">
                 The Placee Consults &amp; Partners Presents
               </p>
-              <h2 className="text-sm sm:text-xl md:text-2xl font-black font-display tracking-tight text-essd-black uppercase mt-0.5">
+              <h2 className="text-sm sm:text-xl md:text-2xl font-black font-display tracking-wider text-essd-black uppercase mt-0.5">
                 Enugu State Secondary Schools
               </h2>
             </div>
@@ -84,30 +84,20 @@ export default function Hero() {
             <div className="lg:col-span-3 flex justify-center lg:justify-start order-2 lg:order-1">
               <div className="relative group">
                 {/* Paper-cut sticker container */}
-                <div className="relative bg-essd-black p-2 border-4 border-essd-cream shadow-[8px_8px_0px_#0A0A0C] rotate-[-2deg] transition-transform duration-300 hover:rotate-0 hover:scale-105">
-                  <div className="w-56 sm:w-64 h-72 sm:h-80 relative overflow-hidden bg-gradient-to-t from-essd-black via-essd-charcoal to-essd-dark">
+                <div className="relative bg-essd-black p-2 border-4 border-essd-cream rounded-2xl shadow-[8px_8px_0px_#0A0A0C] rotate-[-2deg] transition-transform duration-300 hover:rotate-0 hover:scale-105">
+                  <div className="w-56 sm:w-64 h-72 sm:h-80 relative overflow-hidden rounded-xl bg-gradient-to-t from-essd-black via-essd-charcoal to-essd-dark">
                     <Image
                       src="/images/essd-poster.jpg"
-                      alt="Student Debater Enugu State"
+                      alt="Championship Debater"
                       fill
-                      className="object-cover object-left scale-110 filter contrast-125"
-                      priority
+                      className="object-cover object-top filter contrast-125 grayscale"
                     />
-                    {/* Dark gradient overlay for dramatic contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-essd-black/90 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-3 left-3 right-3 text-left">
-                      <span className="inline-block bg-essd-gold text-essd-black font-mono text-[10px] font-extrabold px-2 py-0.5 uppercase mb-1">
-                        Matter &amp; Logic
-                      </span>
-                      <p className="text-xs font-bold text-essd-cream font-mono">
-                        Proposition Speaker
-                      </p>
-                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-essd-black via-transparent to-transparent opacity-80"></div>
                   </div>
-                </div>
-                {/* Visual Stamp Badge */}
-                <div className="absolute -bottom-3 -right-3 bg-essd-orange text-white font-mono text-[10px] font-black uppercase px-2.5 py-1 border-2 border-essd-black shadow-[2px_2px_0px_#0A0A0C] rotate-[4deg]">
-                  Team Leader
+                  {/* Sticker Caption */}
+                  <div className="absolute bottom-4 left-4 right-4 bg-essd-gold text-essd-black px-3 py-1 font-mono text-xs font-black uppercase text-center rounded-lg border-2 border-essd-black shadow-sm">
+                    Speaker 1 • Lead Debater
+                  </div>
                 </div>
               </div>
             </div>
@@ -118,7 +108,7 @@ export default function Hero() {
               {/* Massive DEBATE CHAMPIONSHIP Typography */}
               <div className="relative py-2 select-none">
                 {/* Big Black "DEBATE" Background Word */}
-                <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-tight text-essd-black uppercase leading-[0.85] text-shadow-hard">
+                <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-wider text-essd-black uppercase leading-[0.85] text-shadow-hard">
                   DEBATE
                 </h1>
 
@@ -129,19 +119,19 @@ export default function Hero() {
 
                 {/* Orange CHAMPIONSHIP banner */}
                 <div className="mt-2 sm:mt-3">
-                  <span className="inline-block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-display tracking-tight text-essd-orange uppercase bg-essd-black px-4 py-1.5 border-3 border-essd-cream shadow-[5px_5px_0px_#0A0A0C] rotate-[1deg]">
+                  <span className="inline-block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-display tracking-wider text-essd-orange uppercase bg-essd-black px-5 py-2 rounded-xl border-3 border-essd-cream shadow-[5px_5px_0px_#0A0A0C] rotate-[1deg]">
                     CHAMPIONSHIP
                   </span>
                 </div>
               </div>
 
               {/* Theme Block */}
-              <div className="max-w-xl mx-auto bg-essd-black text-essd-cream p-5 sm:p-6 border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] relative">
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-essd-gold text-essd-black font-mono text-xs font-black uppercase px-3 py-0.5 border-2 border-essd-black">
+              <div className="max-w-xl mx-auto bg-essd-black text-essd-cream p-5 sm:p-6 rounded-2xl border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] relative">
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-essd-gold text-essd-black font-mono text-xs font-black uppercase px-4 py-0.5 rounded-full border-2 border-essd-black shadow-sm">
                   Official 2026 Theme
                 </div>
                 
-                <h3 className="text-lg sm:text-2xl md:text-3xl font-black font-display uppercase tracking-tight text-essd-gold mt-1 leading-snug">
+                <h3 className="text-lg sm:text-2xl md:text-3xl font-black font-display uppercase tracking-wide text-essd-gold mt-1 leading-snug">
                   “Beyond the Algorithm: <span className="text-essd-orange">Reimagining Education</span> in the Age of AI”
                 </h3>
                 
@@ -150,9 +140,9 @@ export default function Hero() {
                 </p>
               </div>
 
-              {/* Event Dates Stamp */}
+              {/* Event Dates & Venue Stamps (Rounded rectangles matching flyer) */}
               <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-3">
-                <div className="bg-essd-black text-essd-cream px-5 py-2.5 border-3 border-essd-gold shadow-[4px_4px_0px_#0A0A0C] flex items-center gap-3">
+                <div className="bg-essd-black text-essd-cream px-5 py-2.5 rounded-2xl border-3 border-essd-gold shadow-[4px_4px_0px_#0A0A0C] flex items-center gap-3">
                   <Icons.Calendar className="w-5 h-5 text-essd-gold flex-shrink-0" />
                   <div className="text-left">
                     <span className="text-[10px] font-mono uppercase font-bold text-essd-gold block">
@@ -164,7 +154,7 @@ export default function Hero() {
                   </div>
                 </div>
 
-                <div className="bg-essd-black text-essd-cream px-4 py-2.5 border-3 border-essd-orange shadow-[4px_4px_0px_#0A0A0C] flex items-center gap-2">
+                <div className="bg-essd-black text-essd-cream px-5 py-2.5 rounded-2xl border-3 border-essd-orange shadow-[4px_4px_0px_#0A0A0C] flex items-center gap-2.5">
                   <Icons.Location className="w-5 h-5 text-essd-orange flex-shrink-0" />
                   <div className="text-left">
                     <span className="text-[10px] font-mono uppercase font-bold text-essd-orange block">
@@ -181,7 +171,7 @@ export default function Hero() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
                 <Link
                   href="/register"
-                  className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-essd-black text-essd-gold hover:bg-essd-orange hover:text-white font-display text-base font-black uppercase tracking-wider border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all group"
+                  className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-essd-black text-essd-gold hover:bg-essd-orange hover:text-white font-display text-base font-black uppercase tracking-wider rounded-xl border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all group"
                 >
                   <Icons.Sparkles className="w-5 h-5 mr-2 text-essd-gold group-hover:text-white transition-transform" />
                   Register Your School
@@ -190,7 +180,7 @@ export default function Hero() {
 
                 <Link
                   href="/championship"
-                  className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-4 bg-essd-cream text-essd-black hover:bg-essd-gold font-display text-base font-black uppercase tracking-wider border-4 border-essd-black shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all"
+                  className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-4 bg-essd-cream text-essd-black hover:bg-essd-gold font-display text-base font-black uppercase tracking-wider rounded-xl border-4 border-essd-black shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all"
                 >
                   <Icons.Trophy className="w-5 h-5 mr-2 text-essd-orange" />
                   View Championship
@@ -199,7 +189,7 @@ export default function Hero() {
 
               {/* Secretariat Hotline bar */}
               <div className="pt-2">
-                <div className="inline-flex items-center gap-2 bg-essd-black/90 text-essd-cream-muted px-4 py-1.5 rounded-full text-xs font-mono border border-essd-black">
+                <div className="inline-flex items-center gap-2 bg-essd-black/90 text-essd-cream-muted px-5 py-2 rounded-full text-xs font-mono border border-essd-black shadow-sm">
                   <span>For enquiries &amp; sponsorship:</span>
                   <a
                     href="tel:+2349038296513"
@@ -222,8 +212,8 @@ export default function Hero() {
             <div className="lg:col-span-3 flex justify-center lg:justify-end order-3">
               <div className="relative group">
                 {/* Paper-cut sticker container */}
-                <div className="relative bg-essd-black p-2 border-4 border-essd-cream shadow-[8px_8px_0px_#0A0A0C] rotate-[2deg] transition-transform duration-300 hover:rotate-0 hover:scale-105">
-                  <div className="w-56 sm:w-64 h-72 sm:h-80 relative overflow-hidden bg-gradient-to-t from-essd-black via-essd-charcoal to-essd-dark">
+                <div className="relative bg-essd-black p-2 border-4 border-essd-cream rounded-2xl shadow-[8px_8px_0px_#0A0A0C] rotate-[2deg] transition-transform duration-300 hover:rotate-0 hover:scale-105">
+                  <div className="w-56 sm:w-64 h-72 sm:h-80 relative overflow-hidden rounded-xl bg-gradient-to-t from-essd-black via-essd-charcoal to-essd-dark">
                     <Image
                       src="/images/essd-poster.jpg"
                       alt="Student Debater Presentation"
@@ -233,7 +223,7 @@ export default function Hero() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-essd-black/90 via-transparent to-transparent"></div>
                     <div className="absolute bottom-3 left-3 right-3 text-left">
-                      <span className="inline-block bg-essd-orange text-white font-mono text-[10px] font-extrabold px-2 py-0.5 uppercase mb-1">
+                      <span className="inline-block bg-essd-orange text-white font-mono text-[10px] font-extrabold px-2.5 py-0.5 rounded uppercase mb-1">
                         Manner &amp; Method
                       </span>
                       <p className="text-xs font-bold text-essd-cream font-mono">
@@ -243,7 +233,7 @@ export default function Hero() {
                   </div>
                 </div>
                 {/* Visual Stamp Badge */}
-                <div className="absolute -bottom-3 -left-3 bg-essd-gold text-essd-black font-mono text-[10px] font-black uppercase px-2.5 py-1 border-2 border-essd-black shadow-[2px_2px_0px_#0A0A0C] rotate-[-4deg]">
+                <div className="absolute -bottom-3 -left-3 bg-essd-gold text-essd-black font-mono text-[10px] font-black uppercase px-3 py-1 rounded-full border-2 border-essd-black shadow-[2px_2px_0px_#0A0A0C] rotate-[-4deg]">
                   Top Adjudicator
                 </div>
               </div>
@@ -253,7 +243,7 @@ export default function Hero() {
 
           {/* Live Tournament Countdown Timer Bar */}
           <div className="mt-8 pt-8 border-t-2 border-essd-black/30">
-            <div className="max-w-3xl mx-auto bg-essd-black text-essd-cream p-4 sm:p-6 border-3 border-essd-cream shadow-[6px_6px_0px_#0A0A0C]">
+            <div className="max-w-3xl mx-auto bg-essd-black text-essd-cream p-4 sm:p-6 rounded-2xl border-3 border-essd-cream shadow-[6px_6px_0px_#0A0A0C]">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-center sm:text-left">
                   <div className="inline-flex items-center gap-2 text-essd-orange font-mono text-xs font-black uppercase tracking-wider">
@@ -266,7 +256,7 @@ export default function Hero() {
                 </div>
 
                 <div className="grid grid-cols-4 gap-2 sm:gap-3 text-center">
-                  <div className="bg-essd-charcoal px-3 py-2 border border-essd-border min-w-[58px]">
+                  <div className="bg-essd-charcoal px-3 py-2 rounded-xl border border-essd-border min-w-[58px]">
                     <span className="block text-xl sm:text-2xl font-black font-mono text-essd-gold">
                       {timeLeft.days}
                     </span>
@@ -274,7 +264,7 @@ export default function Hero() {
                       Days
                     </span>
                   </div>
-                  <div className="bg-essd-charcoal px-3 py-2 border border-essd-border min-w-[58px]">
+                  <div className="bg-essd-charcoal px-3 py-2 rounded-xl border border-essd-border min-w-[58px]">
                     <span className="block text-xl sm:text-2xl font-black font-mono text-essd-cream">
                       {timeLeft.hours}
                     </span>
@@ -282,7 +272,7 @@ export default function Hero() {
                       Hours
                     </span>
                   </div>
-                  <div className="bg-essd-charcoal px-3 py-2 border border-essd-border min-w-[58px]">
+                  <div className="bg-essd-charcoal px-3 py-2 rounded-xl border border-essd-border min-w-[58px]">
                     <span className="block text-xl sm:text-2xl font-black font-mono text-essd-cream">
                       {timeLeft.minutes}
                     </span>
@@ -290,7 +280,7 @@ export default function Hero() {
                       Mins
                     </span>
                   </div>
-                  <div className="bg-essd-charcoal px-3 py-2 border border-essd-border min-w-[58px]">
+                  <div className="bg-essd-charcoal px-3 py-2 rounded-xl border border-essd-border min-w-[58px]">
                     <span className="block text-xl sm:text-2xl font-black font-mono text-essd-orange">
                       {timeLeft.seconds}
                     </span>

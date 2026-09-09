@@ -126,16 +126,16 @@ export default function RegistrationForm() {
 
   if (successData) {
     return (
-      <div className="bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-10 shadow-[10px_10px_0px_#0A0A0C] text-essd-cream animate-in zoom-in-95 duration-300">
+      <div className="bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-10 shadow-[10px_10px_0px_#0A0A0C] text-essd-cream animate-in zoom-in-95 duration-300 rounded-2xl">
         {/* Success Header */}
         <div className="text-center mb-8 pb-6 border-b border-essd-border">
           <div className="w-16 h-16 rounded-full bg-essd-gold text-essd-black flex items-center justify-center mx-auto mb-4 border-2 border-essd-cream shadow-[0_0_20px_rgba(232,169,39,0.5)]">
             <Icons.CheckCircle className="w-10 h-10" />
           </div>
-          <span className="px-3 py-1 bg-essd-orange text-white font-mono text-xs font-black uppercase tracking-wider inline-block mb-2">
+          <span className="px-3.5 py-1 bg-essd-orange text-white font-mono text-xs font-black uppercase tracking-wider inline-block mb-2 rounded-full">
             Registration Confirmed 🎉
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black font-display uppercase tracking-tight text-essd-gold">
+          <h2 className="text-2xl sm:text-4xl font-black font-display uppercase tracking-wide text-essd-gold">
             You're Officially Registered!
           </h2>
           <p className="text-xs sm:text-sm text-essd-cream-muted mt-2 max-w-lg mx-auto font-sans">
@@ -144,7 +144,7 @@ export default function RegistrationForm() {
         </div>
 
         {/* Printable Official Pass */}
-        <div className="bg-essd-black p-6 sm:p-8 border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] mb-8 relative overflow-hidden">
+        <div className="bg-essd-black p-6 sm:p-8 border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] mb-8 relative overflow-hidden rounded-2xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b-2 border-essd-gold gap-2">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-essd-gold text-essd-black font-display font-black text-xs flex items-center justify-center">
@@ -172,22 +172,22 @@ export default function RegistrationForm() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 text-xs font-mono">
             <div className="space-y-2">
-              <div className="p-2 bg-essd-dark/80 border border-essd-border">
+              <div className="p-2.5 bg-essd-dark/80 border border-essd-border rounded-xl">
                 <span className="text-essd-cream-muted block text-[10px]">Registered School:</span>
                 <span className="text-sm font-bold text-essd-gold">{successData.schoolName}</span>
               </div>
-              <div className="p-2 bg-essd-dark/80 border border-essd-border">
+              <div className="p-2.5 bg-essd-dark/80 border border-essd-border rounded-xl">
                 <span className="text-essd-cream-muted block text-[10px]">LGA / Jurisdiction:</span>
                 <span className="font-bold text-essd-cream">{successData.lga} LGA, Enugu State</span>
               </div>
-              <div className="p-2 bg-essd-dark/80 border border-essd-border">
+              <div className="p-2.5 bg-essd-dark/80 border border-essd-border rounded-xl">
                 <span className="text-essd-cream-muted block text-[10px]">Supervising Coordinator:</span>
                 <span className="font-bold text-essd-cream">{successData.teacherName}</span>
               </div>
             </div>
 
             <div className="space-y-2">
-              <div className="p-2 bg-essd-dark/80 border border-essd-gold/60">
+              <div className="p-2.5 bg-essd-dark/80 border border-essd-gold/60 rounded-xl">
                 <span className="text-essd-gold block text-[10px] uppercase font-bold">
                   2 Registered Student Debaters:
                 </span>
@@ -198,7 +198,7 @@ export default function RegistrationForm() {
                   2. {successData.debaterNames?.[1] || "Second Speaker"}
                 </p>
               </div>
-              <div className="p-2 bg-essd-dark/80 border border-essd-border">
+              <div className="p-2.5 bg-essd-dark/80 border border-essd-border rounded-xl">
                 <span className="text-essd-cream-muted block text-[10px]">Event Dates &amp; Venue:</span>
                 <span className="font-bold text-essd-gold">16th &amp; 17th Oct 2026 • Enugu Secretariat</span>
               </div>
@@ -220,7 +220,7 @@ export default function RegistrationForm() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             onClick={handlePrint}
-            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[4px_4px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[4px_4px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all rounded-xl"
           >
             <Icons.Printer className="w-4 h-4 mr-2" />
             Print / Save Pass (PDF)
@@ -251,7 +251,7 @@ export default function RegistrationForm() {
                 agreedToTerms: true,
               });
             }}
-            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-essd-dark text-essd-cream hover:text-essd-gold font-mono font-bold text-xs uppercase border border-essd-border"
+            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-essd-dark text-essd-cream hover:text-essd-gold font-mono font-bold text-xs uppercase border border-essd-border rounded-xl"
           >
             Register Another School
           </button>
@@ -263,10 +263,10 @@ export default function RegistrationForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-essd-charcoal border-4 border-essd-border p-6 sm:p-10 shadow-[8px_8px_0px_#0A0A0C] text-essd-cream space-y-8"
+      className="bg-essd-charcoal border-4 border-essd-border p-6 sm:p-10 shadow-[8px_8px_0px_#0A0A0C] text-essd-cream space-y-8 rounded-2xl"
     >
       {errorMsg && (
-        <div className="p-4 bg-red-950/80 border-2 border-red-500 text-red-200 text-xs font-mono flex items-start gap-3">
+        <div className="p-4 bg-red-950/80 border-2 border-red-500 text-red-200 text-xs font-mono flex items-start gap-3 rounded-xl">
           <Icons.Alert className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
           <div>
             <strong className="block font-bold uppercase">Submission Error</strong>
@@ -276,7 +276,7 @@ export default function RegistrationForm() {
       )}
 
       {/* Info notice about 2 debaters per school */}
-      <div className="p-4 bg-essd-gold/10 border-2 border-essd-gold text-xs font-mono text-essd-cream flex items-start gap-3">
+      <div className="p-4 bg-essd-gold/10 border-2 border-essd-gold text-xs font-mono text-essd-cream flex items-start gap-3 rounded-xl">
         <Icons.Trophy className="w-5 h-5 text-essd-gold flex-shrink-0 mt-0.5" />
         <div>
           <span className="font-bold uppercase text-essd-gold block">
@@ -307,7 +307,7 @@ export default function RegistrationForm() {
               placeholder="e.g. College of the Immaculate Conception (CIC) Enugu"
               value={formData.schoolName}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none transition-colors"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none transition-colors rounded-xl"
             />
           </div>
 
@@ -319,7 +319,7 @@ export default function RegistrationForm() {
               name="schoolType"
               value={formData.schoolType}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
             >
               <option value="PUBLIC">Public State Secondary School</option>
               <option value="PRIVATE">Private International / High School</option>
@@ -336,7 +336,7 @@ export default function RegistrationForm() {
               name="lga"
               value={formData.lga}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
             >
               {ENUGU_LGAS.map((lga) => (
                 <option key={lga} value={lga}>
@@ -357,7 +357,7 @@ export default function RegistrationForm() {
               placeholder="e.g. Ogui Road / Independence Layout / University Road Nsukka"
               value={formData.schoolAddress}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none rounded-xl"
             />
           </div>
 
@@ -372,7 +372,7 @@ export default function RegistrationForm() {
               placeholder="school@example.com"
               value={formData.schoolEmail}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
             />
           </div>
 
@@ -387,7 +387,7 @@ export default function RegistrationForm() {
               placeholder="+234 803 000 0000"
               value={formData.schoolPhone}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
             />
           </div>
         </div>
@@ -414,7 +414,7 @@ export default function RegistrationForm() {
               placeholder="e.g. Mr. Emmanuel Nwankwo"
               value={formData.teacherName}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none rounded-xl"
             />
           </div>
 
@@ -429,7 +429,7 @@ export default function RegistrationForm() {
               placeholder="e.g. Debate Coach / English Dept / Vice Principal"
               value={formData.contactRole}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none rounded-xl"
             />
           </div>
 
@@ -444,7 +444,7 @@ export default function RegistrationForm() {
               placeholder="+234 803 123 4567"
               value={formData.contactPhone || formData.schoolPhone}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
             />
           </div>
 
@@ -459,7 +459,7 @@ export default function RegistrationForm() {
               placeholder="coordinator@example.com"
               value={formData.contactEmail || formData.schoolEmail}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
             />
           </div>
         </div>
@@ -481,7 +481,7 @@ export default function RegistrationForm() {
 
         <div className="space-y-5">
           {/* Debater 1 */}
-          <div className="p-5 bg-essd-black border-2 border-essd-gold/70 shadow-[3px_3px_0px_#0A0A0C]">
+          <div className="p-5 bg-essd-black border-2 border-essd-gold/70 shadow-[3px_3px_0px_#0A0A0C] rounded-2xl">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-mono font-black uppercase text-essd-gold">
                 Student Debater 01 (Lead Speaker) *
@@ -511,7 +511,7 @@ export default function RegistrationForm() {
                   placeholder="First Name &amp; Surname"
                   value={formData.debater1Name}
                   onChange={handleChange}
-                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-gold"
+                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-gold rounded-lg"
                 />
               </div>
               <div>
@@ -522,7 +522,7 @@ export default function RegistrationForm() {
                   name="debater1Class"
                   value={formData.debater1Class}
                   onChange={handleChange}
-                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none"
+                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none rounded-lg"
                 >
                   <option value="SS3">Senior Secondary 3 (SS3)</option>
                   <option value="SS2">Senior Secondary 2 (SS2)</option>
@@ -533,7 +533,7 @@ export default function RegistrationForm() {
           </div>
 
           {/* Debater 2 */}
-          <div className="p-5 bg-essd-black border-2 border-essd-orange/70 shadow-[3px_3px_0px_#0A0A0C]">
+          <div className="p-5 bg-essd-black border-2 border-essd-orange/70 shadow-[3px_3px_0px_#0A0A0C] rounded-2xl">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-mono font-black uppercase text-essd-orange">
                 Student Debater 02 (Second Speaker) *
@@ -563,7 +563,7 @@ export default function RegistrationForm() {
                   placeholder="First Name &amp; Surname"
                   value={formData.debater2Name}
                   onChange={handleChange}
-                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-orange"
+                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-orange rounded-lg"
                 />
               </div>
               <div>
@@ -574,7 +574,7 @@ export default function RegistrationForm() {
                   name="debater2Class"
                   value={formData.debater2Class}
                   onChange={handleChange}
-                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none"
+                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none rounded-lg"
                 >
                   <option value="SS3">Senior Secondary 3 (SS3)</option>
                   <option value="SS2">Senior Secondary 2 (SS2)</option>
@@ -588,7 +588,7 @@ export default function RegistrationForm() {
 
       {/* Terms Agreement */}
       <div className="space-y-4 pt-4 border-t border-essd-border">
-        <div className="flex items-start gap-3 p-4 bg-essd-dark/60 border border-essd-border">
+        <div className="flex items-start gap-3 p-4 bg-essd-dark/60 border border-essd-border rounded-xl">
           <input
             type="checkbox"
             name="agreedToTerms"
@@ -609,7 +609,7 @@ export default function RegistrationForm() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full py-4 bg-essd-gold text-essd-black hover:bg-essd-orange hover:text-white font-display text-base font-black uppercase tracking-wider border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+          className="w-full py-4 bg-essd-gold text-essd-black hover:bg-essd-orange hover:text-white font-display text-base font-black uppercase tracking-wider border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 disabled:opacity-50 rounded-xl"
         >
           {submitting ? (
             <span>Securing Registration &amp; Slot...</span>

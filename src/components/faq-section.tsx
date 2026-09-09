@@ -39,11 +39,11 @@ export default function FAQSection() {
         
         {/* Section Header */}
         <div className="text-center mb-14">
-          <span className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold bg-essd-gold/10 px-3 py-1 border border-essd-gold inline-block mb-3">
+          <span className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold bg-essd-gold/10 px-3.5 py-1 border border-essd-gold inline-block mb-3 rounded-full">
             <Icons.HelpCircle className="w-3.5 h-3.5 inline mr-1" />
             Knowledge Base
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-tight text-essd-cream">
+          <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-wide text-essd-cream">
             FREQUENTLY ASKED <span className="text-essd-gold">QUESTIONS</span>
           </h2>
           <p className="mt-3 text-xs sm:text-sm text-essd-cream-muted font-sans">
@@ -58,7 +58,7 @@ export default function FAQSection() {
             return (
               <div
                 key={idx}
-                className="bg-essd-charcoal border-2 border-essd-border overflow-hidden transition-colors"
+                className="bg-essd-charcoal border-2 border-essd-border overflow-hidden transition-colors rounded-xl"
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? null : idx)}
@@ -85,7 +85,7 @@ export default function FAQSection() {
         </div>
 
         {/* Contact Strip */}
-        <div className="mt-12 p-6 bg-essd-dark border-2 border-essd-border flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div className="mt-12 p-6 bg-essd-dark border-2 border-essd-border flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left rounded-2xl">
           <div>
             <h4 className="text-sm font-bold uppercase font-display text-essd-cream">
               Still have questions about ESSD 2026?
@@ -97,14 +97,14 @@ export default function FAQSection() {
           <div className="flex items-center gap-3">
             <a
               href="tel:+2349038296513"
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-essd-gold text-essd-black font-mono font-bold text-xs uppercase"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-essd-gold text-essd-black font-mono font-bold text-xs uppercase rounded-xl"
             >
               <Icons.Phone className="w-3.5 h-3.5" />
               Call Secretariat
             </a>
             <a
               href="mailto:theplaceeconsults@gmail.com"
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-essd-charcoal text-essd-cream hover:text-essd-gold border border-essd-border font-mono font-bold text-xs uppercase"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-essd-charcoal text-essd-cream hover:text-essd-gold border border-essd-border font-mono font-bold text-xs uppercase rounded-xl"
             >
               <Icons.Mail className="w-3.5 h-3.5" />
               Email Us

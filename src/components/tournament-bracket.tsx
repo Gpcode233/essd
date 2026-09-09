@@ -20,7 +20,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
     switch (status) {
       case "LIVE":
         return (
-          <span className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-essd-orange text-white font-mono text-[9px] font-black uppercase rounded animate-pulse">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-essd-orange text-white font-mono text-[9px] font-black uppercase rounded-full animate-pulse">
             <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
             LIVE
           </span>
@@ -28,13 +28,13 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
       case "FINAL":
       case "COMPLETED":
         return (
-          <span className="px-1.5 py-0.5 bg-green-950 text-green-400 border border-green-700/60 font-mono text-[9px] font-bold uppercase">
+          <span className="px-2 py-0.5 bg-green-950 text-green-400 border border-green-700/60 font-mono text-[9px] font-bold uppercase rounded-full">
             FINAL
           </span>
         );
       default:
         return (
-          <span className="px-1.5 py-0.5 bg-essd-dark text-essd-cream-muted font-mono text-[9px] uppercase">
+          <span className="px-2 py-0.5 bg-essd-dark text-essd-cream-muted font-mono text-[9px] uppercase rounded-full">
             UPCOMING
           </span>
         );
@@ -91,7 +91,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
   const renderTreeNode = (m: MatchData | null, matchLabel: string) => {
     if (!m) {
       return (
-        <div className="w-[240px] bg-essd-charcoal/50 border-2 border-dashed border-essd-border/50 p-4 text-center text-xs font-mono text-essd-cream-muted">
+        <div className="w-[240px] bg-essd-charcoal/50 border-2 border-dashed border-essd-border/50 p-4 text-center text-xs font-mono text-essd-cream-muted rounded-xl">
           Awaiting Qualification
         </div>
       );
@@ -104,7 +104,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
     return (
       <div
         onClick={() => setSelectedMatch(m)}
-        className="w-[250px] bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold transition-all duration-200 cursor-pointer shadow-[4px_4px_0px_#0A0A0C] hover:shadow-[6px_6px_0px_#E8A927] hover:-translate-y-0.5 group relative select-none"
+        className="w-[250px] bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold transition-all duration-200 cursor-pointer shadow-[4px_4px_0px_#0A0A0C] hover:shadow-[6px_6px_0px_#E8A927] hover:-translate-y-0.5 group relative select-none rounded-xl overflow-hidden"
       >
         {/* Node Header */}
         <div className="flex items-center justify-between px-3 py-1.5 bg-essd-dark border-b border-essd-border text-[10px] font-mono">
@@ -150,7 +150,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
       
       {/* Visual Bracket Stage Banner */}
       <div className="hidden lg:grid grid-cols-4 gap-10 mb-8 text-center font-mono">
-        <div className="p-3 bg-essd-charcoal border-2 border-essd-border shadow-[3px_3px_0px_#0A0A0C]">
+        <div className="p-3 bg-essd-charcoal border-2 border-essd-border shadow-[3px_3px_0px_#0A0A0C] rounded-xl">
           <span className="text-sm font-black uppercase tracking-wider text-essd-gold block font-display">
             ROUND OF 16
           </span>
@@ -159,7 +159,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
           </span>
         </div>
 
-        <div className="p-3 bg-essd-charcoal border-2 border-essd-border shadow-[3px_3px_0px_#0A0A0C]">
+        <div className="p-3 bg-essd-charcoal border-2 border-essd-border shadow-[3px_3px_0px_#0A0A0C] rounded-xl">
           <span className="text-sm font-black uppercase tracking-wider text-essd-gold block font-display">
             QUARTER-FINALS
           </span>
@@ -168,7 +168,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
           </span>
         </div>
 
-        <div className="p-3 bg-essd-charcoal border-2 border-essd-border shadow-[3px_3px_0px_#0A0A0C]">
+        <div className="p-3 bg-essd-charcoal border-2 border-essd-border shadow-[3px_3px_0px_#0A0A0C] rounded-xl">
           <span className="text-sm font-black uppercase tracking-wider text-essd-gold block font-display">
             SEMI-FINALS
           </span>
@@ -177,7 +177,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
           </span>
         </div>
 
-        <div className="p-3 bg-gradient-to-r from-essd-black to-essd-charcoal border-2 border-essd-gold shadow-[0_0_15px_rgba(232,169,39,0.3)]">
+        <div className="p-3 bg-gradient-to-r from-essd-black to-essd-charcoal border-2 border-essd-gold shadow-[0_0_15px_rgba(232,169,39,0.3)] rounded-xl">
           <span className="text-sm font-black uppercase tracking-wider text-essd-gold block font-display flex items-center justify-center gap-1">
             <Icons.Trophy className="w-4 h-4 text-essd-gold" />
             GRAND FINAL
@@ -250,7 +250,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
 
               <div className="space-y-4">
                 {/* Champion Badge Banner */}
-                <div className="p-3 bg-gradient-to-r from-essd-gold via-essd-orange to-essd-gold text-essd-black font-display font-black text-xs uppercase tracking-wider text-center border-2 border-essd-cream shadow-[0_0_20px_rgba(232,169,39,0.5)] flex items-center justify-center gap-1.5">
+                <div className="p-3 bg-gradient-to-r from-essd-gold via-essd-orange to-essd-gold text-essd-black font-display font-black text-xs uppercase tracking-wider text-center border-2 border-essd-cream shadow-[0_0_20px_rgba(232,169,39,0.5)] flex items-center justify-center gap-1.5 rounded-xl">
                   <Icons.Trophy className="w-4 h-4 fill-current" />
                   <span>🏆 ESSD 2026 GRAND CHAMPION</span>
                 </div>
@@ -259,7 +259,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
 
                 {/* Champion Result Podium Card */}
                 {final?.winner && (
-                  <div className="p-4 bg-essd-black border-3 border-essd-gold shadow-[6px_6px_0px_#E8A927] text-center space-y-1 animate-in zoom-in-95">
+                  <div className="p-4 bg-essd-black border-3 border-essd-gold shadow-[6px_6px_0px_#E8A927] text-center space-y-1 animate-in zoom-in-95 rounded-2xl">
                     <span className="text-[10px] font-mono text-essd-gold uppercase font-bold block">
                       Reigning State Champion:
                     </span>
@@ -281,10 +281,10 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
       {/* Mobile Bracket View (< lg breakpoint) */}
       <div className="lg:hidden">
         {/* Round Switcher Tabs */}
-        <div className="grid grid-cols-4 gap-1 p-1 bg-essd-charcoal border border-essd-border rounded-none text-center font-mono text-xs font-bold uppercase mb-4">
+        <div className="grid grid-cols-4 gap-1 p-1 bg-essd-charcoal border border-essd-border rounded-xl text-center font-mono text-xs font-bold uppercase mb-4">
           <button
             onClick={() => setMobileRoundTab("R16")}
-            className={`py-2 px-1 transition-colors ${
+            className={`py-2 px-1 transition-colors rounded-lg ${
               mobileRoundTab === "R16"
                 ? "bg-essd-gold text-essd-black font-extrabold shadow-sm"
                 : "text-essd-cream-muted hover:text-essd-cream"
@@ -294,7 +294,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
           </button>
           <button
             onClick={() => setMobileRoundTab("QF")}
-            className={`py-2 px-1 transition-colors ${
+            className={`py-2 px-1 transition-colors rounded-lg ${
               mobileRoundTab === "QF"
                 ? "bg-essd-gold text-essd-black font-extrabold shadow-sm"
                 : "text-essd-cream-muted hover:text-essd-cream"
@@ -304,7 +304,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
           </button>
           <button
             onClick={() => setMobileRoundTab("SF")}
-            className={`py-2 px-1 transition-colors ${
+            className={`py-2 px-1 transition-colors rounded-lg ${
               mobileRoundTab === "SF"
                 ? "bg-essd-gold text-essd-black font-extrabold shadow-sm"
                 : "text-essd-cream-muted hover:text-essd-cream"
@@ -314,7 +314,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
           </button>
           <button
             onClick={() => setMobileRoundTab("FINAL")}
-            className={`py-2 px-1 transition-colors ${
+            className={`py-2 px-1 transition-colors rounded-lg ${
               mobileRoundTab === "FINAL"
                 ? "bg-essd-orange text-white font-extrabold shadow-sm"
                 : "text-essd-cream-muted hover:text-essd-cream"
@@ -343,7 +343,7 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
           ))}
           {mobileRoundTab === "FINAL" && (
             <div className="space-y-4">
-              <div className="p-4 bg-gradient-to-r from-essd-gold via-essd-orange to-essd-gold text-essd-black text-center border-2 border-essd-cream font-display font-black text-sm uppercase">
+              <div className="p-4 bg-gradient-to-r from-essd-gold via-essd-orange to-essd-gold text-essd-black text-center border-2 border-essd-cream font-display font-black text-sm uppercase rounded-xl">
                 🏆 ESSD 2026 GRAND CHAMPIONSHIP FINAL
               </div>
               {renderTreeNode(final, "Grand Final")}

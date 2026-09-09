@@ -32,7 +32,7 @@ export default async function HomePage() {
                 <Icons.Trophy className="w-3.5 h-3.5 text-essd-gold" />
                 Live Tournament Progression
               </div>
-              <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-tight text-essd-cream">
+              <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-wide text-essd-cream">
                 16-SCHOOL KNOCKOUT <br />
                 <span className="text-essd-gold">CHAMPIONSHIP BRACKET</span>
               </h2>
@@ -71,7 +71,7 @@ export default async function HomePage() {
             Enugu State Senior Secondary Schools
           </div>
           
-          <h2 className="text-4xl sm:text-6xl font-black font-display uppercase tracking-tight text-essd-black leading-none text-shadow-hard">
+          <h2 className="text-4xl sm:text-6xl font-black font-display uppercase tracking-wide text-essd-black leading-none text-shadow-hard">
             ARE YOU READY TO <br />
             <span className="text-essd-orange bg-essd-black px-4 py-1 inline-block mt-2 border-4 border-essd-cream rotate-[-1deg]">
               TAKE THE STAGE?

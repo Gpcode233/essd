@@ -27,7 +27,7 @@ export default async function AdminDashboardPage() {
         {/* Admin Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-essd-border gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-essd-gold text-essd-black font-mono text-xs font-black uppercase mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 bg-essd-gold text-essd-black font-mono text-xs font-black uppercase mb-2 rounded-full">
               Organizer Operations
             </div>
             <h1 className="text-2xl sm:text-4xl font-black font-display uppercase tracking-tight text-essd-cream">
@@ -41,13 +41,13 @@ export default async function AdminDashboardPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/admin/fixtures"
-              className="px-4 py-2.5 bg-essd-gold text-essd-black font-mono font-bold text-xs uppercase hover:bg-essd-orange hover:text-white transition-colors"
+              className="px-4 py-2.5 bg-essd-gold text-essd-black font-mono font-bold text-xs uppercase hover:bg-essd-orange hover:text-white transition-colors rounded-xl"
             >
               Update Live Scores
             </Link>
             <Link
               href="/admin/registrations"
-              className="px-4 py-2.5 bg-essd-charcoal text-essd-cream hover:text-essd-gold border border-essd-border font-mono font-bold text-xs uppercase transition-colors"
+              className="px-4 py-2.5 bg-essd-charcoal text-essd-cream hover:text-essd-gold border border-essd-border font-mono font-bold text-xs uppercase transition-colors rounded-xl"
             >
               Manage Registrations
             </Link>
@@ -57,7 +57,7 @@ export default async function AdminDashboardPage() {
         {/* Metric Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           
-          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2">
+          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2 rounded-2xl">
             <div className="flex items-center justify-between text-xs font-mono text-essd-cream-muted">
               <span>Confirmed Roster</span>
               <Icons.Users className="w-4 h-4 text-essd-gold" />
@@ -70,7 +70,7 @@ export default async function AdminDashboardPage() {
             </span>
           </div>
 
-          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2">
+          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2 rounded-2xl">
             <div className="flex items-center justify-between text-xs font-mono text-essd-cream-muted">
               <span>Portal Registrations</span>
               <Icons.FileText className="w-4 h-4 text-essd-orange" />
@@ -83,7 +83,7 @@ export default async function AdminDashboardPage() {
             </span>
           </div>
 
-          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2">
+          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2 rounded-2xl">
             <div className="flex items-center justify-between text-xs font-mono text-essd-cream-muted">
               <span>Matches Tracked</span>
               <Icons.Trophy className="w-4 h-4 text-green-400" />
@@ -96,7 +96,7 @@ export default async function AdminDashboardPage() {
             </span>
           </div>
 
-          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2">
+          <div className="p-6 bg-essd-charcoal border-2 border-essd-border space-y-2 rounded-2xl">
             <div className="flex items-center justify-between text-xs font-mono text-essd-cream-muted">
               <span>Prizes Configured</span>
               <Icons.Sparkles className="w-4 h-4 text-essd-gold" />
@@ -114,7 +114,7 @@ export default async function AdminDashboardPage() {
         {/* Modules Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          <div className="p-6 bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold flex flex-col justify-between space-y-4">
+          <div className="p-6 bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold flex flex-col justify-between space-y-4 rounded-2xl">
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-mono font-bold text-essd-gold uppercase">
@@ -137,7 +137,7 @@ export default async function AdminDashboardPage() {
             </Link>
           </div>
 
-          <div className="p-6 bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold flex flex-col justify-between space-y-4">
+          <div className="p-6 bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold flex flex-col justify-between space-y-4 rounded-2xl">
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-mono font-bold text-essd-orange uppercase">
@@ -160,7 +160,7 @@ export default async function AdminDashboardPage() {
             </Link>
           </div>
 
-          <div className="p-6 bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold flex flex-col justify-between space-y-4">
+          <div className="p-6 bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold flex flex-col justify-between space-y-4 rounded-2xl">
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-mono font-bold text-essd-gold uppercase">

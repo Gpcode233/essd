@@ -52,10 +52,10 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <span className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold bg-essd-gold/10 px-3 py-1 border border-essd-gold inline-block mb-3">
+          <span className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold bg-essd-gold/10 px-3.5 py-1 border border-essd-gold inline-block mb-3 rounded-full">
             🏆 Championship Honors
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-tight text-essd-cream">
+          <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-wide text-essd-cream">
             PRIZES &amp; <span className="text-essd-gold">OPPORTUNITIES</span>
           </h2>
           <p className="mt-4 text-xs sm:text-sm text-essd-cream-muted leading-relaxed font-sans">
@@ -67,9 +67,9 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
         {championPrize && (
           <div className="mb-10 relative group">
             {/* Outer Sticker / Poster Border Container */}
-            <div className="relative bg-gradient-to-br from-essd-charcoal via-essd-black to-essd-charcoal p-6 sm:p-10 border-4 border-essd-gold shadow-[8px_8px_0px_#0A0A0C] hover:shadow-[12px_12px_0px_#E8A927] transition-all duration-300">
+            <div className="relative bg-gradient-to-br from-essd-charcoal via-essd-black to-essd-charcoal p-6 sm:p-10 border-4 border-essd-gold shadow-[8px_8px_0px_#0A0A0C] hover:shadow-[12px_12px_0px_#E8A927] transition-all duration-300 rounded-2xl">
               
-              <div className="absolute -top-4 left-6 sm:left-10 bg-essd-gold text-essd-black font-mono text-xs sm:text-sm font-black uppercase px-4 py-1 border-2 border-essd-black shadow-[3px_3px_0px_#0A0A0C] flex items-center gap-1.5">
+              <div className="absolute -top-4 left-6 sm:left-10 bg-essd-gold text-essd-black font-mono text-xs sm:text-sm font-black uppercase px-4 py-1 border-2 border-essd-black shadow-[3px_3px_0px_#0A0A0C] flex items-center gap-1.5 rounded-full">
                 <Icons.Sparkles className="w-4 h-4 fill-current" />
                 Supreme Honor
               </div>
@@ -77,7 +77,7 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mt-2">
                 
                 {/* Trophy Graphic / Icon Column */}
-                <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-essd-black border-2 border-essd-gold/50 text-center relative overflow-hidden">
+                <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-essd-black border-2 border-essd-gold/50 text-center relative overflow-hidden rounded-xl">
                   <div className="relative z-10">
                     <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-essd-gold/20 border-2 border-essd-gold p-1 flex items-center justify-center mx-auto mb-4">
                       <div className="w-full h-full rounded-full bg-essd-black flex items-center justify-center">
@@ -95,12 +95,12 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
 
                 {/* Details Column */}
                 <div className="lg:col-span-8 space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-essd-gold/10 text-essd-gold border border-essd-gold/30 text-xs font-mono font-bold uppercase">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-essd-gold/10 text-essd-gold border border-essd-gold/30 text-xs font-mono font-bold uppercase rounded-full">
                     <Icons.GraduationCap className="w-4 h-4" />
                     Global Education Pathway
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-black font-display uppercase text-essd-gold tracking-tight leading-tight">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-black font-display uppercase text-essd-gold tracking-wide leading-tight">
                     {championPrize.rewardHeadline}
                   </h3>
 
@@ -134,7 +134,7 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
           {otherPrizes.map((p, idx) => (
             <div
               key={p.id || idx}
-              className="bg-essd-charcoal border-2 border-essd-border hover:border-essd-orange p-6 flex flex-col justify-between shadow-[4px_4px_0px_#0A0A0C] hover:shadow-[6px_6px_0px_#F25A19] transition-all duration-200 group"
+              className="bg-essd-charcoal border-2 border-essd-border hover:border-essd-orange p-6 flex flex-col justify-between shadow-[4px_4px_0px_#0A0A0C] hover:shadow-[6px_6px_0px_#F25A19] transition-all duration-200 group rounded-2xl"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
@@ -162,7 +162,7 @@ export default function PrizeShowcase({ prizes }: PrizeShowcaseProps) {
         </div>
 
         {/* Important Disclaimer Note */}
-        <div className="mt-10 p-4 bg-essd-dark/60 border border-essd-border text-center text-xs font-mono text-essd-cream-muted/80 max-w-2xl mx-auto">
+        <div className="mt-10 p-4 bg-essd-dark/60 border border-essd-border text-center text-xs font-mono text-essd-cream-muted/80 max-w-2xl mx-auto rounded-xl">
           <p>
             * Note: Specific partner institutions, international scholarship allocations, and finalized cash disbursements are subject to official confirmation and protocol by the ESSD 2026 Organizing Secretariat.
           </p>

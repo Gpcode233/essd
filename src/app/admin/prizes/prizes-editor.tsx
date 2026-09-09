@@ -92,7 +92,7 @@ export default function PrizesEditor({ initialPrizes }: PrizesEditorProps) {
 
       {message && (
         <div
-          className={`p-4 border-2 text-xs font-mono flex items-center gap-2 ${
+          className={`p-4 border-2 text-xs font-mono flex items-center gap-2 rounded-xl ${
             message.type === "success"
               ? "bg-green-950/90 border-green-500 text-green-200"
               : "bg-red-950/90 border-red-500 text-red-200"
@@ -112,7 +112,7 @@ export default function PrizesEditor({ initialPrizes }: PrizesEditorProps) {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <form
             onSubmit={handleSave}
-            className="relative w-full max-w-2xl bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-8 shadow-[12px_12px_0px_#0A0A0C] text-essd-cream max-h-[90vh] overflow-y-auto space-y-4"
+            className="relative w-full max-w-2xl bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-8 shadow-[12px_12px_0px_#0A0A0C] text-essd-cream max-h-[90vh] overflow-y-auto space-y-4 rounded-2xl"
           >
             <div className="flex items-center justify-between pb-3 border-b border-essd-border">
               <h3 className="text-xl font-black font-display uppercase text-essd-cream">
@@ -121,7 +121,7 @@ export default function PrizesEditor({ initialPrizes }: PrizesEditorProps) {
               <button
                 type="button"
                 onClick={() => setEditingPrize(null)}
-                className="p-2 bg-essd-dark text-essd-cream hover:text-essd-orange border border-essd-border text-xs font-mono"
+                className="p-2 bg-essd-dark text-essd-cream hover:text-essd-orange border border-essd-border text-xs font-mono rounded-lg"
               >
                 Cancel ✕
               </button>
@@ -134,7 +134,7 @@ export default function PrizesEditor({ initialPrizes }: PrizesEditorProps) {
                 required
                 value={formState.title}
                 onChange={(e) => setFormState({ ...formState, title: e.target.value })}
-                className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-essd-cream font-display font-bold uppercase focus:outline-none"
+                className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-essd-cream font-display font-bold uppercase focus:outline-none rounded-xl"
               />
             </div>
 
@@ -145,7 +145,7 @@ export default function PrizesEditor({ initialPrizes }: PrizesEditorProps) {
                 required
                 value={formState.rewardHeadline}
                 onChange={(e) => setFormState({ ...formState, rewardHeadline: e.target.value })}
-                className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-essd-cream font-sans focus:outline-none"
+                className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-essd-cream font-sans focus:outline-none rounded-xl"
               />
             </div>
 
@@ -156,7 +156,7 @@ export default function PrizesEditor({ initialPrizes }: PrizesEditorProps) {
                 required
                 value={formState.description}
                 onChange={(e) => setFormState({ ...formState, description: e.target.value })}
-                className="w-full bg-essd-black border border-essd-border focus:border-essd-gold p-3 text-essd-cream font-sans focus:outline-none"
+                className="w-full bg-essd-black border border-essd-border focus:border-essd-gold p-3 text-essd-cream font-sans focus:outline-none rounded-xl"
               />
             </div>
 
@@ -164,14 +164,14 @@ export default function PrizesEditor({ initialPrizes }: PrizesEditorProps) {
               <button
                 type="button"
                 onClick={() => setEditingPrize(null)}
-                className="px-4 py-2 bg-essd-dark text-essd-cream hover:bg-essd-black text-xs font-mono uppercase"
+                className="px-4 py-2 bg-essd-dark text-essd-cream hover:bg-essd-black text-xs font-mono uppercase rounded-xl"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={saving}
-                className="px-6 py-2 bg-essd-gold text-essd-black font-mono font-black text-xs uppercase hover:bg-essd-orange hover:text-white transition-colors flex items-center gap-1.5"
+                className="px-6 py-2 bg-essd-gold text-essd-black font-mono font-black text-xs uppercase hover:bg-essd-orange hover:text-white transition-colors flex items-center gap-1.5 rounded-xl"
               >
                 <Icons.Save className="w-3.5 h-3.5" />
                 {saving ? "Saving Changes..." : "Save Prize Package"}
@@ -186,7 +186,7 @@ export default function PrizesEditor({ initialPrizes }: PrizesEditorProps) {
         {prizes.map((p) => (
           <div
             key={p.id}
-            className="bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold p-6 shadow-[4px_4px_0px_#0A0A0C] flex flex-col justify-between"
+            className="bg-essd-charcoal border-2 border-essd-border hover:border-essd-gold p-6 shadow-[4px_4px_0px_#0A0A0C] flex flex-col justify-between rounded-2xl"
           >
             <div>
               <div className="flex items-center justify-between pb-3 mb-3 border-b border-essd-border/80">

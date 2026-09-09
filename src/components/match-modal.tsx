@@ -16,12 +16,12 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-8 shadow-[12px_12px_0px_#0A0A0C] text-essd-cream max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-2xl bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-8 shadow-[12px_12px_0px_#0A0A0C] text-essd-cream max-h-[90vh] overflow-y-auto rounded-2xl">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 bg-essd-dark text-essd-cream hover:text-essd-orange hover:bg-essd-black transition-colors border border-essd-border"
+          className="absolute top-4 right-4 p-2 bg-essd-dark text-essd-cream hover:text-essd-orange hover:bg-essd-black transition-colors border border-essd-border rounded-lg"
           aria-label="Close modal"
         >
           <Icons.Close className="w-5 h-5" />
@@ -29,7 +29,7 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
 
         {/* Modal Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="px-3 py-1 bg-essd-gold text-essd-black font-mono text-xs font-black uppercase tracking-wider">
+          <div className="px-3.5 py-1 bg-essd-gold text-essd-black font-mono text-xs font-black uppercase tracking-wider rounded-full">
             Match #{match.matchNumber < 10 ? `0${match.matchNumber}` : match.matchNumber}
           </div>
           <span className="text-xs font-mono font-bold text-essd-cream-muted uppercase">
@@ -42,18 +42,18 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
             </span>
           )}
           {isFinal && (
-            <span className="px-2.5 py-0.5 bg-green-900/80 text-green-300 border border-green-500/50 text-[11px] font-mono font-bold uppercase">
+            <span className="px-2.5 py-0.5 bg-green-900/80 text-green-300 border border-green-500/50 text-[11px] font-mono font-bold uppercase rounded-full">
               FINAL RESULT
             </span>
           )}
         </div>
 
         {/* Matchup Banner */}
-        <div className="bg-essd-black p-5 border-2 border-essd-border mb-6">
+        <div className="bg-essd-black p-5 border-2 border-essd-border mb-6 rounded-xl">
           <div className="grid grid-cols-1 md:grid-cols-11 items-center gap-4 text-center">
             
             {/* School A */}
-            <div className={`md:col-span-5 p-4 border ${match.winnerId === match.schoolA?.id ? "border-essd-gold bg-essd-gold/10" : "border-essd-border/60 bg-essd-dark/60"}`}>
+            <div className={`md:col-span-5 p-4 border rounded-lg ${match.winnerId === match.schoolA?.id ? "border-essd-gold bg-essd-gold/10" : "border-essd-border/60 bg-essd-dark/60"}`}>
               <span className="text-[10px] font-mono uppercase text-essd-gold block mb-1">
                 Proposition Side
               </span>
@@ -86,7 +86,7 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
             </div>
 
             {/* School B */}
-            <div className={`md:col-span-5 p-4 border ${match.winnerId === match.schoolB?.id ? "border-essd-gold bg-essd-gold/10" : "border-essd-border/60 bg-essd-dark/60"}`}>
+            <div className={`md:col-span-5 p-4 border rounded-lg ${match.winnerId === match.schoolB?.id ? "border-essd-gold bg-essd-gold/10" : "border-essd-border/60 bg-essd-dark/60"}`}>
               <span className="text-[10px] font-mono uppercase text-essd-orange block mb-1">
                 Opposition Side
               </span>
@@ -115,7 +115,7 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
         </div>
 
         {/* Debate Motion Topic */}
-        <div className="p-4 bg-essd-dark border-l-4 border-essd-gold mb-6 space-y-1.5">
+        <div className="p-4 bg-essd-dark border-l-4 border-essd-gold mb-6 space-y-1.5 rounded-xl">
           <span className="text-[11px] font-mono font-black uppercase text-essd-gold block">
             Debate Motion / Topic:
           </span>
@@ -126,7 +126,7 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
 
         {/* Logistics & Adjudicators */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono mb-6">
-          <div className="p-3 bg-essd-black border border-essd-border space-y-2">
+          <div className="p-3 bg-essd-black border border-essd-border space-y-2 rounded-xl">
             <div className="flex items-center gap-2 text-essd-gold font-bold">
               <Icons.Calendar className="w-4 h-4" />
               <span>{match.date}</span>
@@ -141,7 +141,7 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
             </div>
           </div>
 
-          <div className="p-3 bg-essd-black border border-essd-border space-y-2">
+          <div className="p-3 bg-essd-black border border-essd-border space-y-2 rounded-xl">
             <div className="flex items-center gap-2 text-essd-gold font-bold">
               <Icons.Users className="w-4 h-4" />
               <span>Adjudication Panel:</span>
@@ -153,20 +153,20 @@ export default function MatchModal({ match, onClose }: MatchModalProps) {
         </div>
 
         {/* Scoring Criteria Summary */}
-        <div className="p-4 bg-essd-black/60 border border-essd-border/80 text-xs text-essd-cream-muted space-y-2">
+        <div className="p-4 bg-essd-black/60 border border-essd-border/80 text-xs text-essd-cream-muted space-y-2 rounded-xl">
           <span className="font-bold text-essd-cream block uppercase font-mono text-[11px]">
             WSDC Scoring Rubric Breakdown:
           </span>
           <div className="grid grid-cols-3 gap-2 text-center font-mono">
-            <div className="p-2 bg-essd-dark border border-essd-border">
+            <div className="p-2 bg-essd-dark border border-essd-border rounded-lg">
               <span className="block font-bold text-essd-gold">Matter (40%)</span>
               <span className="text-[10px]">Logic &amp; Evidence</span>
             </div>
-            <div className="p-2 bg-essd-dark border border-essd-border">
+            <div className="p-2 bg-essd-dark border border-essd-border rounded-lg">
               <span className="block font-bold text-essd-orange">Manner (40%)</span>
               <span className="text-[10px]">Delivery &amp; Poise</span>
             </div>
-            <div className="p-2 bg-essd-dark border border-essd-border">
+            <div className="p-2 bg-essd-dark border border-essd-border rounded-lg">
               <span className="block font-bold text-essd-cream">Method (20%)</span>
               <span className="text-[10px]">Structure &amp; Rebuttal</span>
             </div>

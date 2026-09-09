@@ -133,7 +133,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
           <button
             onClick={handleAutoDraw}
             disabled={saving}
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-essd-orange hover:bg-essd-orange-dark text-white font-mono font-bold text-xs uppercase shadow-[3px_3px_0px_#0A0A0C] transition-all"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-essd-orange hover:bg-essd-orange-dark text-white font-mono font-bold text-xs uppercase shadow-[3px_3px_0px_#0A0A0C] transition-all rounded-xl"
           >
             <Icons.Sparkles className="w-4 h-4" />
             ⚡ Auto-Match Registered Schools
@@ -143,7 +143,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
 
       {message && (
         <div
-          className={`p-4 border-2 text-xs font-mono flex items-center gap-2 ${
+          className={`p-4 border-2 text-xs font-mono flex items-center gap-2 rounded-xl ${
             message.type === "success"
               ? "bg-green-950/90 border-green-500 text-green-200"
               : "bg-red-950/90 border-red-500 text-red-200"
@@ -163,7 +163,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <form
             onSubmit={handleSave}
-            className="relative w-full max-w-2xl bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-8 shadow-[12px_12px_0px_#0A0A0C] text-essd-cream max-h-[90vh] overflow-y-auto space-y-5"
+            className="relative w-full max-w-2xl bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-8 shadow-[12px_12px_0px_#0A0A0C] text-essd-cream max-h-[90vh] overflow-y-auto space-y-5 rounded-2xl"
           >
             <div className="flex items-center justify-between pb-3 border-b border-essd-border">
               <div>
@@ -177,14 +177,14 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
               <button
                 type="button"
                 onClick={() => setEditingMatch(null)}
-                className="p-2 bg-essd-dark text-essd-cream hover:text-essd-orange border border-essd-border text-xs font-mono"
+                className="p-2 bg-essd-dark text-essd-cream hover:text-essd-orange border border-essd-border text-xs font-mono rounded-lg"
               >
                 Cancel ✕
               </button>
             </div>
 
             {/* Teams Duel */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-essd-black p-4 border border-essd-border">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-essd-black p-4 border border-essd-border rounded-xl">
               {/* Team A */}
               <div className="space-y-2">
                 <span className="text-[10px] font-mono text-essd-gold uppercase font-bold block">
@@ -203,7 +203,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
                     placeholder="e.g. 84.5"
                     value={formState.scoreA}
                     onChange={(e) => setFormState({ ...formState, scoreA: e.target.value })}
-                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-gold font-mono font-bold focus:outline-none focus:border-essd-gold"
+                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-gold font-mono font-bold focus:outline-none focus:border-essd-gold rounded-lg"
                   />
                 </div>
               </div>
@@ -226,7 +226,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
                     placeholder="e.g. 78.0"
                     value={formState.scoreB}
                     onChange={(e) => setFormState({ ...formState, scoreB: e.target.value })}
-                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-orange font-mono font-bold focus:outline-none focus:border-essd-orange"
+                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-orange font-mono font-bold focus:outline-none focus:border-essd-orange rounded-lg"
                   />
                 </div>
               </div>
@@ -241,7 +241,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
                 <select
                   value={formState.status}
                   onChange={(e) => setFormState({ ...formState, status: e.target.value })}
-                  className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-essd-cream focus:outline-none"
+                  className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-essd-cream focus:outline-none rounded-xl"
                 >
                   <option value="UPCOMING">Upcoming</option>
                   <option value="LIVE">Live On Stage 🔥</option>
@@ -256,7 +256,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
                 <select
                   value={formState.winnerId}
                   onChange={(e) => setFormState({ ...formState, winnerId: e.target.value })}
-                  className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-essd-gold focus:outline-none font-bold"
+                  className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-2 text-essd-gold focus:outline-none font-bold rounded-xl"
                 >
                   <option value="">-- Auto Determine by Highest Score --</option>
                   {editingMatch.schoolA && (
@@ -278,7 +278,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
                 rows={2}
                 value={formState.motionTopic}
                 onChange={(e) => setFormState({ ...formState, motionTopic: e.target.value })}
-                className="w-full bg-essd-black border border-essd-border focus:border-essd-gold p-3 text-xs text-essd-cream font-sans focus:outline-none"
+                className="w-full bg-essd-black border border-essd-border focus:border-essd-gold p-3 text-xs text-essd-cream font-sans focus:outline-none rounded-xl"
               />
             </div>
 
@@ -290,7 +290,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
                   type="text"
                   value={formState.time}
                   onChange={(e) => setFormState({ ...formState, time: e.target.value })}
-                  className="w-full bg-essd-black border border-essd-border px-3 py-2 text-essd-cream focus:outline-none"
+                  className="w-full bg-essd-black border border-essd-border px-3 py-2 text-essd-cream focus:outline-none rounded-xl"
                 />
               </div>
 
@@ -300,7 +300,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
                   type="text"
                   value={formState.date}
                   onChange={(e) => setFormState({ ...formState, date: e.target.value })}
-                  className="w-full bg-essd-black border border-essd-border px-3 py-2 text-essd-cream focus:outline-none"
+                  className="w-full bg-essd-black border border-essd-border px-3 py-2 text-essd-cream focus:outline-none rounded-xl"
                 />
               </div>
             </div>
@@ -310,14 +310,14 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
               <button
                 type="button"
                 onClick={() => setEditingMatch(null)}
-                className="px-4 py-2 bg-essd-dark text-essd-cream hover:bg-essd-black text-xs font-mono uppercase"
+                className="px-4 py-2 bg-essd-dark text-essd-cream hover:bg-essd-black text-xs font-mono uppercase rounded-xl"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={saving}
-                className="px-6 py-2 bg-essd-gold text-essd-black font-mono font-black text-xs uppercase hover:bg-essd-orange hover:text-white transition-colors flex items-center gap-1.5"
+                className="px-6 py-2 bg-essd-gold text-essd-black font-mono font-black text-xs uppercase hover:bg-essd-orange hover:text-white transition-colors flex items-center gap-1.5 rounded-xl"
               >
                 <Icons.Save className="w-3.5 h-3.5" />
                 {saving ? "Saving Updates..." : "Save Match & Advance"}
@@ -328,7 +328,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
       )}
 
       {/* Matches List Table */}
-      <div className="bg-essd-charcoal border-2 border-essd-border overflow-x-auto shadow-[4px_4px_0px_#0A0A0C]">
+      <div className="bg-essd-charcoal border-2 border-essd-border overflow-x-auto shadow-[4px_4px_0px_#0A0A0C] rounded-2xl">
         <table className="w-full text-left text-xs font-mono">
           <thead className="bg-essd-black text-essd-gold uppercase border-b border-essd-border">
             <tr>
@@ -365,7 +365,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
                   {m.scoreB !== null && m.scoreB !== undefined ? m.scoreB.toFixed(1) : "-"}
                 </td>
                 <td className="p-3 whitespace-nowrap">
-                  <span className={`px-2 py-0.5 text-[10px] font-bold uppercase ${
+                  <span className={`px-2 py-0.5 text-[10px] font-bold uppercase rounded-full ${
                     m.status === "LIVE"
                       ? "bg-essd-orange text-white animate-pulse"
                       : m.status === "FINAL" || m.status === "COMPLETED"
@@ -381,7 +381,7 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
                 <td className="p-3 text-right whitespace-nowrap">
                   <button
                     onClick={() => handleEditClick(m)}
-                    className="px-3 py-1 bg-essd-gold hover:bg-essd-orange text-essd-black hover:text-white font-bold text-[11px] transition-colors"
+                    className="px-3 py-1 bg-essd-gold hover:bg-essd-orange text-essd-black hover:text-white font-bold text-[11px] transition-colors rounded-lg"
                   >
                     Edit / Score
                   </button>
