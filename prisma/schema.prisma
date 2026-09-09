@@ -1,0 +1,137 @@
+// Prisma schema for ESSD (Enugu State Secondary Schools Debate Championship)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model School {
+  id            String       @id @default(cuid())
+  name          String       @unique
+  slug          String       @unique
+  type          String       // "PUBLIC", "PRIVATE", "MISSION", "FEDERAL"
+  address       String?
+  lga           String       // Enugu North, Nsukka, Udi, Agbani, etc.
+  state         String       @default("Enugu")
+  email         String?
+  phone         String?
+  logoUrl       String?
+  motto         String?
+  status        String       @default("CONFIRMED") // "REGISTERED", "CONFIRMED", "SEEDED", "ELIMINATED", "CHAMPION"
+  matchesPlayed Int          @default(0)
+  wins          Int          @default(0)
+  losses        Int          @default(0)
+  points        Int          @default(0)
+  seedRank      Int?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  teamMembers   TeamMember[]
+  matchesAsA    Match[]      @relation("SchoolA")
+  matchesAsB    Match[]      @relation("SchoolB")
+  wonMatches    Match[]      @relation("Winner")
+}
+
+model TeamMember {
+  id         String   @id @default(cuid())
+  schoolId   String
+  school     School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  fullName   String
+  role       String   // "CAPTAIN", "SPEAKER", "RESEARCHER", "COORDINATOR"
+  classGrade String   // "SS1", "SS2", "SS3"
+  email      String?
+  phone      String?
+  createdAt  DateTime @default(now())
+}
+
+model Registration {
+  id             String   @id @default(cuid())
+  regNumber      String   @unique
+  schoolName     String
+  schoolType     String
+  schoolAddress  String
+  lga            String
+  state          String   @default("Enugu")
+  schoolEmail    String
+  schoolPhone    String
+  contactName    String
+  contactRole    String
+  contactPhone   String
+  contactEmail   String
+  debaterCount   Int
+  debaterNames   String   // JSON string of names
+  debaterClasses String   // JSON string of classes
+  captainName    String
+  teacherName    String
+  referralSource String?
+  agreedToTerms  Boolean  @default(true)
+  status         String   @default("APPROVED") // "PENDING", "APPROVED", "REJECTED"
+  createdAt      DateTime @default(now())
+}
+
+model Match {
+  id              String    @id @default(cuid())
+  matchNumber     Int       @unique
+  round           String    // "ROUND_OF_16", "QUARTER_FINALS", "SEMI_FINALS", "FINAL", "THIRD_PLACE"
+  roundLabel      String    // "Round of 16", "Quarter-Finals", "Semi-Finals", "Grand Final"
+  roundOrder      Int       // 1 for R16, 2 for QF, 3 for SF, 4 for Final
+  positionInRound Int       // 1..8 for R16, 1..4 for QF, 1..2 for SF, 1 for Final
+
+  schoolAId       String?
+  schoolA         School?   @relation("SchoolA", fields: [schoolAId], references: [id])
+  schoolBId       String?
+  schoolB         School?   @relation("SchoolB", fields: [schoolBId], references: [id])
+  
+  winnerId        String?
+  winner          School?   @relation("Winner", fields: [winnerId], references: [id])
+
+  scoreA          Float?
+  scoreB          Float?
+  motionTopic     String
+  date            String    // "16th Oct 2026", "17th Oct 2026"
+  time            String    // "10:00 AM", "01:30 PM", etc.
+  venueName       String    // "Main Auditorium, Enugu State Secretariat Complex"
+  judges          String    // Comma-separated or JSON list of judges
+  status          String    @default("UPCOMING") // "UPCOMING", "LIVE", "FINAL"
+  nextMatchId     String?
+  speechBreakdown String?   // Detailed score components (Matter, Manner, Method)
+  liveMotionKey   String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Prize {
+  id             String   @id @default(cuid())
+  tier           String   // "CHAMPION", "RUNNER_UP", "THIRD_PLACE", "BEST_SPEAKER", "SPECIAL"
+  title          String
+  rewardHeadline String
+  description    String
+  iconName       String   @default("Trophy")
+  badgeColor     String   @default("gold") // "gold", "orange", "cream", "black"
+  displayOrder   Int      @default(0)
+  isAnnounced    Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model EmailLog {
+  id             String   @id @default(cuid())
+  recipientEmail String
+  subject        String
+  type           String   // "REGISTRATION_CONFIRMATION", "ADMIN_NOTIFICATION", "FIXTURE_ASSIGNED", "RESULT_PUBLISHED"
+  status         String   // "SENT", "SIMULATED", "FAILED"
+  payload        String?
+  createdAt      DateTime @default(now())
+}
+
+model Setting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  description String?
+  updatedAt   DateTime @updatedAt
+}
