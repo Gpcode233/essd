@@ -88,6 +88,27 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
     }
   };
 
+  const handleAutoDraw = async () => {
+    if (!confirm("Are you sure you want to automatically match all currently registered schools into the Round of 16 tournament bracket?")) {
+      return;
+    }
+    setSaving(true);
+    setMessage(null);
+    try {
+      const res = await fetch("/api/tournament/draw", { method: "POST" });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || "Failed to generate draw.");
+      }
+      setMatches(data.matches);
+      setMessage({ type: "success", text: data.message });
+    } catch (err: any) {
+      setMessage({ type: "error", text: err.message || "Error generating draw." });
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Top Header */}
@@ -104,8 +125,19 @@ export default function FixturesManager({ initialMatches, schools }: FixturesMan
             Fixtures &amp; Live Scorekeeper
           </h1>
           <p className="text-xs font-mono text-essd-cream-muted mt-0.5">
-            Record judge points and automatically advance winners to the next knockout round.
+            Record judge points, advance winners, or auto-match newly registered schools.
           </p>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleAutoDraw}
+            disabled={saving}
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-essd-orange hover:bg-essd-orange-dark text-white font-mono font-bold text-xs uppercase shadow-[3px_3px_0px_#0A0A0C] transition-all"
+          >
+            <Sparkles className="w-4 h-4" />
+            ⚡ Auto-Match Registered Schools
+          </button>
         </div>
       </div>
 

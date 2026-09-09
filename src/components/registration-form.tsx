@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ENUGU_LGAS } from "@/lib/types";
-import { Sparkles, CheckCircle2, AlertCircle, ArrowRight, Printer, Download, School, User, Users, BookOpen, ShieldCheck, Trophy } from "lucide-react";
+import { Sparkles, CheckCircle2, AlertCircle, ArrowRight, Printer, School, User, Users, ShieldCheck, Trophy, Phone, Mail } from "lucide-react";
 import confetti from "canvas-confetti";
 
 export default function RegistrationForm() {
@@ -14,6 +14,7 @@ export default function RegistrationForm() {
     captainName: string;
     teacherName: string;
     debaterCount: number;
+    debaterNames: string[];
     createdAt: string;
   } | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
@@ -27,25 +28,23 @@ export default function RegistrationForm() {
     schoolEmail: "",
     schoolPhone: "",
     contactName: "",
-    contactRole: "Debate Coordinator / Master",
+    contactRole: "Debate Coordinator / Teacher",
     contactPhone: "",
     contactEmail: "",
-    debaterCount: 3,
+    // Exactly 2 Student Debaters
     debater1Name: "",
-    debater1Class: "SS3",
+    debater1Class: "SS2",
     debater2Name: "",
     debater2Class: "SS2",
-    debater3Name: "",
-    debater3Class: "SS2",
-    debater4Name: "",
-    debater4Class: "SS1",
-    captainName: "",
+    captainChoice: "1", // "1" for Debater 1, "2" for Debater 2
     teacherName: "",
     referralSource: "Ministry of Education Circular",
     agreedToTerms: true,
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value, type } = e.target;
     if (type === "checkbox") {
       const checked = (e.target as HTMLInputElement).checked;
@@ -61,44 +60,38 @@ export default function RegistrationForm() {
     setSubmitting(true);
 
     if (!formData.schoolName || !formData.schoolEmail || !formData.schoolPhone) {
-      setErrorMsg("Please provide all required school contact information.");
+      setErrorMsg("Please provide all required school contact details.");
       setSubmitting(false);
       return;
     }
 
-    if (!formData.captainName || !formData.teacherName) {
-      setErrorMsg("Please specify the Debate Captain and Teacher Coordinator.");
+    if (!formData.debater1Name.trim() || !formData.debater2Name.trim()) {
+      setErrorMsg("Please provide the full names for both student debaters (2 students required).");
+      setSubmitting(false);
+      return;
+    }
+
+    if (!formData.teacherName.trim()) {
+      setErrorMsg("Please specify the supervising Teacher / Coordinator name.");
       setSubmitting(false);
       return;
     }
 
     try {
-      const debaterNames = [
-        formData.debater1Name,
-        formData.debater2Name,
-        formData.debater3Name,
-      ].filter(Boolean);
-
-      if (formData.debaterCount > 3 && formData.debater4Name) {
-        debaterNames.push(formData.debater4Name);
-      }
-
-      const debaterClasses = [
-        formData.debater1Class,
-        formData.debater2Class,
-        formData.debater3Class,
-      ];
-      if (formData.debaterCount > 3) {
-        debaterClasses.push(formData.debater4Class);
-      }
+      const debaterNames = [formData.debater1Name.trim(), formData.debater2Name.trim()];
+      const debaterClasses = [formData.debater1Class, formData.debater2Class];
+      const captainName =
+        formData.captainChoice === "1" ? formData.debater1Name.trim() : formData.debater2Name.trim();
 
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          debaterCount: 2,
           debaterNames,
           debaterClasses,
+          captainName,
         }),
       });
 
@@ -108,8 +101,12 @@ export default function RegistrationForm() {
         throw new Error(data.message || "Registration failed. Please try again.");
       }
 
-      setSuccessData(data.registration);
-      // Trigger celebratory confetti
+      setSuccessData({
+        ...data.registration,
+        debaterNames,
+      });
+
+      // Confetti celebration
       confetti({
         particleCount: 120,
         spread: 70,
@@ -130,28 +127,24 @@ export default function RegistrationForm() {
   if (successData) {
     return (
       <div className="bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-10 shadow-[10px_10px_0px_#0A0A0C] text-essd-cream animate-in zoom-in-95 duration-300">
-        
         {/* Success Header */}
         <div className="text-center mb-8 pb-6 border-b border-essd-border">
           <div className="w-16 h-16 rounded-full bg-essd-gold text-essd-black flex items-center justify-center mx-auto mb-4 border-2 border-essd-cream shadow-[0_0_20px_rgba(232,169,39,0.5)]">
             <CheckCircle2 className="w-10 h-10" />
           </div>
           <span className="px-3 py-1 bg-essd-orange text-white font-mono text-xs font-black uppercase tracking-wider inline-block mb-2">
-            Registration Successful 🎉
+            Registration Confirmed 🎉
           </span>
           <h2 className="text-2xl sm:text-4xl font-black font-display uppercase tracking-tight text-essd-gold">
             You're Officially Registered!
           </h2>
           <p className="text-xs sm:text-sm text-essd-cream-muted mt-2 max-w-lg mx-auto font-sans">
-            Your school has secured its official registration for the Enugu State Secondary Schools Debate Championship 2026.
+            Your 2-student debate delegation is confirmed for the Enugu State Secondary Schools Debate Championship 2026.
           </p>
         </div>
 
-        {/* Printable Official Accreditation Pass */}
-        <div id="printable-badge" className="bg-essd-black p-6 sm:p-8 border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] mb-8 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-essd-gold/10 rounded-full blur-xl pointer-events-none"></div>
-
-          {/* Top Pass Strip */}
+        {/* Printable Official Pass */}
+        <div className="bg-essd-black p-6 sm:p-8 border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] mb-8 relative overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b-2 border-essd-gold gap-2">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-essd-gold text-essd-black font-display font-black text-xs flex items-center justify-center">
@@ -177,9 +170,8 @@ export default function RegistrationForm() {
             </div>
           </div>
 
-          {/* Pass Body */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
-            <div className="space-y-2 text-xs font-mono">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 text-xs font-mono">
+            <div className="space-y-2">
               <div className="p-2 bg-essd-dark/80 border border-essd-border">
                 <span className="text-essd-cream-muted block text-[10px]">Registered School:</span>
                 <span className="text-sm font-bold text-essd-gold">{successData.schoolName}</span>
@@ -189,19 +181,22 @@ export default function RegistrationForm() {
                 <span className="font-bold text-essd-cream">{successData.lga} LGA, Enugu State</span>
               </div>
               <div className="p-2 bg-essd-dark/80 border border-essd-border">
-                <span className="text-essd-cream-muted block text-[10px]">Debate Delegation Size:</span>
-                <span className="font-bold text-essd-cream">{successData.debaterCount} Accredited Debaters</span>
+                <span className="text-essd-cream-muted block text-[10px]">Supervising Coordinator:</span>
+                <span className="font-bold text-essd-cream">{successData.teacherName}</span>
               </div>
             </div>
 
-            <div className="space-y-2 text-xs font-mono">
-              <div className="p-2 bg-essd-dark/80 border border-essd-border">
-                <span className="text-essd-cream-muted block text-[10px]">Debate Team Captain:</span>
-                <span className="text-sm font-bold text-essd-cream">{successData.captainName}</span>
-              </div>
-              <div className="p-2 bg-essd-dark/80 border border-essd-border">
-                <span className="text-essd-cream-muted block text-[10px]">Teacher / Coordinator:</span>
-                <span className="font-bold text-essd-cream">{successData.teacherName}</span>
+            <div className="space-y-2">
+              <div className="p-2 bg-essd-dark/80 border border-essd-gold/60">
+                <span className="text-essd-gold block text-[10px] uppercase font-bold">
+                  2 Registered Student Debaters:
+                </span>
+                <p className="text-sm font-bold text-essd-cream mt-0.5">
+                  1. {successData.debaterNames?.[0] || successData.captainName} (Lead)
+                </p>
+                <p className="text-sm font-bold text-essd-cream">
+                  2. {successData.debaterNames?.[1] || "Second Speaker"}
+                </p>
               </div>
               <div className="p-2 bg-essd-dark/80 border border-essd-border">
                 <span className="text-essd-cream-muted block text-[10px]">Event Dates &amp; Venue:</span>
@@ -210,14 +205,13 @@ export default function RegistrationForm() {
             </div>
           </div>
 
-          {/* Bottom accreditation note */}
           <div className="pt-4 border-t border-essd-border/80 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-essd-cream-muted gap-2">
             <div className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-essd-gold" />
-              <span>Accreditation Valid for Main Auditorium Entry</span>
+              <span>Accreditation Valid for 2 Student Debaters + 1 Coordinator</span>
             </div>
             <span className="text-essd-gold font-bold">
-              Organized by The Placee Consults
+              Automatic Matchmaking Upon Registration Close
             </span>
           </div>
         </div>
@@ -244,19 +238,14 @@ export default function RegistrationForm() {
                 schoolEmail: "",
                 schoolPhone: "",
                 contactName: "",
-                contactRole: "Debate Coordinator / Master",
+                contactRole: "Debate Coordinator / Teacher",
                 contactPhone: "",
                 contactEmail: "",
-                debaterCount: 3,
                 debater1Name: "",
-                debater1Class: "SS3",
+                debater1Class: "SS2",
                 debater2Name: "",
                 debater2Class: "SS2",
-                debater3Name: "",
-                debater3Class: "SS2",
-                debater4Name: "",
-                debater4Class: "SS1",
-                captainName: "",
+                captainChoice: "1",
                 teacherName: "",
                 referralSource: "Ministry of Education Circular",
                 agreedToTerms: true,
@@ -267,7 +256,6 @@ export default function RegistrationForm() {
             Register Another School
           </button>
         </div>
-
       </div>
     );
   }
@@ -286,6 +274,17 @@ export default function RegistrationForm() {
           </div>
         </div>
       )}
+
+      {/* Info notice about 2 debaters per school */}
+      <div className="p-4 bg-essd-gold/10 border-2 border-essd-gold text-xs font-mono text-essd-cream flex items-start gap-3">
+        <Trophy className="w-5 h-5 text-essd-gold flex-shrink-0 mt-0.5" />
+        <div>
+          <span className="font-bold uppercase text-essd-gold block">
+            Official 2-Student Delegation Format:
+          </span>
+          Each registered secondary school enters a 2-student debate squad (Speaker 1 &amp; Speaker 2) guided by 1 supervising teacher. Once all 16 schools register, the tournament matchmaking draw automatically pairs schools into the Round of 16 bracket!
+        </div>
+      </div>
 
       {/* Section 1: School Information */}
       <div>
@@ -331,7 +330,7 @@ export default function RegistrationForm() {
 
           <div>
             <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              Local Government Area (LGA) *
+              Local Government Area (LGA) in Enugu *
             </label>
             <select
               name="lga"
@@ -341,7 +340,7 @@ export default function RegistrationForm() {
             >
               {ENUGU_LGAS.map((lga) => (
                 <option key={lga} value={lga}>
-                  {lga}
+                  {lga} LGA
                 </option>
               ))}
             </select>
@@ -355,10 +354,10 @@ export default function RegistrationForm() {
               type="text"
               name="schoolAddress"
               required
-              placeholder="e.g. Independence Layout / Ogui Road / University Road Nsukka"
+              placeholder="e.g. Ogui Road / Independence Layout / University Road Nsukka"
               value={formData.schoolAddress}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none transition-colors"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none"
             />
           </div>
 
@@ -373,7 +372,7 @@ export default function RegistrationForm() {
               placeholder="school@example.com"
               value={formData.schoolEmail}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none transition-colors"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
             />
           </div>
 
@@ -388,13 +387,13 @@ export default function RegistrationForm() {
               placeholder="+234 803 000 0000"
               value={formData.schoolPhone}
               onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none transition-colors"
+              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
             />
           </div>
         </div>
       </div>
 
-      {/* Section 2: Contact Person */}
+      {/* Section 2: Contact Person / Coordinator */}
       <div>
         <div className="flex items-center gap-2 pb-3 mb-6 border-b-2 border-essd-orange">
           <User className="w-5 h-5 text-essd-orange" />
@@ -406,14 +405,14 @@ export default function RegistrationForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              Coordinator Full Name *
+              Teacher Coordinator Full Name *
             </label>
             <input
               type="text"
-              name="contactName"
+              name="teacherName"
               required
               placeholder="e.g. Mr. Emmanuel Nwankwo"
-              value={formData.contactName}
+              value={formData.teacherName}
               onChange={handleChange}
               className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none"
             />
@@ -427,7 +426,7 @@ export default function RegistrationForm() {
               type="text"
               name="contactRole"
               required
-              placeholder="e.g. Debate Coach / English Dept Head / Vice Principal"
+              placeholder="e.g. Debate Coach / English Dept / Vice Principal"
               value={formData.contactRole}
               onChange={handleChange}
               className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none"
@@ -436,14 +435,14 @@ export default function RegistrationForm() {
 
           <div>
             <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              Coordinator Phone Number *
+              Teacher Phone Number *
             </label>
             <input
               type="tel"
               name="contactPhone"
               required
               placeholder="+234 803 123 4567"
-              value={formData.contactPhone}
+              value={formData.contactPhone || formData.schoolPhone}
               onChange={handleChange}
               className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
             />
@@ -451,14 +450,14 @@ export default function RegistrationForm() {
 
           <div>
             <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              Coordinator Email *
+              Teacher Email Address *
             </label>
             <input
               type="email"
               name="contactEmail"
               required
               placeholder="coordinator@example.com"
-              value={formData.contactEmail}
+              value={formData.contactEmail || formData.schoolEmail}
               onChange={handleChange}
               className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
             />
@@ -466,169 +465,129 @@ export default function RegistrationForm() {
         </div>
       </div>
 
-      {/* Section 3: Debate Team Squad */}
+      {/* Section 3: The 2 Student Debaters */}
       <div>
         <div className="flex items-center gap-2 pb-3 mb-6 border-b-2 border-essd-gold">
           <Users className="w-5 h-5 text-essd-gold" />
-          <h3 className="text-lg font-black font-display uppercase tracking-wide text-essd-cream">
-            3. Debate Team Squad &amp; Speakers
-          </h3>
+          <div>
+            <h3 className="text-lg font-black font-display uppercase tracking-wide text-essd-cream">
+              3. The Two (2) Student Debaters
+            </h3>
+            <span className="text-[11px] font-mono text-essd-gold font-bold">
+              Register exactly 2 students to represent your secondary school.
+            </span>
+          </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-mono font-bold text-essd-gold uppercase mb-1.5">
-                Debate Team Captain *
-              </label>
-              <input
-                type="text"
-                name="captainName"
-                required
-                placeholder="Full Name of Student Captain"
-                value={formData.captainName}
-                onChange={handleChange}
-                className="w-full bg-essd-black border-2 border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-mono font-bold text-essd-gold uppercase mb-1.5">
-                Teacher / Patron In Charge *
-              </label>
-              <input
-                type="text"
-                name="teacherName"
-                required
-                placeholder="Full Name of Supervising Teacher"
-                value={formData.teacherName}
-                onChange={handleChange}
-                className="w-full bg-essd-black border-2 border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none"
-              />
-            </div>
-          </div>
-
+        <div className="space-y-5">
           {/* Debater 1 */}
-          <div className="p-4 bg-essd-black border border-essd-border grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="md:col-span-2">
-              <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
-                Speaker 1 (Prime Minister / 1st Prop) *
+          <div className="p-5 bg-essd-black border-2 border-essd-gold/70 shadow-[3px_3px_0px_#0A0A0C]">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-mono font-black uppercase text-essd-gold">
+                Student Debater 01 (Lead Speaker) *
+              </span>
+              <label className="flex items-center gap-1.5 text-xs font-mono text-essd-cream cursor-pointer">
+                <input
+                  type="radio"
+                  name="captainChoice"
+                  value="1"
+                  checked={formData.captainChoice === "1"}
+                  onChange={handleChange}
+                  className="text-essd-gold focus:ring-0"
+                />
+                <span>Designate as Captain 👑</span>
               </label>
-              <input
-                type="text"
-                name="debater1Name"
-                required
-                placeholder="Student Full Name"
-                value={formData.debater1Name}
-                onChange={handleChange}
-                className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-gold"
-              />
             </div>
-            <div>
-              <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
-                Class / Grade *
-              </label>
-              <select
-                name="debater1Class"
-                value={formData.debater1Class}
-                onChange={handleChange}
-                className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none"
-              >
-                <option value="SS3">Senior Secondary 3 (SS3)</option>
-                <option value="SS2">Senior Secondary 2 (SS2)</option>
-                <option value="SS1">Senior Secondary 1 (SS1)</option>
-              </select>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="md:col-span-2">
+                <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  name="debater1Name"
+                  required
+                  placeholder="First Name &amp; Surname"
+                  value={formData.debater1Name}
+                  onChange={handleChange}
+                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-gold"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
+                  Class / Grade *
+                </label>
+                <select
+                  name="debater1Class"
+                  value={formData.debater1Class}
+                  onChange={handleChange}
+                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none"
+                >
+                  <option value="SS3">Senior Secondary 3 (SS3)</option>
+                  <option value="SS2">Senior Secondary 2 (SS2)</option>
+                  <option value="SS1">Senior Secondary 1 (SS1)</option>
+                </select>
+              </div>
             </div>
           </div>
 
           {/* Debater 2 */}
-          <div className="p-4 bg-essd-black border border-essd-border grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="md:col-span-2">
-              <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
-                Speaker 2 (Deputy / 2nd Speaker) *
+          <div className="p-5 bg-essd-black border-2 border-essd-orange/70 shadow-[3px_3px_0px_#0A0A0C]">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-mono font-black uppercase text-essd-orange">
+                Student Debater 02 (Second Speaker) *
+              </span>
+              <label className="flex items-center gap-1.5 text-xs font-mono text-essd-cream cursor-pointer">
+                <input
+                  type="radio"
+                  name="captainChoice"
+                  value="2"
+                  checked={formData.captainChoice === "2"}
+                  onChange={handleChange}
+                  className="text-essd-orange focus:ring-0"
+                />
+                <span>Designate as Captain 👑</span>
               </label>
-              <input
-                type="text"
-                name="debater2Name"
-                required
-                placeholder="Student Full Name"
-                value={formData.debater2Name}
-                onChange={handleChange}
-                className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-gold"
-              />
             </div>
-            <div>
-              <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
-                Class / Grade *
-              </label>
-              <select
-                name="debater2Class"
-                value={formData.debater2Class}
-                onChange={handleChange}
-                className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none"
-              >
-                <option value="SS3">Senior Secondary 3 (SS3)</option>
-                <option value="SS2">Senior Secondary 2 (SS2)</option>
-                <option value="SS1">Senior Secondary 1 (SS1)</option>
-              </select>
-            </div>
-          </div>
 
-          {/* Debater 3 */}
-          <div className="p-4 bg-essd-black border border-essd-border grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="md:col-span-2">
-              <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
-                Speaker 3 (Whip / Rebuttal Specialist) *
-              </label>
-              <input
-                type="text"
-                name="debater3Name"
-                required
-                placeholder="Student Full Name"
-                value={formData.debater3Name}
-                onChange={handleChange}
-                className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-gold"
-              />
-            </div>
-            <div>
-              <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
-                Class / Grade *
-              </label>
-              <select
-                name="debater3Class"
-                value={formData.debater3Class}
-                onChange={handleChange}
-                className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none"
-              >
-                <option value="SS3">Senior Secondary 3 (SS3)</option>
-                <option value="SS2">Senior Secondary 2 (SS2)</option>
-                <option value="SS1">Senior Secondary 1 (SS1)</option>
-              </select>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="md:col-span-2">
+                <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  name="debater2Name"
+                  required
+                  placeholder="First Name &amp; Surname"
+                  value={formData.debater2Name}
+                  onChange={handleChange}
+                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-orange"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
+                  Class / Grade *
+                </label>
+                <select
+                  name="debater2Class"
+                  value={formData.debater2Class}
+                  onChange={handleChange}
+                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none"
+                >
+                  <option value="SS3">Senior Secondary 3 (SS3)</option>
+                  <option value="SS2">Senior Secondary 2 (SS2)</option>
+                  <option value="SS1">Senior Secondary 1 (SS1)</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Section 4: Terms & Referral */}
+      {/* Terms Agreement */}
       <div className="space-y-4 pt-4 border-t border-essd-border">
-        <div>
-          <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-            How did your school hear about ESSD 2026?
-          </label>
-          <select
-            name="referralSource"
-            value={formData.referralSource}
-            onChange={handleChange}
-            className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none"
-          >
-            <option value="Ministry of Education Circular">Enugu State Ministry of Education Circular</option>
-            <option value="Official Poster & Social Media">Official Poster &amp; Social Media Artwork</option>
-            <option value="Direct Invitation by The Placee Consults">Direct Invitation by The Placee Consults</option>
-            <option value="Secondary Schools Association">All Nigeria Confederation of Principals of Secondary Schools (ANCOPSS)</option>
-            <option value="Peer School Recommendation">Peer School Recommendation</option>
-          </select>
-        </div>
-
         <div className="flex items-start gap-3 p-4 bg-essd-dark/60 border border-essd-border">
           <input
             type="checkbox"
@@ -637,33 +596,32 @@ export default function RegistrationForm() {
             required
             checked={formData.agreedToTerms}
             onChange={handleChange}
-            className="mt-1 w-4 h-4 text-essd-gold bg-essd-black border-essd-border rounded focus:ring-0 focus:ring-offset-0"
+            className="mt-1 w-4 h-4 text-essd-gold bg-essd-black border-essd-border rounded focus:ring-0"
           />
           <label htmlFor="agreedToTerms" className="text-xs text-essd-cream-muted font-sans leading-relaxed">
-            I confirm that our school administration has authorized this registration, our squad debaters are bona fide registered secondary school students, and we agree to comply with all ESSD 2026 rules and WSDC adjudication standards.
+            I confirm that these 2 registered students are currently enrolled in our secondary school, and our school commits to participating in the championship fixtures upon completion of the tournament matchmaking draw.
           </label>
         </div>
       </div>
 
       {/* Submit Button */}
-      <div className="pt-4">
+      <div className="pt-2">
         <button
           type="submit"
           disabled={submitting}
           className="w-full py-4 bg-essd-gold text-essd-black hover:bg-essd-orange hover:text-white font-display text-base font-black uppercase tracking-wider border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
         >
           {submitting ? (
-            <span>Processing Official Registration...</span>
+            <span>Securing Registration &amp; Slot...</span>
           ) : (
             <>
               <Sparkles className="w-5 h-5 fill-current" />
-              Complete School Registration
+              Register 2 Debaters &amp; Secure Slot
               <ArrowRight className="w-5 h-5" />
             </>
           )}
         </button>
       </div>
-
     </form>
   );
 }

@@ -70,7 +70,11 @@ export default function TournamentBracket({ matches }: TournamentBracketProps) {
             }`}
           ></span>
           <span className="text-xs font-mono font-bold truncate">
-            {name || <span className="text-essd-cream-muted/40 italic">TBD ({slotNumber})</span>}
+            {name || (
+              <span className="text-essd-cream-muted/60 italic">
+                Awaiting Registration ({slotNumber})
+              </span>
+            )}
           </span>
         </div>
         <span
