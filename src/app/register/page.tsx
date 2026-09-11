@@ -64,8 +64,8 @@ export default function RegisterPage() {
                 <div className="flex items-start gap-2.5">
                   <Icons.Location className="w-4 h-4 text-essd-orange mt-0.5 flex-shrink-0" />
                   <div>
-                    <span className="font-bold text-essd-cream block">Enugu State Secretariat Complex</span>
-                    <span className="text-essd-cream-muted text-[10px]">Main Auditorium, Independence Layout</span>
+                    <span className="font-bold text-essd-cream block">HOTR Auditorium, Enugu</span>
+                    <span className="text-essd-cream-muted text-[10px]">House on the Rock Church, Enugu</span>
                   </div>
                 </div>
 

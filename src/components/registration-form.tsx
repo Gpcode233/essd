@@ -5,6 +5,35 @@ import { ENUGU_LGAS } from "@/lib/types";
 import { Icons } from "@/components/icons";
 import confetti from "canvas-confetti";
 
+const INITIAL_FORM_DATA = {
+  schoolName: "",
+  schoolType: "PUBLIC",
+  schoolAddress: "",
+  lga: "Enugu North",
+  state: "Enugu",
+  schoolEmail: "",
+  schoolPhone: "",
+  contactName: "",
+  contactRole: "Debate Coordinator / Teacher",
+  contactPhone: "",
+  contactEmail: "",
+  // Exactly 2 Student Debaters & Parent Contacts
+  debater1Name: "",
+  debater1Class: "SS2",
+  debater1ParentName: "",
+  debater1ParentPhone: "",
+  debater1ParentEmail: "",
+  debater2Name: "",
+  debater2Class: "SS2",
+  debater2ParentName: "",
+  debater2ParentPhone: "",
+  debater2ParentEmail: "",
+  captainChoice: "1", // "1" for Debater 1, "2" for Debater 2
+  teacherName: "",
+  referralSource: "Ministry of Education Circular",
+  agreedToTerms: true,
+};
+
 export default function RegistrationForm() {
   const [submitting, setSubmitting] = useState(false);
   const [successData, setSuccessData] = useState<{
@@ -19,28 +48,7 @@ export default function RegistrationForm() {
   } | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const [formData, setFormData] = useState({
-    schoolName: "",
-    schoolType: "PUBLIC",
-    schoolAddress: "",
-    lga: "Enugu North",
-    state: "Enugu",
-    schoolEmail: "",
-    schoolPhone: "",
-    contactName: "",
-    contactRole: "Debate Coordinator / Teacher",
-    contactPhone: "",
-    contactEmail: "",
-    // Exactly 2 Student Debaters
-    debater1Name: "",
-    debater1Class: "SS2",
-    debater2Name: "",
-    debater2Class: "SS2",
-    captainChoice: "1", // "1" for Debater 1, "2" for Debater 2
-    teacherName: "",
-    referralSource: "Ministry of Education Circular",
-    agreedToTerms: true,
-  });
+  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -67,6 +75,12 @@ export default function RegistrationForm() {
 
     if (!formData.debater1Name.trim() || !formData.debater2Name.trim()) {
       setErrorMsg("Please provide the full names for both student debaters (2 students required).");
+      setSubmitting(false);
+      return;
+    }
+
+    if (!formData.debater1ParentPhone.trim() || !formData.debater2ParentPhone.trim()) {
+      setErrorMsg("Please provide parent/guardian phone numbers for both student debaters.");
       setSubmitting(false);
       return;
     }
@@ -200,7 +214,7 @@ export default function RegistrationForm() {
               </div>
               <div className="p-2.5 bg-essd-dark/80 border border-essd-border rounded-xl">
                 <span className="text-essd-cream-muted block text-[10px]">Event Dates &amp; Venue:</span>
-                <span className="font-bold text-essd-gold">16th &amp; 17th Oct 2026 • Enugu Secretariat</span>
+                <span className="font-bold text-essd-gold">16th &amp; 17th Oct 2026 • HOTR Auditorium, Enugu</span>
               </div>
             </div>
           </div>
@@ -229,27 +243,7 @@ export default function RegistrationForm() {
           <button
             onClick={() => {
               setSuccessData(null);
-              setFormData({
-                schoolName: "",
-                schoolType: "PUBLIC",
-                schoolAddress: "",
-                lga: "Enugu North",
-                state: "Enugu",
-                schoolEmail: "",
-                schoolPhone: "",
-                contactName: "",
-                contactRole: "Debate Coordinator / Teacher",
-                contactPhone: "",
-                contactEmail: "",
-                debater1Name: "",
-                debater1Class: "SS2",
-                debater2Name: "",
-                debater2Class: "SS2",
-                captainChoice: "1",
-                teacherName: "",
-                referralSource: "Ministry of Education Circular",
-                agreedToTerms: true,
-              });
+              setFormData(INITIAL_FORM_DATA);
             }}
             className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-essd-dark text-essd-cream hover:text-essd-gold font-mono font-bold text-xs uppercase border border-essd-border rounded-xl"
           >
@@ -530,6 +524,56 @@ export default function RegistrationForm() {
                 </select>
               </div>
             </div>
+
+            {/* Debater 1 Parent / Guardian Info */}
+            <div className="mt-4 pt-3.5 border-t border-essd-border/60">
+              <span className="text-[10px] font-mono uppercase font-bold text-essd-gold block mb-2 flex items-center gap-1.5">
+                <Icons.User className="w-3.5 h-3.5 text-essd-gold" />
+                Student 01 Parent / Guardian Contact Details
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
+                    Parent Full Name
+                  </label>
+                  <input
+                    type="text"
+                    name="debater1ParentName"
+                    placeholder="e.g. Mr. / Mrs. Okonkwo"
+                    value={formData.debater1ParentName}
+                    onChange={handleChange}
+                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-gold rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
+                    Parent Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    name="debater1ParentPhone"
+                    required
+                    placeholder="+234 803 000 0000"
+                    value={formData.debater1ParentPhone}
+                    onChange={handleChange}
+                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-mono focus:outline-none focus:border-essd-gold rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
+                    Parent Email (Optional)
+                  </label>
+                  <input
+                    type="email"
+                    name="debater1ParentEmail"
+                    placeholder="parent@example.com"
+                    value={formData.debater1ParentEmail}
+                    onChange={handleChange}
+                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-mono focus:outline-none focus:border-essd-gold rounded-lg"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Debater 2 */}
@@ -580,6 +624,56 @@ export default function RegistrationForm() {
                   <option value="SS2">Senior Secondary 2 (SS2)</option>
                   <option value="SS1">Senior Secondary 1 (SS1)</option>
                 </select>
+              </div>
+            </div>
+
+            {/* Debater 2 Parent / Guardian Info */}
+            <div className="mt-4 pt-3.5 border-t border-essd-border/60">
+              <span className="text-[10px] font-mono uppercase font-bold text-essd-orange block mb-2 flex items-center gap-1.5">
+                <Icons.User className="w-3.5 h-3.5 text-essd-orange" />
+                Student 02 Parent / Guardian Contact Details
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div>
+                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
+                    Parent Full Name
+                  </label>
+                  <input
+                    type="text"
+                    name="debater2ParentName"
+                    placeholder="e.g. Mr. / Mrs. Eze"
+                    value={formData.debater2ParentName}
+                    onChange={handleChange}
+                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-orange rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
+                    Parent Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    name="debater2ParentPhone"
+                    required
+                    placeholder="+234 803 000 0000"
+                    value={formData.debater2ParentPhone}
+                    onChange={handleChange}
+                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-mono focus:outline-none focus:border-essd-orange rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
+                    Parent Email (Optional)
+                  </label>
+                  <input
+                    type="email"
+                    name="debater2ParentEmail"
+                    placeholder="parent@example.com"
+                    value={formData.debater2ParentEmail}
+                    onChange={handleChange}
+                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-mono focus:outline-none focus:border-essd-orange rounded-lg"
+                  />
+                </div>
               </div>
             </div>
           </div>

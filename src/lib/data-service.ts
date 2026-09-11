@@ -68,7 +68,7 @@ const MOTIONS = [
   "This House believes that in the age of artificial intelligence, the ultimate goal of secondary education must be the cultivation of human wisdom over algorithmic efficiency.",
 ];
 
-const VENUE = "Main Auditorium, Enugu State Secretariat Complex, Independence Layout";
+const VENUE = "HOTR Auditorium, House on the Rock Church, Enugu";
 
 export function generateDefaultMatches(): MatchData[] {
   return [

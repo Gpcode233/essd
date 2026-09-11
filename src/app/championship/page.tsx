@@ -128,7 +128,7 @@ export default async function ChampionshipPage() {
                 Stage 4: Grand Final
               </span>
               <p className="text-essd-cream-muted leading-relaxed font-sans text-xs">
-                The supreme clash on the Secretariat main stage to crown the 2026 ESSD Grand Champion.
+                The supreme clash on the HOTR Auditorium main stage to crown the 2026 ESSD Grand Champion.
               </p>
             </div>
 

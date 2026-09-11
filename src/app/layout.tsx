@@ -18,7 +18,10 @@ export const metadata: Metadata = {
     "Enugu Students",
     "Debate Tournament",
   ],
-  authors: [{ name: "The Placee Consults" }],
+  authors: [
+    { name: "The Placee Educational Consult" },
+    { name: "House on the Rock Church, Enugu" },
+  ],
   icons: {
     icon: "/images/essd-logo.jpg",
     shortcut: "/images/essd-logo.jpg",

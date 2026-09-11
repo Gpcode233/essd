@@ -5,7 +5,7 @@ export default function StatsBanner() {
     { number: "16", label: "SCHOOLS", sub: "Elite Senior Teams", icon: Icons.Users, color: "text-essd-gold" },
     { number: "02", label: "DAYS", sub: "16th & 17th Oct 2026", icon: Icons.Calendar, color: "text-essd-orange" },
     { number: "01", label: "CHAMPION", sub: "Gold Trophy & Scholarship", icon: Icons.Trophy, color: "text-essd-gold" },
-    { number: "01", label: "STATE-WIDE STAGE", sub: "Enugu Secretariat Complex", icon: Icons.Target, color: "text-essd-cream" },
+    { number: "01", label: "STATE-WIDE STAGE", sub: "HOTR Auditorium, Enugu", icon: Icons.Target, color: "text-essd-cream" },
   ];
 
   const competencies = [

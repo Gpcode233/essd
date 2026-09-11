@@ -95,7 +95,7 @@ async function main() {
       await prisma.match.create({
         data: {
           ...m,
-          venueName: "Main Auditorium, Enugu State Secretariat Complex, Independence Layout",
+          venueName: "HOTR Auditorium, House on the Rock Church, Enugu",
           judges: "Panel of Certified WSDC State Adjudicators",
         },
       });

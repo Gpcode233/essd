@@ -21,7 +21,7 @@ export default function FAQSection() {
     },
     {
       q: "Where and when will the championship take place?",
-      a: "The tournament takes place on 16th & 17th October 2026 at the Main Auditorium, Enugu State Secretariat Complex, Independence Layout, Enugu. Accreditation starts at 08:00 AM on Day 1.",
+      a: "The tournament takes place on 16th & 17th October 2026 at the HOTR Auditorium, House on the Rock Church, Enugu. Accreditation starts at 08:00 AM on Day 1.",
     },
     {
       q: "What happens after our school submits the registration form?",

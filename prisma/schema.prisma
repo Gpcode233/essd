@@ -67,6 +67,12 @@ model Registration {
   debaterClasses String   // JSON string of classes
   captainName    String
   teacherName    String
+  debater1ParentName  String?
+  debater1ParentPhone String?
+  debater1ParentEmail String?
+  debater2ParentName  String?
+  debater2ParentPhone String?
+  debater2ParentEmail String?
   referralSource String?
   agreedToTerms  Boolean  @default(true)
   status         String   @default("APPROVED") // "PENDING", "APPROVED", "REJECTED"

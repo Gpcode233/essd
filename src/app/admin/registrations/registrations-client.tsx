@@ -268,14 +268,51 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
                 <span className="px-2.5 py-0.5 bg-essd-gold text-essd-black font-bold text-[10px] rounded-full">Captain</span>
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-3">
                 {parseJsonSafe(selectedReg.debaterNames).map((name: string, i: number) => {
                   const classes = parseJsonSafe(selectedReg.debaterClasses);
                   const cls = classes[i] || "SS2";
+                  const parentName = i === 0 ? selectedReg.debater1ParentName : selectedReg.debater2ParentName;
+                  const parentPhone = i === 0 ? selectedReg.debater1ParentPhone : selectedReg.debater2ParentPhone;
+                  const parentEmail = i === 0 ? selectedReg.debater1ParentEmail : selectedReg.debater2ParentEmail;
+
                   return (
-                    <div key={i} className="p-2.5 bg-essd-dark border border-essd-border flex items-center justify-between text-xs font-mono rounded-lg">
-                      <span>Speaker 0{i + 1}: <strong className="text-essd-cream">{name}</strong></span>
-                      <span className="text-essd-cream-muted text-[11px]">{cls}</span>
+                    <div key={i} className="p-3 bg-essd-dark border border-essd-border text-xs font-mono rounded-xl space-y-2">
+                      <div className="flex items-center justify-between border-b border-essd-border/60 pb-1.5">
+                        <span>Speaker 0{i + 1}: <strong className="text-essd-cream text-sm">{name}</strong></span>
+                        <span className="px-2 py-0.5 bg-essd-black text-essd-gold border border-essd-border text-[10px] rounded-md">{cls}</span>
+                      </div>
+                      
+                      {/* Parent details */}
+                      <div className="text-[11px] text-essd-cream-muted space-y-1 pt-1">
+                        <span className="text-[10px] uppercase font-bold text-essd-gold block">
+                          👨‍👩‍👧 Parent / Guardian Contact:
+                        </span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-essd-cream">
+                          <div>
+                            <span className="text-essd-cream-muted">Name: </span>
+                            <span>{parentName || "Not specified"}</span>
+                          </div>
+                          <div>
+                            <span className="text-essd-cream-muted">Phone: </span>
+                            {parentPhone ? (
+                              <a href={`tel:${parentPhone}`} className="text-essd-gold font-bold hover:underline">
+                                {parentPhone}
+                              </a>
+                            ) : (
+                              "N/A"
+                            )}
+                          </div>
+                          {parentEmail && (
+                            <div className="sm:col-span-2">
+                              <span className="text-essd-cream-muted">Email: </span>
+                              <a href={`mailto:${parentEmail}`} className="text-essd-orange hover:underline">
+                                {parentEmail}
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   );
                 })}

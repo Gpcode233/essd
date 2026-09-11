@@ -28,10 +28,10 @@
   }
 }
 
-/* Halftone Textures */
+/* Halftone Textures - Off-White / Light Cream Editorial Canvas */
 .halftone-bg {
-  background-color: #E8A927;
-  background-image: radial-gradient(circle, rgba(10, 10, 12, 0.85) 1.5px, transparent 1.5px);
+  background-color: #F8F5EE;
+  background-image: radial-gradient(circle, rgba(10, 10, 12, 0.09) 1.5px, transparent 1.5px);
   background-size: 8px 8px;
 }
 

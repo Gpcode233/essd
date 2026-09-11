@@ -56,7 +56,7 @@ export default function Hero() {
           
           {/* Header presenter line */}
           <div className="text-center mb-4 sm:mb-6">
-            <div className="inline-block relative">
+            <div className="inline-block relative max-w-2xl mx-auto">
               {/* Circular ESSD Logo Badge at Top of Poster */}
               <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-3 rounded-full bg-essd-black border-3 border-essd-gold p-0.5 shadow-2xl flex items-center justify-center overflow-hidden">
                 <Image
@@ -68,20 +68,20 @@ export default function Hero() {
                   priority
                 />
               </div>
-              <p className="font-mono text-xs sm:text-sm uppercase tracking-[0.25em] font-black text-essd-black/80">
-                The Placee Consults &amp; Partners Presents
+              <p className="font-mono text-[11px] sm:text-xs md:text-sm uppercase tracking-widest font-black text-essd-black/80 px-2 leading-tight">
+                The Placee Educational Consult in collaboration with House on the Rock Church, Enugu Presents
               </p>
-              <h2 className="text-sm sm:text-xl md:text-2xl font-black font-display tracking-wider text-essd-black uppercase mt-0.5">
+              <h2 className="text-sm sm:text-xl md:text-2xl font-black font-display tracking-wider text-essd-black uppercase mt-1">
                 Enugu State Secondary Schools
               </h2>
             </div>
           </div>
 
-          {/* Central Visual Composition: Layered Debaters + Massive Poster Typography */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center my-6 lg:my-10">
+          {/* Central Visual Composition: Layered Debaters (Desktop Only) + Massive Typography */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center my-4 sm:my-6 lg:my-10">
             
-            {/* Left Debater Cutout Poster (Male Debater) */}
-            <div className="lg:col-span-3 flex justify-center lg:justify-start order-2 lg:order-1">
+            {/* Left Debater Cutout Poster (Hidden on Mobile) */}
+            <div className="hidden lg:flex lg:col-span-3 justify-center lg:justify-start order-2 lg:order-1">
               <div className="relative group">
                 {/* Paper-cut sticker container */}
                 <div className="relative bg-essd-black p-2 border-4 border-essd-cream rounded-2xl shadow-[8px_8px_0px_#0A0A0C] rotate-[-2deg] transition-transform duration-300 hover:rotate-0 hover:scale-105">
@@ -103,23 +103,23 @@ export default function Hero() {
             </div>
 
             {/* Center Massive Headline & Event Theme */}
-            <div className="lg:col-span-6 text-center order-1 lg:order-2 space-y-4 sm:space-y-6">
+            <div className="col-span-1 lg:col-span-6 text-center order-1 lg:order-2 space-y-4 sm:space-y-6 max-w-2xl mx-auto w-full">
               
               {/* Massive DEBATE CHAMPIONSHIP Typography */}
               <div className="relative py-2 select-none">
                 {/* Big Black "DEBATE" Background Word */}
-                <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-wider text-essd-black uppercase leading-[0.85] text-shadow-hard">
+                <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-display tracking-wider text-essd-black uppercase leading-[0.85] text-shadow-hard">
                   DEBATE
                 </h1>
 
                 {/* Layered Cursive Script "Debate" overlapping */}
-                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-essd-cream tracking-wide rotate-[-8deg] pointer-events-none drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] font-sans italic opacity-95">
+                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-essd-cream tracking-wide rotate-[-8deg] pointer-events-none drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] font-sans italic opacity-95">
                   Debate
                 </span>
 
                 {/* Orange CHAMPIONSHIP banner */}
                 <div className="mt-2 sm:mt-3">
-                  <span className="inline-block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-display tracking-wider text-essd-orange uppercase bg-essd-black px-5 py-2 rounded-xl border-3 border-essd-cream shadow-[5px_5px_0px_#0A0A0C] rotate-[1deg]">
+                  <span className="inline-block text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-display tracking-wider text-essd-orange uppercase bg-essd-black px-4 sm:px-5 py-1.5 sm:py-2 rounded-xl border-3 border-essd-cream shadow-[5px_5px_0px_#0A0A0C] rotate-[1deg]">
                     CHAMPIONSHIP
                   </span>
                 </div>
@@ -141,8 +141,8 @@ export default function Hero() {
               </div>
 
               {/* Event Dates & Venue Stamps (Rounded rectangles matching flyer) */}
-              <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-3">
-                <div className="bg-essd-black text-essd-cream px-5 py-2.5 rounded-2xl border-3 border-essd-gold shadow-[4px_4px_0px_#0A0A0C] flex items-center gap-3">
+              <div className="inline-flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+                <div className="w-full sm:w-auto bg-essd-black text-essd-cream px-5 py-2.5 rounded-2xl border-3 border-essd-gold shadow-[4px_4px_0px_#0A0A0C] flex items-center justify-center gap-3">
                   <Icons.Calendar className="w-5 h-5 text-essd-gold flex-shrink-0" />
                   <div className="text-left">
                     <span className="text-[10px] font-mono uppercase font-bold text-essd-gold block">
@@ -154,14 +154,14 @@ export default function Hero() {
                   </div>
                 </div>
 
-                <div className="bg-essd-black text-essd-cream px-5 py-2.5 rounded-2xl border-3 border-essd-orange shadow-[4px_4px_0px_#0A0A0C] flex items-center gap-2.5">
+                <div className="w-full sm:w-auto bg-essd-black text-essd-cream px-5 py-2.5 rounded-2xl border-3 border-essd-orange shadow-[4px_4px_0px_#0A0A0C] flex items-center justify-center gap-2.5">
                   <Icons.Location className="w-5 h-5 text-essd-orange flex-shrink-0" />
                   <div className="text-left">
                     <span className="text-[10px] font-mono uppercase font-bold text-essd-orange block">
                       Venue
                     </span>
                     <span className="text-xs sm:text-sm font-bold font-mono uppercase">
-                      Enugu State Secretariat
+                      HOTR Auditorium, Enugu
                     </span>
                   </div>
                 </div>
@@ -189,7 +189,7 @@ export default function Hero() {
 
               {/* Secretariat Hotline bar */}
               <div className="pt-2">
-                <div className="inline-flex items-center gap-2 bg-essd-black/90 text-essd-cream-muted px-5 py-2 rounded-full text-xs font-mono border border-essd-black shadow-sm">
+                <div className="inline-flex flex-wrap items-center justify-center gap-2 bg-essd-black/90 text-essd-cream-muted px-4 sm:px-5 py-2 rounded-full text-xs font-mono border border-essd-black shadow-sm text-center">
                   <span>For enquiries &amp; sponsorship:</span>
                   <a
                     href="tel:+2349038296513"
@@ -197,7 +197,7 @@ export default function Hero() {
                   >
                     +234 903 829 6513
                   </a>
-                  <span>|</span>
+                  <span className="hidden sm:inline">|</span>
                   <a
                     href="mailto:theplaceeconsults@gmail.com"
                     className="text-essd-orange font-bold hover:underline"
@@ -208,8 +208,8 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Right Debater Cutout Poster (Female Debater with glasses) */}
-            <div className="lg:col-span-3 flex justify-center lg:justify-end order-3">
+            {/* Right Debater Cutout Poster (Hidden on Mobile) */}
+            <div className="hidden lg:flex lg:col-span-3 justify-center lg:justify-end order-3">
               <div className="relative group">
                 {/* Paper-cut sticker container */}
                 <div className="relative bg-essd-black p-2 border-4 border-essd-cream rounded-2xl shadow-[8px_8px_0px_#0A0A0C] rotate-[2deg] transition-transform duration-300 hover:rotate-0 hover:scale-105">

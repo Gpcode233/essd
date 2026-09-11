@@ -101,8 +101,8 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Visual Poster Frame */}
-          <div className="lg:col-span-5 flex justify-center">
+          {/* Visual Poster Frame (Hidden on mobile) */}
+          <div className="hidden lg:flex lg:col-span-5 justify-center">
             <div className="relative p-3.5 bg-essd-charcoal border-4 border-essd-gold shadow-[10px_10px_0px_#0A0A0C] rotate-[1deg] rounded-2xl">
               <div className="w-72 sm:w-80 h-96 relative overflow-hidden bg-essd-dark rounded-xl">
                 <Image
@@ -117,7 +117,7 @@ export default function AboutPage() {
                   Official ESSD 2026 Poster Artwork
                 </span>
                 <span className="text-[10px] font-mono text-essd-cream-muted">
-                  16th &amp; 17th October 2026 • Enugu Secretariat
+                  16th &amp; 17th October 2026 • HOTR Auditorium, Enugu
                 </span>
               </div>
             </div>
@@ -133,8 +133,8 @@ export default function AboutPage() {
             <span className="text-xs font-mono font-bold uppercase text-essd-orange tracking-widest block mb-2">
               Debate Focus Areas
             </span>
-            <h3 className="text-2xl sm:text-4xl font-black font-display uppercase text-essd-cream">
-              FOUR PILLARS OF DISCOURSE
+            <h3 className="text-2xl sm:text-3xl font-black font-display uppercase tracking-wide text-essd-cream">
+              The 4 Pillars of the 2026 Discourse
             </h3>
           </div>
 
@@ -144,9 +144,9 @@ export default function AboutPage() {
               return (
                 <div
                   key={idx}
-                  className={`p-6 bg-essd-black border-2 ${p.color} shadow-[4px_4px_0px_#0A0A0C] space-y-3 rounded-2xl`}
+                  className={`p-6 bg-essd-dark border-2 ${p.color} space-y-3 rounded-2xl transition-all hover:scale-[1.02]`}
                 >
-                  <div className="p-3 bg-essd-dark w-fit border border-essd-border text-essd-gold rounded-xl">
+                  <div className="w-12 h-12 rounded-xl bg-essd-black border border-essd-border flex items-center justify-center text-essd-gold">
                     <Icon className="w-6 h-6" />
                   </div>
                   <h4 className="text-base font-black font-display uppercase text-essd-cream tracking-wide">
@@ -171,10 +171,10 @@ export default function AboutPage() {
               Organizer &amp; Host
             </span>
             <h4 className="text-lg font-black font-display uppercase text-essd-cream">
-              The Placee Consults
+              The Placee Educational Consult
             </h4>
             <p className="text-xs text-essd-cream-muted leading-relaxed font-sans">
-              In strategic partnership with secondary schools, educational administrators, and policy advocates across Enugu State.
+              Presented in collaboration with House on the Rock Church, Enugu, partnering with secondary schools and educational administrators across Enugu State.
             </p>
           </div>
 
@@ -183,10 +183,10 @@ export default function AboutPage() {
               Championship Venue
             </span>
             <h4 className="text-lg font-black font-display uppercase text-essd-cream">
-              Main Secretariat Auditorium
+              HOTR Auditorium, Enugu
             </h4>
             <p className="text-xs text-essd-cream-muted leading-relaxed font-sans">
-              Enugu State Secretariat Complex, Independence Layout, Enugu. World-class acoustic stage with state-wide live broadcast.
+              House on the Rock Church, Enugu, Enugu State, Nigeria. Premium auditorium with state-of-the-art acoustics and live audience capacity.
             </p>
           </div>
 

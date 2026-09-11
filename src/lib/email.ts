@@ -95,6 +95,7 @@ export function generateRegistrationConfirmationEmail(reg: {
           <div class="details-row"><span class="details-label">Teacher / Coordinator:</span> <span class="details-value">${reg.teacherName}</span></div>
           <div class="details-row"><span class="details-label">Delegation Size:</span> <span class="details-value">${reg.debaterCount} Debaters</span></div>
           <div class="details-row"><span class="details-label">Event Dates:</span> <span class="details-value">16th & 17th October 2026</span></div>
+          <div class="details-row"><span class="details-label">Venue:</span> <span class="details-value">HOTR Auditorium, House on the Rock Church, Enugu</span></div>
         </div>
 
         <div class="next-steps">
@@ -113,7 +114,7 @@ export function generateRegistrationConfirmationEmail(reg: {
       </div>
       <div class="footer">
         &copy; 2026 Enugu State Secondary Schools Debate Championship (ESSD). All rights reserved.<br>
-        Organized by The Placee Consults & Partners.
+        Presented by The Placee Educational Consult in collaboration with House on the Rock Church, Enugu.
       </div>
     </div>
   </body>

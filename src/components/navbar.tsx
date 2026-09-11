@@ -48,7 +48,7 @@ export default function Navbar() {
             <span className="text-essd-border">|</span>
             <span>16th &amp; 17th October 2026</span>
             <span className="text-essd-border">|</span>
-            <span>Enugu State Secretariat Complex</span>
+            <span>HOTR Auditorium, Enugu</span>
           </div>
           <div className="flex items-center space-x-4">
             <Link

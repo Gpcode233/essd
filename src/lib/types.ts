@@ -74,6 +74,12 @@ export interface RegistrationData {
   debaterClasses: string[];
   captainName: string;
   teacherName: string;
+  debater1ParentName?: string | null;
+  debater1ParentPhone?: string | null;
+  debater1ParentEmail?: string | null;
+  debater2ParentName?: string | null;
+  debater2ParentPhone?: string | null;
+  debater2ParentEmail?: string | null;
   referralSource?: string | null;
   agreedToTerms: boolean;
   status: string;

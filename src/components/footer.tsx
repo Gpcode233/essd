@@ -145,7 +145,7 @@ export default function Footer() {
               <div className="flex items-start gap-3">
                 <Icons.Location className="w-4 h-4 text-essd-cream-muted mt-0.5 flex-shrink-0" />
                 <span className="text-essd-cream-muted text-[11px]">
-                  Independence Layout, Enugu, Enugu State, Nigeria
+                  HOTR Auditorium, House on the Rock Church, Enugu, Enugu State, Nigeria
                 </span>
               </div>
             </div>
@@ -180,10 +180,8 @@ export default function Footer() {
           <p>
             &copy; 2026 Enugu State Secondary Schools Debate Championship (ESSD). All rights reserved.
           </p>
-          <div className="flex items-center space-x-6">
-            <span className="text-essd-gold">Organized by The Placee Consults</span>
-            <span>•</span>
-            <span>Enugu State, Nigeria</span>
+          <div className="flex items-center space-x-4 text-center sm:text-right">
+            <span className="text-essd-gold">Presented by The Placee Educational Consult in collaboration with House on the Rock Church, Enugu</span>
           </div>
         </div>
       </div>
