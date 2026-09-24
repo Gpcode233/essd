@@ -8,28 +8,32 @@ export default function FAQSection() {
 
   const faqs = [
     {
-      q: "Which secondary schools are eligible to register for ESSD 2026?",
-      a: "All accredited public, private, mission/faith-based, and federal unity secondary schools situated across all 17 Local Government Areas of Enugu State are eligible. Each school registers an official delegation comprising exactly 2 student debaters (Speaker 1 and Speaker 2, with one selected as team captain) and 1 supervising teacher coordinator.",
+      q: "Who is eligible to compete in ESSD 2026?",
+      a: "Senior secondary school students (SS1 to SS3) representing accredited public, private, mission, and federal unity schools located within Enugu Town and Enugu Central (including Enugu North, Enugu East, Enugu South, and Central urban districts) are eligible. Over 80+ schools are participating.",
     },
     {
-      q: "What is the official debate format and timing standard?",
-      a: "ESSD 2026 adheres to the World Schools Debating Championship (WSDC) format. Each round features structured substantive speeches from Proposition and Opposition speakers, followed by reply speeches, with Points of Information (POIs) accepted during the designated speech windows.",
+      q: "Is registration for individual debaters or teams?",
+      a: "Registrations are for individual student debaters representing their secondary school. Each registered student competes individually and selects their preferred motions directly during online registration.",
     },
     {
-      q: "How are tournament motions selected and announced?",
-      a: "All motions are curated around the core theme 'Beyond the Algorithm: Reimagining Education in the Age of AI'. Prepared motions for the Round of 16 are published 2 weeks prior to the event. Impromptu motions for Semi-Finals and Finals will be released with 1 hour of supervised preparation time.",
+      q: "Are debaters assigned to fixed Proposition or Opposition sides?",
+      a: "No! There are no rigid proposition or opposition team assignments. Debaters are free to select and argue any stance (Proposition or Opposition) on their chosen motions. Scoring is based on dialectical logic, depth of research, rhetorical precision, and rebuttal mastery.",
+    },
+    {
+      q: "How does motion selection work across Day 1 and Day 2?",
+      a: "During registration, each debater selects exactly 3 motions from the curated 6-motion pool for Day 1's preliminary and elimination rounds, and 2 motions from the 4-motion pool for the Day 2 Grand Finale. For The Finals (Apex Stage), an impromptu motion is provided on the spot!",
+    },
+    {
+      q: "How many debaters advance to Day 2 (Grand Finale)?",
+      a: "Out of 80+ debaters competing on Day 1 across 3 rounds of elimination, exactly 20 debaters will advance to the Grand Finale on Day 2. The Grand Finale further cuts down to Top 10, and then the Top 5 finalists enter The Finals.",
+    },
+    {
+      q: "What prizes and scholarship opportunities are awarded?",
+      a: "1st Position receives ₦150k cash prize, gold medal, full tech course scholarship, free international scholarship application & advisory, plus the Gold Championship Trophy for their school. 2nd Position receives ₦100k cash prize, medal, tech scholarship, free int'l scholarship application, and school trophy. 3rd Position receives ₦50k cash prize, medal, tech scholarship, free int'l scholarship application, and school trophy. 4th & 5th Positions receive full tech course scholarships and free international scholarship applications.",
     },
     {
       q: "Where and when will the championship take place?",
-      a: "The tournament takes place on 16th & 17th October 2026 at the HOTR Auditorium, House on the Rock Church, Enugu. Accreditation starts at 08:00 AM on Day 1.",
-    },
-    {
-      q: "What happens after our school submits the registration form?",
-      a: "Upon submission, your school receives an immediate unique Registration ID (e.g. ESSD-2026-EN-XXXX), a downloadable printable official accreditation slip with QR code, and a confirmation email. The secretariat will follow up with debate guidebooks and tournament logistics.",
-    },
-    {
-      q: "How can corporate sponsors or partners get involved?",
-      a: "Sponsorship and partnership inquiries are warmly welcomed. Please contact the tournament secretariat directly at +234 903 829 6513 or email theplaceeconsults@gmail.com.",
+      a: "The championship takes place on 16th & 17th October 2026 at HOTR Auditorium, House on the Rock Church, Enugu. Accreditation check-in opens at 8:00 AM on Day 1.",
     },
   ];
 
@@ -41,13 +45,13 @@ export default function FAQSection() {
         <div className="text-center mb-14">
           <span className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold bg-essd-gold/10 px-3.5 py-1 border border-essd-gold inline-block mb-3 rounded-full">
             <Icons.HelpCircle className="w-3.5 h-3.5 inline mr-1" />
-            Knowledge Base
+            Tournament Knowledge Base
           </span>
           <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-wide text-essd-cream">
             FREQUENTLY ASKED <span className="text-essd-gold">QUESTIONS</span>
           </h2>
           <p className="mt-3 text-xs sm:text-sm text-essd-cream-muted font-sans">
-            Everything you need to know about the Enugu State Secondary Schools Debate Championship.
+            Everything you need to know about individual debater entries, motions, tournament stages, and prizes.
           </p>
         </div>
 
@@ -88,26 +92,26 @@ export default function FAQSection() {
         <div className="mt-12 p-6 bg-essd-dark border-2 border-essd-border flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left rounded-2xl">
           <div>
             <h4 className="text-sm font-bold uppercase font-display text-essd-cream">
-              Still have questions about ESSD 2026?
+              Have further questions about ESSD 2026?
             </h4>
             <p className="text-xs text-essd-cream-muted mt-0.5">
-              Our championship secretariat is available to assist your school.
+              The championship secretariat is available to assist student debaters and teachers.
             </p>
           </div>
           <div className="flex items-center gap-3">
             <a
               href="tel:+2349038296513"
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-essd-gold text-essd-black font-mono font-bold text-xs uppercase rounded-xl"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-essd-gold text-essd-black font-mono font-bold text-xs uppercase rounded-xl hover:bg-essd-orange hover:text-white transition-all"
             >
               <Icons.Phone className="w-3.5 h-3.5" />
-              Call Secretariat
+              Call Helpline
             </a>
             <a
               href="mailto:theplaceeconsults@gmail.com"
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-essd-charcoal text-essd-cream hover:text-essd-gold border border-essd-border font-mono font-bold text-xs uppercase rounded-xl"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-essd-charcoal border border-essd-border text-essd-cream font-mono font-bold text-xs uppercase rounded-xl hover:border-essd-gold transition-all"
             >
-              <Icons.Mail className="w-3.5 h-3.5" />
-              Email Us
+              <Icons.Mail className="w-3.5 h-3.5 text-essd-gold" />
+              Email Desk
             </a>
           </div>
         </div>

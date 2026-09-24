@@ -50,7 +50,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Navigation */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-3 space-y-4">
             <h4 className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold flex items-center gap-2">
               <span className="w-2 h-2 bg-essd-gold rounded-full"></span>
               Navigation
@@ -71,117 +71,95 @@ export default function Footer() {
               <li>
                 <Link href="/championship" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
                   <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
-                  Knockout Bracket
-                </Link>
-              </li>
-              <li>
-                <Link href="/fixtures" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
-                  <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
-                  Fixtures &amp; Results
-                </Link>
-              </li>
-              <li>
-                <Link href="/schools" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
-                  <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
-                  Participating Schools
+                  Championship Rounds &amp; Motions
                 </Link>
               </li>
               <li>
                 <Link href="/prizes" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
                   <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
-                  Prizes &amp; Awards
+                  Prizes &amp; Honors
+                </Link>
+              </li>
+              <li>
+                <Link href="/#faq" className="text-essd-cream-muted hover:text-essd-gold transition-colors flex items-center gap-1.5">
+                  <Icons.ArrowUpRight className="w-3 h-3 text-essd-gold" />
+                  FAQ &amp; Rules
                 </Link>
               </li>
               <li>
                 <Link href="/register" className="text-essd-orange font-bold hover:underline transition-colors flex items-center gap-1.5">
                   <Icons.ArrowUpRight className="w-3 h-3 text-essd-orange" />
-                  Register School
+                  Register Debater
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact & Secretariat Info */}
-          <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold flex items-center gap-2">
-              <span className="w-2 h-2 bg-essd-orange rounded-full"></span>
-              Secretariat &amp; Enquiries
-            </h4>
-            <div className="space-y-3 text-xs">
-              <div className="flex items-start gap-3">
-                <Icons.Calendar className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
-                <div>
-                  <span className="text-essd-cream font-bold block">16th &amp; 17th October 2026</span>
-                  <span className="text-essd-cream-muted text-[11px]">Two-Day Championship Tournament</span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icons.Phone className="w-4 h-4 text-essd-orange mt-0.5 flex-shrink-0" />
-                <div>
-                  <a
-                    href="tel:+2349038296513"
-                    className="text-essd-cream font-bold hover:text-essd-gold transition-colors block"
-                  >
-                    +234 903 829 6513
-                  </a>
-                  <span className="text-essd-cream-muted text-[11px]">Official Tournament Helpline</span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icons.Mail className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
-                <div>
-                  <a
-                    href="mailto:theplaceeconsults@gmail.com"
-                    className="text-essd-cream font-bold hover:text-essd-gold transition-colors block break-all"
-                  >
-                    theplaceeconsults@gmail.com
-                  </a>
-                  <span className="text-essd-cream-muted text-[11px]">Sponsorship &amp; Official Inquiries</span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icons.Location className="w-4 h-4 text-essd-cream-muted mt-0.5 flex-shrink-0" />
-                <span className="text-essd-cream-muted text-[11px]">
-                  HOTR Auditorium, House on the Rock Church, Enugu, Enugu State, Nigeria
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Admin & Security Seal */}
-          <div className="lg:col-span-2 space-y-4">
+          {/* Tournament Logistics & Venue */}
+          <div className="lg:col-span-4 space-y-4">
             <h4 className="text-xs font-mono font-black uppercase tracking-widest text-essd-gold flex items-center gap-2">
               <span className="w-2 h-2 bg-essd-gold rounded-full"></span>
-              Governance
+              Tournament Secretariat
             </h4>
-            <div className="p-3 bg-essd-dark/80 border border-essd-border rounded-2xl text-center space-y-2">
-              <Icons.Shield className="w-6 h-6 text-essd-gold mx-auto" />
-              <span className="block text-[11px] font-mono font-bold text-essd-cream uppercase">
-                Adjudication Standard
-              </span>
-              <p className="text-[10px] text-essd-cream-muted">
-                Governed by World Schools Debating Championship (WSDC) scoring rubrics.
-              </p>
-              <Link
-                href="/admin"
-                className="inline-block mt-2 text-[10px] font-mono font-bold text-essd-gold hover:underline"
-              >
-                Organizer Access →
-              </Link>
+
+            <div className="space-y-3 text-xs font-mono text-essd-cream-muted">
+              <div className="flex items-start gap-2.5">
+                <Icons.Location className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
+                <div>
+                  <span className="text-essd-cream font-bold block">HOTR Auditorium</span>
+                  <span>House on the Rock Church, Enugu, Nigeria</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5">
+                <Icons.Calendar className="w-4 h-4 text-essd-orange mt-0.5 flex-shrink-0" />
+                <div>
+                  <span className="text-essd-cream font-bold block">16th &amp; 17th October 2026</span>
+                  <span>Two-Day State Championship Event</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5">
+                <Icons.Phone className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
+                <div>
+                  <a href="tel:+2349038296513" className="hover:text-essd-gold text-essd-cream">
+                    +234 903 829 6513
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-2.5">
+                <Icons.Mail className="w-4 h-4 text-essd-orange mt-0.5 flex-shrink-0" />
+                <div>
+                  <a href="mailto:theplaceeconsults@gmail.com" className="hover:text-essd-gold text-essd-cream">
+                    theplaceeconsults@gmail.com
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
 
-        {/* Bottom copyright line */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-essd-cream-muted/60">
+        {/* Bottom Credits */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs font-mono text-essd-cream-muted/60 gap-4">
           <p>
-            &copy; 2026 Enugu State Secondary Schools Debate Championship (ESSD). All rights reserved.
+            &copy; {new Date().getFullYear()} Enugu State Secondary Schools Debate Championship (ESSD). Presented by{" "}
+            <span className="text-essd-gold font-bold">The Placee Educational Consult</span> in collaboration with{" "}
+            <span className="text-essd-cream font-bold">House on the Rock Church, Enugu</span>.
           </p>
-          <div className="flex items-center space-x-4 text-center sm:text-right">
-            <span className="text-essd-gold">Presented by The Placee Educational Consult in collaboration with House on the Rock Church, Enugu</span>
+          <div className="flex items-center space-x-4">
+            <Link href="/privacy" className="hover:text-essd-gold transition-colors">
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link href="/terms" className="hover:text-essd-gold transition-colors">
+              Tournament Terms
+            </Link>
+            <span>•</span>
+            <Link href="/admin" className="hover:text-essd-gold transition-colors">
+              Admin Login
+            </Link>
           </div>
         </div>
       </div>

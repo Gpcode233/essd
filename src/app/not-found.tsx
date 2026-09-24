@@ -23,11 +23,11 @@ export default function NotFound() {
             Return Home
           </Link>
           <Link
-            href="/fixtures"
+            href="/championship"
             className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-essd-charcoal text-essd-cream font-mono font-bold text-xs uppercase tracking-wider border border-essd-border hover:border-essd-gold"
           >
             <Icons.Trophy className="w-4 h-4 mr-2 text-essd-gold" />
-            View Fixtures
+            View Championship Format
           </Link>
         </div>
       </div>

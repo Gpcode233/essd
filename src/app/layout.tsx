@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://essd.ng"),
   title: "ESSD 2026 | Enugu State Secondary Schools Debate Championship",
   description:
-    "Official championship website for the Enugu State Secondary Schools Debate Championship. Theme: 'Beyond the Algorithm: Reimagining Education in the Age of AI'. 16th & 17th October 2026.",
+    "Official championship website for the Enugu State Secondary Schools Debate Championship for individual debaters in Enugu Town and Enugu Central. Theme: 'Beyond the Algorithm: Reimagining Education in the Age of AI'. 16th & 17th October 2026.",
   keywords: [
     "ESSD",
     "Enugu State Debate Championship",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ESSD 2026 | Enugu State Secondary Schools Debate Championship",
     description:
-      "Where brilliant young minds challenge ideas, sharpen their reasoning, and debate the future of education in an AI-driven world. 16th & 17th October 2026.",
+      "Individual debaters from Enugu Town and Enugu Central challenge ideas, sharpen their reasoning, and debate the future of education in an AI-driven world. 16th & 17th October 2026.",
     images: [
       {
         url: "/images/essd-poster.jpg",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { RegistrationData, ENUGU_LGAS } from "@/lib/types";
+import { RegistrationData, ENUGU_CENTRAL_LGAS, DAY1_MOTIONS, DAY2_MOTIONS } from "@/lib/types";
 import Link from "next/link";
 import { Icons } from "@/components/icons";
 
@@ -10,7 +10,7 @@ interface RegistrationsClientProps {
 }
 
 export default function RegistrationsClient({ initialRegistrations }: RegistrationsClientProps) {
-  const [registrations, setRegistrations] = useState(initialRegistrations);
+  const [registrations] = useState(initialRegistrations);
   const [selectedReg, setSelectedReg] = useState<RegistrationData | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLga, setSelectedLga] = useState("ALL");
@@ -21,25 +21,27 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
     if (selectedStatus !== "ALL" && r.status !== selectedStatus) return false;
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
-      const sName = r.schoolName.toLowerCase();
-      const rNum = r.regNumber.toLowerCase();
-      const cName = r.contactName.toLowerCase();
-      if (!sName.includes(q) && !rNum.includes(q) && !cName.includes(q)) return false;
+      const sName = r.schoolName?.toLowerCase() || "";
+      const rNum = r.regNumber?.toLowerCase() || "";
+      const dName = r.studentName?.toLowerCase() || "";
+      if (!sName.includes(q) && !rNum.includes(q) && !dName.includes(q)) return false;
     }
     return true;
   });
 
   const exportCSV = () => {
-    const headers = ["Reg Number", "School Name", "Type", "LGA", "Captain", "Teacher", "Email", "Phone", "Status", "Date"];
+    const headers = ["Reg Number", "Debater Name", "Class", "School Name", "Type", "LGA", "Parent Name", "Parent Phone", "Teacher Name", "Teacher Phone", "Status", "Date Registered"];
     const rows = filtered.map((r) => [
       `"${r.regNumber}"`,
+      `"${r.studentName}"`,
+      `"${r.studentClass}"`,
       `"${r.schoolName}"`,
       `"${r.schoolType}"`,
       `"${r.lga}"`,
-      `"${r.captainName}"`,
+      `"${r.parentName}"`,
+      `"${r.parentPhone}"`,
       `"${r.teacherName}"`,
-      `"${r.schoolEmail}"`,
-      `"${r.schoolPhone}"`,
+      `"${r.teacherPhone}"`,
       `"${r.status}"`,
       `"${new Date(r.createdAt).toLocaleDateString()}"`,
     ]);
@@ -48,13 +50,13 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `ESSD_2026_School_Registrations_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute("download", `ESSD_2026_Debater_Registrations_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
-  const parseJsonSafe = (str: any) => {
+  const parseJsonSafe = (str: any): string[] => {
     if (!str) return [];
     if (Array.isArray(str)) return str;
     try {
@@ -77,8 +79,11 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
             Back to Dashboard
           </Link>
           <h1 className="text-2xl sm:text-3xl font-black font-display uppercase tracking-tight text-essd-cream">
-            School Registrations &amp; Squad Rosters
+            Debater Registrations &amp; Competitor Profiles
           </h1>
+          <p className="text-xs text-essd-cream-muted font-mono mt-0.5">
+            {registrations.length} total debater registrations • {filtered.length} matching current filter
+          </p>
         </div>
 
         <div className="flex items-center gap-3">
@@ -99,7 +104,7 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
           <div className="relative">
             <input
               type="text"
-              placeholder="Search school or ID..."
+              placeholder="Search debater name, school, or reg ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full bg-essd-black border border-essd-border focus:border-essd-gold pl-8 pr-3 py-1.5 text-essd-cream font-sans focus:outline-none rounded-xl"
@@ -109,15 +114,15 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
         </div>
 
         <div>
-          <label className="block text-essd-cream-muted uppercase mb-1">Filter by LGA</label>
+          <label className="block text-essd-cream-muted uppercase mb-1">Filter by LGA (Enugu Central)</label>
           <select
             value={selectedLga}
             onChange={(e) => setSelectedLga(e.target.value)}
             className="w-full bg-essd-black border border-essd-border focus:border-essd-gold px-3 py-1.5 text-essd-cream focus:outline-none rounded-xl"
           >
-            <option value="ALL">All LGAs</option>
-            {ENUGU_LGAS.map((lga) => (
-              <option key={lga} value={lga}>{lga} LGA</option>
+            <option value="ALL">All Enugu Central LGAs</option>
+            {ENUGU_CENTRAL_LGAS.map((lga) => (
+              <option key={lga} value={lga}>{lga}</option>
             ))}
           </select>
         </div>
@@ -143,11 +148,11 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
           <thead className="bg-essd-black text-essd-gold uppercase border-b border-essd-border">
             <tr>
               <th className="p-3">Reg ID</th>
-              <th className="p-3">School Name</th>
+              <th className="p-3">Debater Name</th>
+              <th className="p-3">School</th>
               <th className="p-3">LGA</th>
-              <th className="p-3">Captain</th>
-              <th className="p-3">Coordinator</th>
-              <th className="p-3">Debaters</th>
+              <th className="p-3">Day 1 Motions</th>
+              <th className="p-3">Day 2 Motions</th>
               <th className="p-3">Status</th>
               <th className="p-3 text-right">Action</th>
             </tr>
@@ -159,22 +164,23 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
                   {reg.regNumber}
                 </td>
                 <td className="p-3 font-bold text-essd-cream">
-                  {reg.schoolName}
+                  {reg.studentName}
                   <span className="block text-[10px] text-essd-cream-muted font-normal">
-                    {reg.schoolType}
+                    {reg.studentClass} • {reg.studentGender || "—"}
                   </span>
+                </td>
+                <td className="p-3 text-essd-cream">
+                  <span className="font-medium block">{reg.schoolName}</span>
+                  <span className="text-[10px] text-essd-cream-muted">{reg.schoolType}</span>
                 </td>
                 <td className="p-3 text-essd-cream-muted whitespace-nowrap">
                   {reg.lga}
                 </td>
-                <td className="p-3 text-essd-cream font-medium">
-                  {reg.captainName}
-                </td>
-                <td className="p-3 text-essd-cream-muted">
-                  {reg.teacherName}
-                </td>
                 <td className="p-3 font-bold text-essd-gold">
-                  {reg.debaterCount} Debaters
+                  {parseJsonSafe(reg.day1Motions).length} / 3 Selected
+                </td>
+                <td className="p-3 font-bold text-essd-orange">
+                  {parseJsonSafe(reg.day2Motions).length} / 2 Selected
                 </td>
                 <td className="p-3 whitespace-nowrap">
                   <span className={`px-2.5 py-0.5 text-[10px] font-bold uppercase rounded-full ${
@@ -192,7 +198,7 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
                     onClick={() => setSelectedReg(reg)}
                     className="px-2.5 py-1 bg-essd-dark hover:bg-essd-gold hover:text-essd-black text-essd-cream border border-essd-border text-[11px] font-bold transition-colors rounded-lg"
                   >
-                    Inspect Roster
+                    Inspect Profile
                   </button>
                 </td>
               </tr>
@@ -202,7 +208,7 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
 
         {filtered.length === 0 && (
           <div className="p-8 text-center text-xs text-essd-cream-muted">
-            No registration records matching your filter criteria.
+            No debater registrations matching your filter criteria.
           </div>
         )}
       </div>
@@ -218,8 +224,11 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
                   {selectedReg.regNumber}
                 </span>
                 <h3 className="text-xl font-black font-display uppercase text-essd-cream">
-                  {selectedReg.schoolName}
+                  {selectedReg.studentName}
                 </h3>
+                <span className="text-xs text-essd-cream-muted font-mono">
+                  {selectedReg.studentClass} • {selectedReg.schoolName}
+                </span>
               </div>
               <button
                 onClick={() => setSelectedReg(null)}
@@ -229,100 +238,114 @@ export default function RegistrationsClient({ initialRegistrations }: Registrati
               </button>
             </div>
 
-            {/* School Logistics */}
+            {/* School & Teacher Details */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono mb-6">
               <div className="p-3 bg-essd-black border border-essd-border space-y-1.5 rounded-xl">
                 <span className="text-essd-gold font-bold uppercase block text-[10px]">
-                  Institution Details
+                  School Details
                 </span>
+                <p><strong>School:</strong> {selectedReg.schoolName}</p>
                 <p><strong>Type:</strong> {selectedReg.schoolType}</p>
-                <p><strong>LGA:</strong> {selectedReg.lga} LGA</p>
+                <p><strong>LGA:</strong> {selectedReg.lga}</p>
                 <p><strong>Address:</strong> {selectedReg.schoolAddress}</p>
-                <p><strong>Email:</strong> {selectedReg.schoolEmail}</p>
-                <p><strong>Phone:</strong> {selectedReg.schoolPhone}</p>
+                <p><strong>School Email:</strong> {selectedReg.schoolEmail || "—"}</p>
+                <p><strong>School Phone:</strong> {selectedReg.schoolPhone || "—"}</p>
               </div>
 
               <div className="p-3 bg-essd-black border border-essd-border space-y-1.5 rounded-xl">
                 <span className="text-essd-orange font-bold uppercase block text-[10px]">
-                  Coordinator &amp; Patron
+                  Teacher / Patron
                 </span>
-                <p><strong>Contact:</strong> {selectedReg.contactName}</p>
-                <p><strong>Role:</strong> {selectedReg.contactRole}</p>
-                <p><strong>Phone:</strong> {selectedReg.contactPhone}</p>
-                <p><strong>Email:</strong> {selectedReg.contactEmail}</p>
-                <p><strong>Teacher Patron:</strong> {selectedReg.teacherName}</p>
+                <p><strong>Name:</strong> {selectedReg.teacherName}</p>
+                <p><strong>Phone:</strong>{" "}
+                  {selectedReg.teacherPhone ? (
+                    <a href={`tel:${selectedReg.teacherPhone}`} className="text-essd-gold hover:underline">
+                      {selectedReg.teacherPhone}
+                    </a>
+                  ) : "—"}
+                </p>
+                <p><strong>Email:</strong>{" "}
+                  {selectedReg.teacherEmail ? (
+                    <a href={`mailto:${selectedReg.teacherEmail}`} className="text-essd-orange hover:underline">
+                      {selectedReg.teacherEmail}
+                    </a>
+                  ) : "—"}
+                </p>
               </div>
             </div>
 
-            {/* Student Debaters */}
-            <div className="space-y-3 mb-6">
+            {/* Parent Contact */}
+            <div className="p-3 bg-essd-black border border-essd-border text-xs font-mono rounded-xl mb-6 space-y-1.5">
+              <span className="text-essd-gold font-bold uppercase block text-[10px]">👨‍👩‍👧 Parent / Guardian Contact</span>
+              <p><strong>Name:</strong> {selectedReg.parentName || "—"}</p>
+              <p><strong>Phone:</strong>{" "}
+                {selectedReg.parentPhone ? (
+                  <a href={`tel:${selectedReg.parentPhone}`} className="text-essd-gold font-bold hover:underline">
+                    {selectedReg.parentPhone}
+                  </a>
+                ) : "—"}
+              </p>
+              {selectedReg.parentEmail && (
+                <p><strong>Email:</strong>{" "}
+                  <a href={`mailto:${selectedReg.parentEmail}`} className="text-essd-orange hover:underline">
+                    {selectedReg.parentEmail}
+                  </a>
+                </p>
+              )}
+            </div>
+
+            {/* Selected Motions */}
+            <div className="space-y-4 mb-6">
               <h4 className="text-xs font-mono font-bold uppercase text-essd-gold">
-                Registered Student Debaters ({selectedReg.debaterCount}):
+                Selected Motions:
               </h4>
-              
-              <div className="p-3 bg-essd-black border border-essd-gold text-xs font-mono flex items-center justify-between rounded-xl">
-                <div>
-                  <span className="text-[10px] text-essd-gold uppercase font-bold block">Team Captain:</span>
-                  <span className="text-sm font-bold text-essd-cream">👑 {selectedReg.captainName}</span>
-                </div>
-                <span className="px-2.5 py-0.5 bg-essd-gold text-essd-black font-bold text-[10px] rounded-full">Captain</span>
-              </div>
 
-              <div className="space-y-3">
-                {parseJsonSafe(selectedReg.debaterNames).map((name: string, i: number) => {
-                  const classes = parseJsonSafe(selectedReg.debaterClasses);
-                  const cls = classes[i] || "SS2";
-                  const parentName = i === 0 ? selectedReg.debater1ParentName : selectedReg.debater2ParentName;
-                  const parentPhone = i === 0 ? selectedReg.debater1ParentPhone : selectedReg.debater2ParentPhone;
-                  const parentEmail = i === 0 ? selectedReg.debater1ParentEmail : selectedReg.debater2ParentEmail;
-
+              <div className="p-3 bg-essd-black border border-essd-border rounded-xl space-y-2 text-xs font-mono">
+                <span className="text-essd-gold font-bold text-[10px] uppercase block">
+                  Day 1 Motions (3 Selected):
+                </span>
+                {parseJsonSafe(selectedReg.day1Motions).map((mId: string, i: number) => {
+                  const m = DAY1_MOTIONS.find((item) => item.id === mId);
                   return (
-                    <div key={i} className="p-3 bg-essd-dark border border-essd-border text-xs font-mono rounded-xl space-y-2">
-                      <div className="flex items-center justify-between border-b border-essd-border/60 pb-1.5">
-                        <span>Speaker 0{i + 1}: <strong className="text-essd-cream text-sm">{name}</strong></span>
-                        <span className="px-2 py-0.5 bg-essd-black text-essd-gold border border-essd-border text-[10px] rounded-md">{cls}</span>
-                      </div>
-                      
-                      {/* Parent details */}
-                      <div className="text-[11px] text-essd-cream-muted space-y-1 pt-1">
-                        <span className="text-[10px] uppercase font-bold text-essd-gold block">
-                          👨‍👩‍👧 Parent / Guardian Contact:
-                        </span>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-essd-cream">
-                          <div>
-                            <span className="text-essd-cream-muted">Name: </span>
-                            <span>{parentName || "Not specified"}</span>
-                          </div>
-                          <div>
-                            <span className="text-essd-cream-muted">Phone: </span>
-                            {parentPhone ? (
-                              <a href={`tel:${parentPhone}`} className="text-essd-gold font-bold hover:underline">
-                                {parentPhone}
-                              </a>
-                            ) : (
-                              "N/A"
-                            )}
-                          </div>
-                          {parentEmail && (
-                            <div className="sm:col-span-2">
-                              <span className="text-essd-cream-muted">Email: </span>
-                              <a href={`mailto:${parentEmail}`} className="text-essd-orange hover:underline">
-                                {parentEmail}
-                              </a>
-                            </div>
-                          )}
-                        </div>
-                      </div>
+                    <div key={i} className="text-essd-cream text-[11px] leading-snug">
+                      <strong className="text-essd-gold">{m?.title || mId}</strong>
+                      {m && <p className="text-essd-cream-muted mt-0.5">{m.motion}</p>}
                     </div>
                   );
                 })}
+                {parseJsonSafe(selectedReg.day1Motions).length === 0 && (
+                  <p className="text-essd-cream-muted">No Day 1 motions recorded.</p>
+                )}
+              </div>
+
+              <div className="p-3 bg-essd-black border border-essd-border rounded-xl space-y-2 text-xs font-mono">
+                <span className="text-essd-orange font-bold text-[10px] uppercase block">
+                  Day 2 Grand Finale Motions (2 Selected):
+                </span>
+                {parseJsonSafe(selectedReg.day2Motions).map((mId: string, i: number) => {
+                  const m = DAY2_MOTIONS.find((item) => item.id === mId);
+                  return (
+                    <div key={i} className="text-essd-cream text-[11px] leading-snug">
+                      <strong className="text-essd-orange">{m?.title || mId}</strong>
+                      {m && <p className="text-essd-cream-muted mt-0.5">{m.motion}</p>}
+                    </div>
+                  );
+                })}
+                {parseJsonSafe(selectedReg.day2Motions).length === 0 && (
+                  <p className="text-essd-cream-muted">No Day 2 motions recorded.</p>
+                )}
+              </div>
+
+              <div className="p-3 bg-essd-dark border border-dashed border-essd-gold/40 rounded-xl text-xs font-mono">
+                <span className="text-essd-gold font-bold text-[10px] uppercase block">The Finals:</span>
+                <p className="text-essd-cream-muted italic mt-0.5">Impromptu motion provided on the spot at the apex stage.</p>
               </div>
             </div>
 
             {/* Modal Actions */}
             <div className="pt-4 border-t border-essd-border flex items-center justify-between">
               <div className="text-[10px] font-mono text-essd-cream-muted">
-                Submitted: {new Date(selectedReg.createdAt).toLocaleString()}
+                Registered: {new Date(selectedReg.createdAt).toLocaleString()}
               </div>
               <button
                 onClick={() => setSelectedReg(null)}

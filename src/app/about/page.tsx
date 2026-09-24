@@ -81,7 +81,7 @@ export default function AboutPage() {
             </p>
 
             <p className="text-sm text-essd-cream-muted leading-relaxed font-sans">
-              Secondary school scholars from across all 17 LGAs of Enugu State will sharpen their reasoning, defend evidence-backed motions under strict international WSDC timing, and prove that authentic human intellect remains the ultimate sovereign in modern society.
+              Individual secondary school debaters from Enugu Town and Enugu Central will sharpen their reasoning, defend evidence-backed motions under strict international WSDC timing, and prove that authentic human intellect remains the ultimate sovereign in modern society.
             </p>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">
@@ -174,7 +174,7 @@ export default function AboutPage() {
               The Placee Educational Consult
             </h4>
             <p className="text-xs text-essd-cream-muted leading-relaxed font-sans">
-              Presented in collaboration with House on the Rock Church, Enugu, partnering with secondary schools and educational administrators across Enugu State.
+              Presented in collaboration with House on the Rock Church, Enugu, partnering with secondary schools and educational administrators around Enugu Town and Enugu Central.
             </p>
           </div>
 

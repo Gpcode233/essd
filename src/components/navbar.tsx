@@ -22,10 +22,8 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Championship", href: "/championship" },
-    { name: "Fixtures", href: "/fixtures" },
-    { name: "Schools", href: "/schools" },
-    { name: "Prizes", href: "/prizes" },
+    { name: "Championship Rounds", href: "/championship" },
+    { name: "Prizes & Honors", href: "/prizes" },
     { name: "FAQ", href: "/#faq" },
   ];
 
@@ -98,32 +96,29 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Brand Title */}
+            {/* Brand Titles */}
             <div className="flex flex-col">
-              <span className="text-xs font-mono font-bold tracking-widest text-essd-gold uppercase">
-                Enugu State
+              <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest text-essd-gold uppercase leading-none">
+                The Placee Consults &amp; HOTR Present
               </span>
-              <span className="text-sm sm:text-base font-black tracking-tight text-essd-cream uppercase group-hover:text-essd-gold transition-colors font-display">
-                Secondary Schools Debate
-              </span>
-              <span className="text-[10px] font-bold tracking-widest text-essd-orange uppercase -mt-0.5">
-                Championship 2026
+              <span className="font-display text-lg sm:text-xl font-black tracking-tight text-essd-cream uppercase leading-tight group-hover:text-essd-gold transition-colors">
+                ESSD 2026
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+          <div className="hidden lg:flex items-center space-x-1 font-mono text-xs font-bold uppercase tracking-wider">
             {navLinks.map((link) => {
               const active = isActive(link.href);
               return (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`px-3 py-2 rounded-md text-xs font-mono font-bold uppercase tracking-wider transition-all duration-150 relative ${
+                  className={`px-3.5 py-2 transition-all relative ${
                     active
-                      ? "text-essd-black bg-essd-gold shadow-sm font-extrabold"
-                      : "text-essd-cream hover:text-essd-gold hover:bg-essd-dark/60"
+                      ? "text-essd-gold font-black bg-essd-charcoal/80 border border-essd-gold/40 rounded-lg"
+                      : "text-essd-cream-muted hover:text-essd-cream hover:bg-essd-charcoal/40 rounded-lg"
                   }`}
                 >
                   {link.name}
@@ -132,76 +127,66 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Action CTA */}
+          {/* Primary CTA Button */}
           <div className="hidden sm:flex items-center space-x-3">
             <Link
               href="/register"
-              className="relative inline-flex items-center justify-center px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-xl font-display text-xs sm:text-sm font-black uppercase tracking-wider text-essd-black bg-essd-gold hover:bg-essd-orange hover:text-white border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:shadow-[1px_1px_0px_#0A0A0C] hover:translate-x-[2px] hover:translate-y-[2px] transition-all duration-150"
+              className="px-5 py-2.5 bg-essd-gold text-essd-black font-display font-black text-xs uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] hover:bg-essd-orange hover:text-white transition-all rounded-xl flex items-center gap-1.5"
             >
-              <Icons.Sparkles className="w-4 h-4 mr-1.5 fill-current" />
-              Register Your School
+              <Icons.Sparkles className="w-4 h-4 fill-current" />
+              Register Debater
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex lg:hidden items-center space-x-2">
-            <Link
-              href="/register"
-              className="sm:hidden px-3 py-1.5 bg-essd-gold text-essd-black text-xs font-black uppercase tracking-wider font-display border border-essd-cream rounded-lg"
-            >
-              Register
-            </Link>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-essd-cream hover:text-essd-gold hover:bg-essd-dark focus:outline-none"
-              aria-label="Toggle Navigation Menu"
-            >
-              {mobileMenuOpen ? (
-                <Icons.Close className="w-6 h-6 text-essd-gold" />
-              ) : (
-                <Icons.Menu className="w-6 h-6 text-essd-gold" />
-              )}
-            </button>
-          </div>
+          {/* Mobile Menu Toggle Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 text-essd-cream hover:text-essd-gold focus:outline-none rounded-lg"
+            aria-label="Toggle Navigation Menu"
+          >
+            {mobileMenuOpen ? (
+              <Icons.Close className="w-6 h-6" />
+            ) : (
+              <Icons.Menu className="w-6 h-6" />
+            )}
+          </button>
         </div>
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-essd-border bg-essd-black/98 px-4 pt-3 pb-6 space-y-2 animate-in slide-in-from-top-2 duration-200 rounded-b-2xl">
-            <div className="grid grid-cols-1 gap-1">
-              {navLinks.map((link) => (
+          <div className="lg:hidden bg-essd-black border-b border-essd-border px-4 pt-3 pb-6 space-y-2 animate-fade-in font-mono text-xs uppercase font-bold">
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
                 <Link
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between px-3 py-2.5 text-sm font-mono font-bold uppercase tracking-wider rounded-xl ${
-                    isActive(link.href)
-                      ? "bg-essd-gold text-essd-black"
-                      : "text-essd-cream hover:bg-essd-dark hover:text-essd-gold"
+                  className={`block px-4 py-2.5 rounded-xl transition-colors ${
+                    active
+                      ? "bg-essd-gold text-essd-black font-black"
+                      : "text-essd-cream hover:bg-essd-charcoal"
                   }`}
                 >
-                  <span>{link.name}</span>
-                  <Icons.ChevronRight className="w-4 h-4 opacity-70" />
+                  {link.name}
                 </Link>
-              ))}
-            </div>
+              );
+            })}
 
-            <div className="pt-4 border-t border-essd-border space-y-2">
+            <div className="pt-4 border-t border-essd-border/80 flex flex-col gap-2.5">
               <Link
                 href="/register"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] rounded-xl"
+                className="w-full text-center py-3 bg-essd-gold text-essd-black font-display font-black text-xs uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] rounded-xl"
               >
-                <Icons.Sparkles className="w-4 h-4 mr-2" />
-                Register Your School
+                Register Debater
               </Link>
               <Link
-                href="/championship"
+                href="/admin"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center py-2.5 bg-essd-charcoal text-essd-cream hover:text-essd-gold font-mono font-bold text-xs uppercase tracking-wider border border-essd-border rounded-xl"
+                className="w-full text-center py-2 text-essd-cream-muted text-xs hover:text-essd-gold"
               >
-                <Icons.Trophy className="w-3.5 h-3.5 mr-2 text-essd-gold" />
-                View Championship Bracket
+                Organizer Admin Login →
               </Link>
             </div>
           </div>

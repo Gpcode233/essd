@@ -7,34 +7,55 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     const {
+      studentName,
+      studentClass,
+      studentGender,
+      studentEmail,
+      studentPhone,
       schoolName,
-      schoolType,
+      schoolType = "PUBLIC",
       schoolAddress,
-      lga,
+      lga = "Enugu North",
       state = "Enugu",
       schoolEmail,
       schoolPhone,
-      contactName,
-      contactRole,
-      contactPhone,
-      contactEmail,
-      debaterCount = 3,
-      debaterNames = [],
-      debaterClasses = [],
-      captainName,
+      parentName,
+      parentPhone,
+      parentEmail,
       teacherName,
-      debater1ParentName,
-      debater1ParentPhone,
-      debater1ParentEmail,
-      debater2ParentName,
-      debater2ParentPhone,
-      debater2ParentEmail,
+      teacherPhone,
+      teacherEmail,
+      day1Motions = [],
+      day2Motions = [],
+      preferredStance = "FREE",
       referralSource,
     } = body;
 
-    if (!schoolName || !schoolEmail || !schoolPhone || !captainName || !teacherName) {
+    // Validation
+    if (!studentName || !studentClass || !schoolName || !schoolAddress || !parentName || !parentPhone || !parentEmail || !teacherName || !teacherPhone) {
       return NextResponse.json(
-        { success: false, message: "Missing required fields" },
+        { success: false, message: "Missing required registration fields" },
+        { status: 400 }
+      );
+    }
+
+    if (typeof parentEmail !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(parentEmail)) {
+      return NextResponse.json(
+        { success: false, message: "Please provide a valid parent/guardian email address" },
+        { status: 400 }
+      );
+    }
+
+    if (!Array.isArray(day1Motions) || day1Motions.length !== 3) {
+      return NextResponse.json(
+        { success: false, message: "Please select exactly 3 preferred motions for Day 1" },
+        { status: 400 }
+      );
+    }
+
+    if (!Array.isArray(day2Motions) || day2Motions.length !== 2) {
+      return NextResponse.json(
+        { success: false, message: "Please select exactly 2 preferred motions for Day 2 (Grand Finale)" },
         { status: 400 }
       );
     }
@@ -48,28 +69,27 @@ export async function POST(req: NextRequest) {
     const registration = await prisma.registration.create({
       data: {
         regNumber,
+        studentName,
+        studentClass,
+        studentGender: studentGender || null,
+        studentEmail: studentEmail || null,
+        studentPhone: studentPhone || null,
         schoolName,
         schoolType: schoolType || "PUBLIC",
         schoolAddress: schoolAddress || "Enugu State",
         lga: lga || "Enugu North",
         state,
-        schoolEmail,
-        schoolPhone,
-        contactName: contactName || teacherName,
-        contactRole: contactRole || "Debate Coordinator",
-        contactPhone: contactPhone || schoolPhone,
-        contactEmail: contactEmail || schoolEmail,
-        debaterCount: Number(debaterCount) || 2,
-        debaterNames: JSON.stringify(debaterNames),
-        debaterClasses: JSON.stringify(debaterClasses),
-        captainName,
+        schoolEmail: schoolEmail || null,
+        schoolPhone: schoolPhone || null,
+        parentName,
+        parentPhone,
+        parentEmail: parentEmail || null,
         teacherName,
-        debater1ParentName: debater1ParentName || null,
-        debater1ParentPhone: debater1ParentPhone || null,
-        debater1ParentEmail: debater1ParentEmail || null,
-        debater2ParentName: debater2ParentName || null,
-        debater2ParentPhone: debater2ParentPhone || null,
-        debater2ParentEmail: debater2ParentEmail || null,
+        teacherPhone,
+        teacherEmail: teacherEmail || null,
+        day1Motions: JSON.stringify(day1Motions),
+        day2Motions: JSON.stringify(day2Motions),
+        preferredStance: preferredStance || "FREE",
         referralSource: referralSource || "Direct",
         agreedToTerms: true,
         status: "APPROVED",
@@ -95,61 +115,62 @@ export async function POST(req: NextRequest) {
           address: schoolAddress,
           lga: lga || "Enugu North",
           state,
-          email: schoolEmail,
-          phone: schoolPhone,
+          email: schoolEmail || teacherEmail || null,
+          phone: schoolPhone || teacherPhone || null,
           status: "REGISTERED",
         },
       });
 
-      // Add debater team members
-      if (Array.isArray(debaterNames)) {
-        for (let i = 0; i < debaterNames.length; i++) {
-          const name = debaterNames[i];
-          if (name && typeof name === "string") {
-            const isCaptain = name.toLowerCase() === captainName.toLowerCase();
-            const grade = debaterClasses[i] || "SS2";
-            await prisma.teamMember.create({
-              data: {
-                schoolId: createdSchool.id,
-                fullName: name,
-                role: isCaptain ? "CAPTAIN" : "SPEAKER",
-                classGrade: grade,
-              },
-            });
-          }
-        }
-      }
+      // Add debater as team member
+      await prisma.teamMember.create({
+        data: {
+          schoolId: createdSchool.id,
+          fullName: studentName,
+          role: "SPEAKER",
+          classGrade: studentClass,
+          email: studentEmail || null,
+          phone: studentPhone || null,
+        },
+      });
     }
 
-    // Send confirmation email to School & Coordinator
-    const schoolEmailHtml = generateRegistrationConfirmationEmail({
-      schoolName,
-      regNumber,
-      captainName,
-      teacherName,
-      debaterCount: Number(debaterCount) || 3,
-    });
+    // Send confirmation email to Student/Parent/Teacher if email provided
+    const recipientEmail = studentEmail || parentEmail || teacherEmail || schoolEmail;
+    if (recipientEmail) {
+      const confirmationEmailHtml = generateRegistrationConfirmationEmail({
+        studentName,
+        studentClass,
+        schoolName,
+        regNumber,
+        parentName,
+        teacherName,
+        day1MotionsCount: day1Motions.length,
+        day2MotionsCount: day2Motions.length,
+      });
 
-    await sendEmail({
-      to: schoolEmail,
-      subject: `ESSD 2026 — Registration Confirmed (${regNumber})`,
-      html: schoolEmailHtml,
-      type: "REGISTRATION_CONFIRMATION",
-    });
+      await sendEmail({
+        to: recipientEmail,
+        subject: `ESSD 2026 — Debater Accreditation Confirmed (${regNumber})`,
+        html: confirmationEmailHtml,
+        type: "REGISTRATION_CONFIRMATION",
+      });
+    }
 
     // Send internal admin alert
     const adminEmailHtml = generateAdminNotificationEmail({
+      studentName,
+      studentClass,
       schoolName,
       regNumber,
       lga: lga || "Enugu",
-      schoolPhone,
-      schoolEmail,
-      contactName: contactName || teacherName,
+      parentPhone,
+      teacherPhone,
+      studentEmail,
     });
 
     await sendEmail({
       to: "theplaceeconsults@gmail.com",
-      subject: `New School Registration: ${schoolName} (${regNumber})`,
+      subject: `New Debater Registration: ${studentName} (${schoolName}) [${regNumber}]`,
       html: adminEmailHtml,
       type: "ADMIN_NOTIFICATION",
     });
@@ -159,11 +180,17 @@ export async function POST(req: NextRequest) {
       registration: {
         id: registration.id,
         regNumber: registration.regNumber,
+        studentName: registration.studentName,
+        studentClass: registration.studentClass,
         schoolName: registration.schoolName,
         lga: registration.lga,
-        captainName: registration.captainName,
+        parentName: registration.parentName,
+        parentPhone: registration.parentPhone,
         teacherName: registration.teacherName,
-        debaterCount: registration.debaterCount,
+        teacherPhone: registration.teacherPhone,
+        day1Motions,
+        day2Motions,
+        preferredStance: registration.preferredStance,
         createdAt: registration.createdAt.toISOString(),
       },
     });

@@ -2,17 +2,17 @@ import RegistrationForm from "@/components/registration-form";
 import { Icons } from "@/components/icons";
 
 export const metadata = {
-  title: "Register Your School | ESSD 2026",
-  description: "Official school delegation registration portal for the Enugu State Secondary Schools Debate Championship 2026.",
+  title: "Register Debater | ESSD 2026",
+  description: "Official competitor registration portal for the Enugu State Secondary Schools Debate Championship 2026.",
 };
 
 export default function RegisterPage() {
   const steps = [
-    "Complete School Profile & Location details",
-    "Register 2 Student Debaters (Speaker 1 & 2)",
-    "Designate Team Captain from the 2 Speakers",
-    "Assign Supervising Teacher Coordinator",
-    "Submit to receive instant Registration ID & Printable Pass",
+    "Enter Student Competitor profile (SS1 - SS3)",
+    "Select Secondary School in Enugu Town / Central",
+    "Provide Parent / Guardian & Teacher contacts",
+    "Select 3 Day 1 Motions & 2 Grand Finale Motions",
+    "Submit to receive instant Debater Accreditation Pass",
   ];
 
   return (
@@ -26,13 +26,13 @@ export default function RegisterPage() {
               Official Entry Portal
             </span>
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-display uppercase tracking-wide text-essd-black leading-none text-shadow-hard">
-              REGISTER YOUR <br />
+              REGISTER COMPETITOR <br />
               <span className="text-essd-orange bg-essd-black px-3.5 py-1 inline-block mt-1 border-3 border-essd-cream rounded-xl">
-                SECONDARY SCHOOL
+                ENUGU CENTRAL SCHOOLS
               </span>
             </h1>
             <p className="mt-3 text-sm sm:text-base font-bold text-essd-black/90 font-sans">
-              Enter your student debate squad for the 2026 Enugu State Championship.
+              Enter individual student debaters representing secondary schools across Enugu Town / Enugu Central.
             </p>
           </div>
         </div>
@@ -72,8 +72,8 @@ export default function RegisterPage() {
                 <div className="flex items-start gap-2.5">
                   <Icons.Shield className="w-4 h-4 text-essd-gold mt-0.5 flex-shrink-0" />
                   <div>
-                    <span className="font-bold text-essd-cream block">WSDC Debate Standard</span>
-                    <span className="text-essd-cream-muted text-[10px]">2 Debaters (Speaker 1 & 2) + Coordinator</span>
+                    <span className="font-bold text-essd-cream block">Individual Debater Format</span>
+                    <span className="text-essd-cream-muted text-[10px]">Free Stance • 80+ Debaters • Top 20 to Grand Finale</span>
                   </div>
                 </div>
               </div>
@@ -99,30 +99,18 @@ export default function RegisterPage() {
               <span className="text-essd-orange font-bold uppercase block text-[11px]">
                 Registration Helpline
               </span>
-              <p className="text-essd-cream-muted">
-                Experiencing difficulties registering your institution? Reach the tournament desk directly:
+              <p className="text-essd-cream-muted leading-relaxed">
+                Need assistance with competitor registration or motion clarification? Contact the Championship Secretariat:
               </p>
-              <div className="pt-2 space-y-1">
-                <a
-                  href="tel:+2349038296513"
-                  className="flex items-center gap-2 text-essd-cream font-bold hover:text-essd-gold transition-colors"
-                >
-                  <Icons.Phone className="w-3.5 h-3.5 text-essd-gold" />
-                  +234 903 829 6513
-                </a>
-                <a
-                  href="mailto:theplaceeconsults@gmail.com"
-                  className="flex items-center gap-2 text-essd-cream font-bold hover:text-essd-gold transition-colors break-all"
-                >
-                  <Icons.Mail className="w-3.5 h-3.5 text-essd-gold" />
-                  theplaceeconsults@gmail.com
-                </a>
+              <div className="pt-2 text-essd-cream space-y-1">
+                <p>📞 <strong className="text-essd-gold">+234 903 829 6513</strong></p>
+                <p>✉️ <strong className="text-essd-gold">theplaceeconsults@gmail.com</strong></p>
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: Interactive Registration Form */}
+          {/* Right Column: Registration Form Component */}
           <div className="lg:col-span-8">
             <RegistrationForm />
           </div>

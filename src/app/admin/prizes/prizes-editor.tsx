@@ -26,7 +26,7 @@ export default function PrizesEditor({ initialPrizes }: PrizesEditorProps) {
   const handleEdit = (p: PrizeData) => {
     setEditingPrize(p);
     setFormState({
-      title: p.title,
+      title: p.title || p.position,
       rewardHeadline: p.rewardHeadline,
       description: p.description,
       badgeColor: p.badgeColor || "gold",

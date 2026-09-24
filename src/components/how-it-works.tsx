@@ -6,40 +6,40 @@ export default function HowItWorks() {
     {
       step: "01",
       title: "REGISTER",
-      subtitle: "Schools Enter Roster",
-      description: "Secondary schools across Enugu State register their official delegation (2 debaters with designated captain, and 1 teacher coordinator).",
+      subtitle: "Individual Competitor Entry",
+      description: "Each student debater registers individually while naming the eligible Enugu Town or Enugu Central secondary school they represent.",
       icon: Icons.User,
       highlight: "Online Registration Portal",
     },
     {
       step: "02",
       title: "QUALIFY",
-      subtitle: "Seeding & Group Draw",
-      description: "Accredited schools enter the official state championship draw and receive their Round of 16 tournament bracket seedings and motions.",
+      subtitle: "Motion Selection",
+      description: "During registration, each competitor chooses 3 motions from the 6-motion Day 1 pool and 2 motions from the 5-motion Grand Finale pool.",
       icon: Icons.Shuffle,
-      highlight: "16-School Knockout Draw",
+      highlight: "6 Day 1 + 5 Finale Motions",
     },
     {
       step: "03",
       title: "DEBATE",
       subtitle: "Live State Battles",
-      description: "Squads lock horns at the Enugu State Secretariat Auditorium under strict WSDC rules (Matter, Manner, Method, Cross-Examination).",
+      description: "Individual debaters compete across three Day 1 rounds under strict adjudication. Participants may argue either side of every motion.",
       icon: Icons.Mic,
       highlight: "16th & 17th Oct 2026",
     },
     {
       step: "04",
       title: "ADVANCE",
-      subtitle: "Knockout Progression",
-      description: "Winners of each round advance automatically through Quarter-Finals and Semi-Finals on the live tournament digital bracket.",
+      subtitle: "Top 20 Grand Finalists",
+      description: "The strongest 20 individual debaters advance from Day 1 into two Grand Finale rounds, which narrow the field to the Top 5.",
       icon: Icons.TrendingUp,
-      highlight: "Real-time Bracket Updates",
+      highlight: "20 Advance to Day 2",
     },
     {
       step: "05",
       title: "CHAMPION",
       subtitle: "The Grand Coronation",
-      description: "The supreme finalists clash in the Grand Final. The champion claims international scholarships, millions in cash, and the Gold Trophy.",
+      description: "The Top 5 face an on-the-spot final motion. The champion claims the cash prize, scholarships, medal, and school trophy.",
       icon: Icons.Trophy,
       highlight: "Scholarship & Gold Trophy",
     },
@@ -128,14 +128,14 @@ export default function HowItWorks() {
               Ready to Represent Your Secondary School?
             </h4>
             <p className="text-xs sm:text-sm text-essd-cream-muted mt-1 font-sans">
-              Registration is currently open for secondary schools across all 17 LGAs of Enugu State.
+              Registration is open for individual debaters representing secondary schools in Enugu Town and Enugu Central.
             </p>
           </div>
           <Link
             href="/register"
             className="flex-shrink-0 inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-colors rounded-xl"
           >
-            Register Team Today
+            Register as a Debater
             <Icons.ArrowRight className="w-4 h-4 ml-2" />
           </Link>
         </div>

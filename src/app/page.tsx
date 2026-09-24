@@ -1,8 +1,7 @@
-import { getSafeMatches, getSafePrizes } from "@/lib/data-service";
+import { getSafePrizes } from "@/lib/data-service";
 import Hero from "@/components/hero";
 import StatsBanner from "@/components/stats-banner";
 import HowItWorks from "@/components/how-it-works";
-import TournamentBracket from "@/components/tournament-bracket";
 import PrizeShowcase from "@/components/prize-showcase";
 import FAQSection from "@/components/faq-section";
 import Link from "next/link";
@@ -11,7 +10,6 @@ import { Icons } from "@/components/icons";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const matches = await getSafeMatches();
   const prizes = await getSafePrizes();
 
   return (
@@ -22,7 +20,7 @@ export default async function HomePage() {
       {/* 2. Championship Stats & Next Generation Pillars */}
       <StatsBanner />
 
-      {/* 3. Live Tournament Hub & Interactive Bracket Preview */}
+      {/* 3. Tournament Format */}
       <section className="relative bg-essd-charcoal text-essd-cream py-16 sm:py-24 border-b border-essd-border overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
@@ -30,11 +28,11 @@ export default async function HomePage() {
             <div>
               <div className="inline-flex items-center gap-2 bg-essd-gold/10 border border-essd-gold px-3 py-1 text-essd-gold font-mono text-xs font-bold uppercase tracking-widest mb-3">
                 <Icons.Trophy className="w-3.5 h-3.5 text-essd-gold" />
-                Live Tournament Progression
+                Individual Debater Championship
               </div>
               <h2 className="text-3xl sm:text-5xl font-black font-display uppercase tracking-wide text-essd-cream">
-                16-SCHOOL KNOCKOUT <br />
-                <span className="text-essd-gold">CHAMPIONSHIP BRACKET</span>
+                80+ DEBATERS <br />
+                <span className="text-essd-gold">ONE CHAMPIONSHIP CROWN</span>
               </h2>
             </div>
             
@@ -43,14 +41,15 @@ export default async function HomePage() {
                 href="/championship"
                 className="inline-flex items-center justify-center px-5 py-2.5 bg-essd-gold text-essd-black hover:bg-essd-orange hover:text-white font-display font-black text-xs uppercase tracking-wider border-2 border-essd-cream shadow-[3px_3px_0px_#0A0A0C] transition-all"
               >
-                Explore Full Tournament Hub
+                Explore Championship Rounds
                 <Icons.ArrowRight className="w-4 h-4 ml-1.5" />
               </Link>
             </div>
           </div>
 
-          {/* Interactive Knockout Tree Bracket View */}
-          <TournamentBracket matches={matches} />
+          <p className="max-w-3xl text-sm sm:text-base text-essd-cream-muted leading-relaxed">
+            Individual student debaters from eligible Enugu Town and Enugu Central secondary schools compete through three Day 1 rounds. The top 20 advance to two Grand Finale rounds, followed by The Finals on an on-the-spot motion.
+          </p>
 
         </div>
       </section>
@@ -79,7 +78,7 @@ export default async function HomePage() {
           </h2>
 
           <p className="max-w-2xl mx-auto text-sm sm:text-base font-bold text-essd-black/90 font-sans">
-            Represent your institution, compete against 16 of the finest academic debate teams in the state, and claim the ultimate championship honors.
+            Represent your school as an individual competitor, compete with 80+ debaters from Enugu Town and Enugu Central, and claim the ultimate championship honors.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
@@ -88,14 +87,14 @@ export default async function HomePage() {
               className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-essd-black text-essd-gold hover:bg-essd-orange hover:text-white font-display text-base font-black uppercase tracking-wider border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all"
             >
               <Icons.Sparkles className="w-5 h-5 mr-2 text-essd-gold" />
-              Register Your School
+              Register as a Debater
             </Link>
 
             <Link
-              href="/fixtures"
+              href="/championship"
               className="w-full sm:w-auto inline-flex items-center justify-center px-7 py-4 bg-essd-cream text-essd-black hover:bg-essd-gold font-display text-base font-black uppercase tracking-wider border-4 border-essd-black shadow-[6px_6px_0px_#0A0A0C] transition-all"
             >
-              View Match Fixtures
+              View Championship Format
             </Link>
           </div>
         </div>

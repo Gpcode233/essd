@@ -1,36 +1,43 @@
 "use client";
 
 import { useState } from "react";
-import { ENUGU_LGAS } from "@/lib/types";
+import { ENUGU_CENTRAL_LGAS, DAY1_MOTIONS, DAY2_MOTIONS } from "@/lib/types";
 import { Icons } from "@/components/icons";
 import confetti from "canvas-confetti";
 
 const INITIAL_FORM_DATA = {
+  // Debater Information
+  studentName: "",
+  studentClass: "SS2",
+  studentGender: "MALE",
+  studentEmail: "",
+  studentPhone: "",
+
+  // School Information (Enugu Central / Enugu Town)
   schoolName: "",
   schoolType: "PUBLIC",
   schoolAddress: "",
-  lga: "Enugu North",
+  lga: ENUGU_CENTRAL_LGAS[0],
   state: "Enugu",
   schoolEmail: "",
   schoolPhone: "",
-  contactName: "",
-  contactRole: "Debate Coordinator / Teacher",
-  contactPhone: "",
-  contactEmail: "",
-  // Exactly 2 Student Debaters & Parent Contacts
-  debater1Name: "",
-  debater1Class: "SS2",
-  debater1ParentName: "",
-  debater1ParentPhone: "",
-  debater1ParentEmail: "",
-  debater2Name: "",
-  debater2Class: "SS2",
-  debater2ParentName: "",
-  debater2ParentPhone: "",
-  debater2ParentEmail: "",
-  captainChoice: "1", // "1" for Debater 1, "2" for Debater 2
+
+  // Parent / Guardian Information
+  parentName: "",
+  parentPhone: "",
+  parentEmail: "",
+
+  // Supervising Teacher / Patron
   teacherName: "",
-  referralSource: "Ministry of Education Circular",
+  teacherPhone: "",
+  teacherEmail: "",
+
+  // Motions Selection
+  day1Motions: [] as string[], // Exactly 3 of 6
+  day2Motions: [] as string[], // Exactly 2 of 5
+  preferredStance: "FREE",
+
+  referralSource: "School Circular / Principal",
   agreedToTerms: true,
 };
 
@@ -38,12 +45,17 @@ export default function RegistrationForm() {
   const [submitting, setSubmitting] = useState(false);
   const [successData, setSuccessData] = useState<{
     regNumber: string;
+    studentName: string;
+    studentClass: string;
     schoolName: string;
     lga: string;
-    captainName: string;
+    parentName: string;
+    parentPhone: string;
     teacherName: string;
-    debaterCount: number;
-    debaterNames: string[];
+    teacherPhone: string;
+    day1Motions: string[];
+    day2Motions: string[];
+    preferredStance: string;
     createdAt: string;
   } | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
@@ -62,660 +74,725 @@ export default function RegistrationForm() {
     }
   };
 
+  const toggleDay1Motion = (motionId: string) => {
+    setFormData((prev) => {
+      const exists = prev.day1Motions.includes(motionId);
+      if (exists) {
+        return { ...prev, day1Motions: prev.day1Motions.filter((id) => id !== motionId) };
+      } else {
+        if (prev.day1Motions.length >= 3) {
+          setErrorMsg("You can select a maximum of 3 motions for Day 1.");
+          return prev;
+        }
+        setErrorMsg("");
+        return { ...prev, day1Motions: [...prev.day1Motions, motionId] };
+      }
+    });
+  };
+
+  const toggleDay2Motion = (motionId: string) => {
+    setFormData((prev) => {
+      const exists = prev.day2Motions.includes(motionId);
+      if (exists) {
+        return { ...prev, day2Motions: prev.day2Motions.filter((id) => id !== motionId) };
+      } else {
+        if (prev.day2Motions.length >= 2) {
+          setErrorMsg("You can select a maximum of 2 motions for Day 2 (Grand Finale).");
+          return prev;
+        }
+        setErrorMsg("");
+        return { ...prev, day2Motions: [...prev.day2Motions, motionId] };
+      }
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg("");
     setSubmitting(true);
 
-    if (!formData.schoolName || !formData.schoolEmail || !formData.schoolPhone) {
-      setErrorMsg("Please provide all required school contact details.");
+    if (!formData.studentName.trim() || !formData.studentClass) {
+      setErrorMsg("Please enter the student debater's full name and class.");
       setSubmitting(false);
       return;
     }
 
-    if (!formData.debater1Name.trim() || !formData.debater2Name.trim()) {
-      setErrorMsg("Please provide the full names for both student debaters (2 students required).");
+    if (!formData.schoolName.trim() || !formData.schoolAddress.trim()) {
+      setErrorMsg("Please provide your school name and location in Enugu Central.");
       setSubmitting(false);
       return;
     }
 
-    if (!formData.debater1ParentPhone.trim() || !formData.debater2ParentPhone.trim()) {
-      setErrorMsg("Please provide parent/guardian phone numbers for both student debaters.");
+    if (!formData.parentName.trim() || !formData.parentPhone.trim()) {
+      setErrorMsg("Please provide the parent/guardian contact details.");
       setSubmitting(false);
       return;
     }
 
-    if (!formData.teacherName.trim()) {
-      setErrorMsg("Please specify the supervising Teacher / Coordinator name.");
+    if (!formData.teacherName.trim() || !formData.teacherPhone.trim()) {
+      setErrorMsg("Please provide the supervising Teacher / Debate Patron details.");
+      setSubmitting(false);
+      return;
+    }
+
+    if (formData.day1Motions.length !== 3) {
+      setErrorMsg("Please select exactly 3 motions for Day 1.");
+      setSubmitting(false);
+      return;
+    }
+
+    if (formData.day2Motions.length !== 2) {
+      setErrorMsg("Please select exactly 2 motions for Day 2 (Grand Finale).");
       setSubmitting(false);
       return;
     }
 
     try {
-      const debaterNames = [formData.debater1Name.trim(), formData.debater2Name.trim()];
-      const debaterClasses = [formData.debater1Class, formData.debater2Class];
-      const captainName =
-        formData.captainChoice === "1" ? formData.debater1Name.trim() : formData.debater2Name.trim();
-
       const res = await fetch("/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          debaterCount: 2,
-          debaterNames,
-          debaterClasses,
-          captainName,
-        }),
+        body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
+      const json = await res.json();
 
-      if (!res.ok || !data.success) {
-        throw new Error(data.message || "Registration failed. Please try again.");
+      if (!res.ok || !json.success) {
+        throw new Error(json.message || "Registration submission failed.");
       }
 
-      setSuccessData({
-        ...data.registration,
-        debaterNames,
-      });
-
-      // Confetti celebration
+      setSuccessData(json.registration);
       confetti({
         particleCount: 120,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ["#E8A927", "#F25A19", "#FAF6EB", "#141418"],
+        colors: ["#E8A927", "#F25A19", "#FAF6EB", "#10B981"],
       });
     } catch (err: any) {
-      setErrorMsg(err.message || "An unexpected error occurred.");
+      setErrorMsg(err.message || "Network error. Please try again or contact support.");
     } finally {
       setSubmitting(false);
     }
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
-
-  if (successData) {
-    return (
-      <div className="bg-essd-charcoal border-4 border-essd-gold p-6 sm:p-10 shadow-[10px_10px_0px_#0A0A0C] text-essd-cream animate-in zoom-in-95 duration-300 rounded-2xl">
-        {/* Success Header */}
-        <div className="text-center mb-8 pb-6 border-b border-essd-border">
-          <div className="w-16 h-16 rounded-full bg-essd-gold text-essd-black flex items-center justify-center mx-auto mb-4 border-2 border-essd-cream shadow-[0_0_20px_rgba(232,169,39,0.5)]">
-            <Icons.CheckCircle className="w-10 h-10" />
-          </div>
-          <span className="px-3.5 py-1 bg-essd-orange text-white font-mono text-xs font-black uppercase tracking-wider inline-block mb-2 rounded-full">
-            Registration Confirmed 🎉
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-black font-display uppercase tracking-wide text-essd-gold">
-            You're Officially Registered!
-          </h2>
-          <p className="text-xs sm:text-sm text-essd-cream-muted mt-2 max-w-lg mx-auto font-sans">
-            Your 2-student debate delegation is confirmed for the Enugu State Secondary Schools Debate Championship 2026.
-          </p>
-        </div>
-
-        {/* Printable Official Pass */}
-        <div className="bg-essd-black p-6 sm:p-8 border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] mb-8 relative overflow-hidden rounded-2xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-4 border-b-2 border-essd-gold gap-2">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-essd-gold text-essd-black font-display font-black text-xs flex items-center justify-center">
-                ESSD
-              </div>
-              <div>
-                <span className="text-[10px] font-mono uppercase font-bold text-essd-gold block">
-                  Official Team Accreditation Pass
-                </span>
-                <span className="text-xs sm:text-sm font-bold font-display uppercase text-essd-cream">
-                  ESSD State Championship 2026
-                </span>
-              </div>
-            </div>
-
-            <div className="text-left sm:text-right">
-              <span className="text-[10px] font-mono text-essd-cream-muted uppercase block">
-                Official Registration ID
-              </span>
-              <span className="text-base sm:text-lg font-mono font-black text-essd-orange tracking-wider">
-                {successData.regNumber}
-              </span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 text-xs font-mono">
-            <div className="space-y-2">
-              <div className="p-2.5 bg-essd-dark/80 border border-essd-border rounded-xl">
-                <span className="text-essd-cream-muted block text-[10px]">Registered School:</span>
-                <span className="text-sm font-bold text-essd-gold">{successData.schoolName}</span>
-              </div>
-              <div className="p-2.5 bg-essd-dark/80 border border-essd-border rounded-xl">
-                <span className="text-essd-cream-muted block text-[10px]">LGA / Jurisdiction:</span>
-                <span className="font-bold text-essd-cream">{successData.lga} LGA, Enugu State</span>
-              </div>
-              <div className="p-2.5 bg-essd-dark/80 border border-essd-border rounded-xl">
-                <span className="text-essd-cream-muted block text-[10px]">Supervising Coordinator:</span>
-                <span className="font-bold text-essd-cream">{successData.teacherName}</span>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="p-2.5 bg-essd-dark/80 border border-essd-gold/60 rounded-xl">
-                <span className="text-essd-gold block text-[10px] uppercase font-bold">
-                  2 Registered Student Debaters:
-                </span>
-                <p className="text-sm font-bold text-essd-cream mt-0.5">
-                  1. {successData.debaterNames?.[0] || successData.captainName} (Lead)
-                </p>
-                <p className="text-sm font-bold text-essd-cream">
-                  2. {successData.debaterNames?.[1] || "Second Speaker"}
-                </p>
-              </div>
-              <div className="p-2.5 bg-essd-dark/80 border border-essd-border rounded-xl">
-                <span className="text-essd-cream-muted block text-[10px]">Event Dates &amp; Venue:</span>
-                <span className="font-bold text-essd-gold">16th &amp; 17th Oct 2026 • HOTR Auditorium, Enugu</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="pt-4 border-t border-essd-border/80 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-essd-cream-muted gap-2">
-            <div className="flex items-center gap-1.5">
-              <Icons.Shield className="w-4 h-4 text-essd-gold" />
-              <span>Accreditation Valid for 2 Student Debaters + 1 Coordinator</span>
-            </div>
-            <span className="text-essd-gold font-bold">
-              Automatic Matchmaking Upon Registration Close
-            </span>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            onClick={handlePrint}
-            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-essd-gold text-essd-black font-display font-black text-sm uppercase tracking-wider border-2 border-essd-cream shadow-[4px_4px_0px_#0A0A0C] hover:bg-essd-orange hover:text-white transition-all rounded-xl"
-          >
-            <Icons.Printer className="w-4 h-4 mr-2" />
-            Print / Save Pass (PDF)
-          </button>
-
-          <button
-            onClick={() => {
-              setSuccessData(null);
-              setFormData(INITIAL_FORM_DATA);
-            }}
-            className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 bg-essd-dark text-essd-cream hover:text-essd-gold font-mono font-bold text-xs uppercase border border-essd-border rounded-xl"
-          >
-            Register Another School
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-essd-charcoal border-4 border-essd-border p-6 sm:p-10 shadow-[8px_8px_0px_#0A0A0C] text-essd-cream space-y-8 rounded-2xl"
-    >
-      {errorMsg && (
-        <div className="p-4 bg-red-950/80 border-2 border-red-500 text-red-200 text-xs font-mono flex items-start gap-3 rounded-xl">
-          <Icons.Alert className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-          <div>
-            <strong className="block font-bold uppercase">Submission Error</strong>
-            {errorMsg}
-          </div>
-        </div>
-      )}
-
-      {/* Info notice about 2 debaters per school */}
-      <div className="p-4 bg-essd-gold/10 border-2 border-essd-gold text-xs font-mono text-essd-cream flex items-start gap-3 rounded-xl">
-        <Icons.Trophy className="w-5 h-5 text-essd-gold flex-shrink-0 mt-0.5" />
-        <div>
-          <span className="font-bold uppercase text-essd-gold block">
-            Official 2-Student Delegation Format:
-          </span>
-          Each registered secondary school enters a 2-student debate squad (Speaker 1 &amp; Speaker 2) guided by 1 supervising teacher. Once all 16 schools register, the tournament matchmaking draw automatically pairs schools into the Round of 16 bracket!
-        </div>
-      </div>
-
-      {/* Section 1: School Information */}
-      <div>
-        <div className="flex items-center gap-2 pb-3 mb-6 border-b-2 border-essd-gold">
-          <Icons.School className="w-5 h-5 text-essd-gold" />
-          <h3 className="text-lg font-black font-display uppercase tracking-wide text-essd-cream">
-            1. School Profile &amp; Location
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="md:col-span-2">
-            <label className="block text-xs font-mono font-bold text-essd-gold uppercase mb-1.5">
-              Official School Name *
-            </label>
-            <input
-              type="text"
-              name="schoolName"
-              required
-              placeholder="e.g. College of the Immaculate Conception (CIC) Enugu"
-              value={formData.schoolName}
-              onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none transition-colors rounded-xl"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              School Type *
-            </label>
-            <select
-              name="schoolType"
-              value={formData.schoolType}
-              onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
-            >
-              <option value="PUBLIC">Public State Secondary School</option>
-              <option value="PRIVATE">Private International / High School</option>
-              <option value="MISSION">Mission / Faith-Based College</option>
-              <option value="FEDERAL">Federal Unity College</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              Local Government Area (LGA) in Enugu *
-            </label>
-            <select
-              name="lga"
-              value={formData.lga}
-              onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
-            >
-              {ENUGU_LGAS.map((lga) => (
-                <option key={lga} value={lga}>
-                  {lga} LGA
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="md:col-span-2">
-            <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              School Physical Address *
-            </label>
-            <input
-              type="text"
-              name="schoolAddress"
-              required
-              placeholder="e.g. Ogui Road / Independence Layout / University Road Nsukka"
-              value={formData.schoolAddress}
-              onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none rounded-xl"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              School Official Email *
-            </label>
-            <input
-              type="email"
-              name="schoolEmail"
-              required
-              placeholder="school@example.com"
-              value={formData.schoolEmail}
-              onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              School Phone Number *
-            </label>
-            <input
-              type="tel"
-              name="schoolPhone"
-              required
-              placeholder="+234 803 000 0000"
-              value={formData.schoolPhone}
-              onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Section 2: Contact Person / Coordinator */}
-      <div>
-        <div className="flex items-center gap-2 pb-3 mb-6 border-b-2 border-essd-orange">
-          <Icons.User className="w-5 h-5 text-essd-orange" />
-          <h3 className="text-lg font-black font-display uppercase tracking-wide text-essd-cream">
-            2. Teacher / Coordinator Contact
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div>
-            <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              Teacher Coordinator Full Name *
-            </label>
-            <input
-              type="text"
-              name="teacherName"
-              required
-              placeholder="e.g. Mr. Emmanuel Nwankwo"
-              value={formData.teacherName}
-              onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none rounded-xl"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              Role / Designation *
-            </label>
-            <input
-              type="text"
-              name="contactRole"
-              required
-              placeholder="e.g. Debate Coach / English Dept / Vice Principal"
-              value={formData.contactRole}
-              onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-sans focus:outline-none rounded-xl"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              Teacher Phone Number *
-            </label>
-            <input
-              type="tel"
-              name="contactPhone"
-              required
-              placeholder="+234 803 123 4567"
-              value={formData.contactPhone || formData.schoolPhone}
-              onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
-            />
-          </div>
-
-          <div>
-            <label className="block text-xs font-mono font-bold text-essd-cream-muted uppercase mb-1.5">
-              Teacher Email Address *
-            </label>
-            <input
-              type="email"
-              name="contactEmail"
-              required
-              placeholder="coordinator@example.com"
-              value={formData.contactEmail || formData.schoolEmail}
-              onChange={handleChange}
-              className="w-full bg-essd-black border-2 border-essd-border focus:border-essd-gold px-4 py-2.5 text-sm text-essd-cream font-mono focus:outline-none rounded-xl"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Section 3: The 2 Student Debaters */}
-      <div>
-        <div className="flex items-center gap-2 pb-3 mb-6 border-b-2 border-essd-gold">
-          <Icons.Users className="w-5 h-5 text-essd-gold" />
-          <div>
-            <h3 className="text-lg font-black font-display uppercase tracking-wide text-essd-cream">
-              3. The Two (2) Student Debaters
-            </h3>
-            <span className="text-[11px] font-mono text-essd-gold font-bold">
-              Register exactly 2 students to represent your secondary school.
+    <div className="w-full max-w-4xl mx-auto">
+      {successData ? (
+        <div className="bg-[#141418] border-2 border-[#E8A927] rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden animate-fade-in">
+          {/* Header Banner */}
+          <div className="text-center pb-8 border-b border-[#2A2A33]">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#E8A927] to-[#F25A19] text-[#0A0A0C] mb-4 shadow-lg shadow-[#E8A927]/20">
+              <Icons.Award className="w-9 h-9" />
+            </div>
+            <span className="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-bold uppercase tracking-wider mb-2">
+              Accreditation Approved & Active
             </span>
+            <h2 className="font-heading text-3xl sm:text-4xl text-[#FAF6EB] tracking-wide uppercase">
+              Official Debater Accreditation Pass
+            </h2>
+            <p className="text-[#A1A1AA] text-sm mt-1 max-w-lg mx-auto">
+              Present this digital badge or your Accreditation ID at the registration desk on 16th October 2026.
+            </p>
           </div>
-        </div>
 
-        <div className="space-y-5">
-          {/* Debater 1 */}
-          <div className="p-5 bg-essd-black border-2 border-essd-gold/70 shadow-[3px_3px_0px_#0A0A0C] rounded-2xl">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-black uppercase text-essd-gold">
-                Student Debater 01 (Lead Speaker) *
-              </span>
-              <label className="flex items-center gap-1.5 text-xs font-mono text-essd-cream cursor-pointer">
-                <input
-                  type="radio"
-                  name="captainChoice"
-                  value="1"
-                  checked={formData.captainChoice === "1"}
-                  onChange={handleChange}
-                  className="text-essd-gold focus:ring-0"
-                />
-                <span>Designate as Captain 👑</span>
-              </label>
+          {/* Accreditation Badge Card */}
+          <div className="my-8 p-6 sm:p-8 bg-[#1B1B22] rounded-xl border border-[#E8A927]/30 relative">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#2A2A33]">
+              <div>
+                <span className="text-xs text-[#A1A1AA] uppercase tracking-wider font-mono">Accreditation ID</span>
+                <div className="font-heading text-2xl sm:text-3xl text-[#E8A927] tracking-wider mt-0.5">
+                  {successData.regNumber}
+                </div>
+              </div>
+              <div className="text-left sm:text-right">
+                <span className="text-xs text-[#A1A1AA] uppercase tracking-wider font-mono">Date Issued</span>
+                <div className="text-sm font-medium text-[#FAF6EB]">
+                  {new Date(successData.createdAt).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </div>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="md:col-span-2">
-                <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  name="debater1Name"
-                  required
-                  placeholder="First Name &amp; Surname"
-                  value={formData.debater1Name}
-                  onChange={handleChange}
-                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-gold rounded-lg"
-                />
+            <div className="grid sm:grid-cols-2 gap-6 py-6 border-b border-[#2A2A33]">
+              <div>
+                <span className="text-xs text-[#A1A1AA] uppercase tracking-wider font-mono">Competitor Debater</span>
+                <p className="text-lg font-bold text-[#FAF6EB] mt-1">{successData.studentName}</p>
+                <span className="inline-block px-2.5 py-0.5 mt-1 bg-[#2A2A33] text-[#E8A927] rounded text-xs font-mono">
+                  Class: {successData.studentClass}
+                </span>
               </div>
               <div>
-                <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
-                  Class / Grade *
-                </label>
-                <select
-                  name="debater1Class"
-                  value={formData.debater1Class}
-                  onChange={handleChange}
-                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none rounded-lg"
-                >
-                  <option value="SS3">Senior Secondary 3 (SS3)</option>
-                  <option value="SS2">Senior Secondary 2 (SS2)</option>
-                  <option value="SS1">Senior Secondary 1 (SS1)</option>
-                </select>
+                <span className="text-xs text-[#A1A1AA] uppercase tracking-wider font-mono">Representing School</span>
+                <p className="text-lg font-bold text-[#FAF6EB] mt-1">{successData.schoolName}</p>
+                <span className="text-xs text-[#A1A1AA] block mt-1">{successData.lga}</span>
               </div>
             </div>
 
-            {/* Debater 1 Parent / Guardian Info */}
-            <div className="mt-4 pt-3.5 border-t border-essd-border/60">
-              <span className="text-[10px] font-mono uppercase font-bold text-essd-gold block mb-2 flex items-center gap-1.5">
-                <Icons.User className="w-3.5 h-3.5 text-essd-gold" />
-                Student 01 Parent / Guardian Contact Details
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
-                    Parent Full Name
-                  </label>
-                  <input
-                    type="text"
-                    name="debater1ParentName"
-                    placeholder="e.g. Mr. / Mrs. Okonkwo"
-                    value={formData.debater1ParentName}
-                    onChange={handleChange}
-                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-gold rounded-lg"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
-                    Parent Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    name="debater1ParentPhone"
-                    required
-                    placeholder="+234 803 000 0000"
-                    value={formData.debater1ParentPhone}
-                    onChange={handleChange}
-                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-mono focus:outline-none focus:border-essd-gold rounded-lg"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
-                    Parent Email (Optional)
-                  </label>
-                  <input
-                    type="email"
-                    name="debater1ParentEmail"
-                    placeholder="parent@example.com"
-                    value={formData.debater1ParentEmail}
-                    onChange={handleChange}
-                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-mono focus:outline-none focus:border-essd-gold rounded-lg"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Debater 2 */}
-          <div className="p-5 bg-essd-black border-2 border-essd-orange/70 shadow-[3px_3px_0px_#0A0A0C] rounded-2xl">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-mono font-black uppercase text-essd-orange">
-                Student Debater 02 (Second Speaker) *
-              </span>
-              <label className="flex items-center gap-1.5 text-xs font-mono text-essd-cream cursor-pointer">
-                <input
-                  type="radio"
-                  name="captainChoice"
-                  value="2"
-                  checked={formData.captainChoice === "2"}
-                  onChange={handleChange}
-                  className="text-essd-orange focus:ring-0"
-                />
-                <span>Designate as Captain 👑</span>
-              </label>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="md:col-span-2">
-                <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  name="debater2Name"
-                  required
-                  placeholder="First Name &amp; Surname"
-                  value={formData.debater2Name}
-                  onChange={handleChange}
-                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-orange rounded-lg"
-                />
+            <div className="grid sm:grid-cols-2 gap-6 py-6 border-b border-[#2A2A33]">
+              <div>
+                <span className="text-xs text-[#A1A1AA] uppercase tracking-wider font-mono">Supervising Teacher</span>
+                <p className="text-sm font-semibold text-[#FAF6EB] mt-1">{successData.teacherName}</p>
+                <span className="text-xs text-[#A1A1AA] block mt-0.5 font-mono">{successData.teacherPhone}</span>
               </div>
               <div>
-                <label className="block text-[11px] font-mono font-bold text-essd-cream-muted uppercase mb-1">
-                  Class / Grade *
-                </label>
-                <select
-                  name="debater2Class"
-                  value={formData.debater2Class}
-                  onChange={handleChange}
-                  className="w-full bg-essd-dark border border-essd-border px-3 py-2 text-xs text-essd-cream font-mono focus:outline-none rounded-lg"
-                >
-                  <option value="SS3">Senior Secondary 3 (SS3)</option>
-                  <option value="SS2">Senior Secondary 2 (SS2)</option>
-                  <option value="SS1">Senior Secondary 1 (SS1)</option>
-                </select>
+                <span className="text-xs text-[#A1A1AA] uppercase tracking-wider font-mono">Parent / Guardian</span>
+                <p className="text-sm font-semibold text-[#FAF6EB] mt-1">{successData.parentName}</p>
+                <span className="text-xs text-[#A1A1AA] block mt-0.5 font-mono">{successData.parentPhone}</span>
               </div>
             </div>
 
-            {/* Debater 2 Parent / Guardian Info */}
-            <div className="mt-4 pt-3.5 border-t border-essd-border/60">
-              <span className="text-[10px] font-mono uppercase font-bold text-essd-orange block mb-2 flex items-center gap-1.5">
-                <Icons.User className="w-3.5 h-3.5 text-essd-orange" />
-                Student 02 Parent / Guardian Contact Details
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
-                    Parent Full Name
-                  </label>
-                  <input
-                    type="text"
-                    name="debater2ParentName"
-                    placeholder="e.g. Mr. / Mrs. Eze"
-                    value={formData.debater2ParentName}
-                    onChange={handleChange}
-                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-sans focus:outline-none focus:border-essd-orange rounded-lg"
-                  />
+            {/* Selected Motions Recap */}
+            <div className="pt-6">
+              <span className="text-xs text-[#A1A1AA] uppercase tracking-wider font-mono">Selected Motions Breakdown</span>
+              <div className="grid sm:grid-cols-2 gap-4 mt-3">
+                <div className="p-3.5 bg-[#141418] rounded-lg border border-[#2A2A33]">
+                  <span className="text-xs font-bold text-[#E8A927] block">Day 1 Rounds (3 Selected):</span>
+                  <ul className="mt-1 text-xs text-[#FAF6EB] space-y-1">
+                    {successData.day1Motions.map((mId, idx) => {
+                      const m = DAY1_MOTIONS.find((item) => item.id === mId);
+                      return (
+                        <li key={idx} className="line-clamp-2">
+                          • <strong className="text-[#E8A927]">{m?.title.split("—")[0] || mId}:</strong> {m?.motion || mId}
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
-                <div>
-                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
-                    Parent Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    name="debater2ParentPhone"
-                    required
-                    placeholder="+234 803 000 0000"
-                    value={formData.debater2ParentPhone}
-                    onChange={handleChange}
-                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-mono focus:outline-none focus:border-essd-orange rounded-lg"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-mono text-essd-cream-muted uppercase mb-1">
-                    Parent Email (Optional)
-                  </label>
-                  <input
-                    type="email"
-                    name="debater2ParentEmail"
-                    placeholder="parent@example.com"
-                    value={formData.debater2ParentEmail}
-                    onChange={handleChange}
-                    className="w-full bg-essd-dark border border-essd-border px-3 py-1.5 text-xs text-essd-cream font-mono focus:outline-none focus:border-essd-orange rounded-lg"
-                  />
+                <div className="p-3.5 bg-[#141418] rounded-lg border border-[#2A2A33]">
+                  <span className="text-xs font-bold text-[#F25A19] block">Day 2 Grand Finale (2 Selected):</span>
+                  <ul className="mt-1 text-xs text-[#FAF6EB] space-y-1">
+                    {successData.day2Motions.map((mId, idx) => {
+                      const m = DAY2_MOTIONS.find((item) => item.id === mId);
+                      return (
+                        <li key={idx} className="line-clamp-2">
+                          • <strong className="text-[#F25A19]">{m?.title.split("—")[0] || mId}:</strong> {m?.motion || mId}
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
               </div>
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-[#2A2A33] flex flex-col sm:flex-row items-center justify-between text-xs text-[#A1A1AA] gap-2">
+              <span className="flex items-center gap-1.5 text-[#E8A927]">
+                <Icons.Location className="w-4 h-4" />
+                HOTR Auditorium, House on the Rock Church, Enugu
+              </span>
+              <span>16th & 17th October 2026 • 8:00 AM WAT</span>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Terms Agreement */}
-      <div className="space-y-4 pt-4 border-t border-essd-border">
-        <div className="flex items-start gap-3 p-4 bg-essd-dark/60 border border-essd-border rounded-xl">
-          <input
-            type="checkbox"
-            name="agreedToTerms"
-            id="agreedToTerms"
-            required
-            checked={formData.agreedToTerms}
-            onChange={handleChange}
-            className="mt-1 w-4 h-4 text-essd-gold bg-essd-black border-essd-border rounded focus:ring-0"
-          />
-          <label htmlFor="agreedToTerms" className="text-xs text-essd-cream-muted font-sans leading-relaxed">
-            I confirm that these 2 registered students are currently enrolled in our secondary school, and our school commits to participating in the championship fixtures upon completion of the tournament matchmaking draw.
-          </label>
+          {/* Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+            <button
+              onClick={() => window.print()}
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#E8A927] text-[#0A0A0C] font-bold text-sm hover:bg-[#F25A19] hover:text-[#FAF6EB] transition-all flex items-center justify-center gap-2 shadow-lg"
+            >
+              <Icons.Download className="w-4 h-4" />
+              Print / Save Debater Pass
+            </button>
+            <button
+              onClick={() => {
+                setSuccessData(null);
+                setFormData(INITIAL_FORM_DATA);
+              }}
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-[#2A2A33] text-[#FAF6EB] font-bold text-sm hover:bg-[#3A3A44] transition-all"
+            >
+              Register Another Competitor
+            </button>
+          </div>
         </div>
-      </div>
-
-      {/* Submit Button */}
-      <div className="pt-2">
-        <button
-          type="submit"
-          disabled={submitting}
-          className="w-full py-4 bg-essd-gold text-essd-black hover:bg-essd-orange hover:text-white font-display text-base font-black uppercase tracking-wider border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 disabled:opacity-50 rounded-xl"
+      ) : (
+        <form
+          onSubmit={handleSubmit}
+          className="bg-[#141418] border border-[#2A2A33] rounded-2xl p-6 sm:p-10 shadow-2xl space-y-8"
         >
-          {submitting ? (
-            <span>Securing Registration &amp; Slot...</span>
-          ) : (
-            <>
-              <Icons.Sparkles className="w-5 h-5 fill-current" />
-              Register 2 Debaters &amp; Secure Slot
-              <Icons.ArrowRight className="w-5 h-5" />
-            </>
+          {errorMsg && (
+            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm flex items-start gap-3 animate-shake">
+              <Icons.Alert className="w-5 h-5 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-bold">Submission Incomplete</p>
+                <p className="mt-0.5">{errorMsg}</p>
+              </div>
+            </div>
           )}
-        </button>
-      </div>
-    </form>
+
+          {/* SECTION 1: Individual Competitor Profile */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 pb-3 border-b border-[#2A2A33]">
+              <div className="w-8 h-8 rounded-lg bg-[#E8A927]/10 text-[#E8A927] flex items-center justify-center font-heading font-bold text-lg">
+                1
+              </div>
+              <div>
+                <h3 className="font-heading text-xl text-[#FAF6EB] uppercase tracking-wide">
+                  Student Competitor Profile
+                </h3>
+                <p className="text-xs text-[#A1A1AA]">
+                  The individual student representing your secondary school in the championship.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                  Debater Full Name <span className="text-[#F25A19]">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="studentName"
+                  required
+                  placeholder="e.g. Chinedu Okafor"
+                  value={formData.studentName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 bg-[#1B1B22] border border-[#2A2A33] rounded-xl text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                  Academic Class <span className="text-[#F25A19]">*</span>
+                </label>
+                <select
+                  name="studentClass"
+                  value={formData.studentClass}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 bg-[#1B1B22] border border-[#2A2A33] rounded-xl text-[#FAF6EB] text-sm focus:border-[#E8A927] focus:outline-none transition-colors"
+                >
+                  <option value="SS1">SS1 (Senior Secondary 1)</option>
+                  <option value="SS2">SS2 (Senior Secondary 2)</option>
+                  <option value="SS3">SS3 (Senior Secondary 3)</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                  Gender
+                </label>
+                <select
+                  name="studentGender"
+                  value={formData.studentGender}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 bg-[#1B1B22] border border-[#2A2A33] rounded-xl text-[#FAF6EB] text-sm focus:border-[#E8A927] focus:outline-none transition-colors"
+                >
+                  <option value="MALE">Male</option>
+                  <option value="FEMALE">Female</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                  Debater Phone (Optional)
+                </label>
+                <input
+                  type="tel"
+                  name="studentPhone"
+                  placeholder="080 0000 0000"
+                  value={formData.studentPhone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 bg-[#1B1B22] border border-[#2A2A33] rounded-xl text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                  Debater Email (Optional)
+                </label>
+                <input
+                  type="email"
+                  name="studentEmail"
+                  placeholder="student@example.com"
+                  value={formData.studentEmail}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 bg-[#1B1B22] border border-[#2A2A33] rounded-xl text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none transition-colors"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 2: School Information (Enugu Central / Town) */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 pb-3 border-b border-[#2A2A33]">
+              <div className="w-8 h-8 rounded-lg bg-[#E8A927]/10 text-[#E8A927] flex items-center justify-center font-heading font-bold text-lg">
+                2
+              </div>
+              <div>
+                <h3 className="font-heading text-xl text-[#FAF6EB] uppercase tracking-wide">
+                  School Information (Enugu Central)
+                </h3>
+                <p className="text-xs text-[#A1A1AA]">
+                  Eligible secondary schools located within Enugu Town / Enugu Central zone.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                  Secondary School Name <span className="text-[#F25A19]">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="schoolName"
+                  required
+                  placeholder="e.g. College of the Immaculate Conception (CIC)"
+                  value={formData.schoolName}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 bg-[#1B1B22] border border-[#2A2A33] rounded-xl text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                  School Category <span className="text-[#F25A19]">*</span>
+                </label>
+                <select
+                  name="schoolType"
+                  value={formData.schoolType}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 bg-[#1B1B22] border border-[#2A2A33] rounded-xl text-[#FAF6EB] text-sm focus:border-[#E8A927] focus:outline-none transition-colors"
+                >
+                  <option value="PUBLIC">State Public Secondary School</option>
+                  <option value="PRIVATE">Private / International College</option>
+                  <option value="MISSION">Mission / Diocesan Secondary School</option>
+                  <option value="FEDERAL">Federal Unity College</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                  School Physical Address <span className="text-[#F25A19]">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="schoolAddress"
+                  required
+                  placeholder="e.g. Enugu-Onitsha Expressway, Uwani, Enugu"
+                  value={formData.schoolAddress}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 bg-[#1B1B22] border border-[#2A2A33] rounded-xl text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none transition-colors"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                  Local Government Area (Enugu Central Zone) <span className="text-[#F25A19]">*</span>
+                </label>
+                <select
+                  name="lga"
+                  value={formData.lga}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 bg-[#1B1B22] border border-[#2A2A33] rounded-xl text-[#FAF6EB] text-sm focus:border-[#E8A927] focus:outline-none transition-colors"
+                >
+                  {ENUGU_CENTRAL_LGAS.map((lga) => (
+                    <option key={lga} value={lga}>
+                      {lga}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 3: Parent & Teacher Contacts */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 pb-3 border-b border-[#2A2A33]">
+              <div className="w-8 h-8 rounded-lg bg-[#E8A927]/10 text-[#E8A927] flex items-center justify-center font-heading font-bold text-lg">
+                3
+              </div>
+              <div>
+                <h3 className="font-heading text-xl text-[#FAF6EB] uppercase tracking-wide">
+                  Parent / Guardian & Teacher Verification
+                </h3>
+                <p className="text-xs text-[#A1A1AA]">
+                  Parent consent and supervising debate patron information for student safety and accreditation.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="p-4 bg-[#1B1B22] rounded-xl border border-[#2A2A33] space-y-3">
+                <span className="text-xs font-bold text-[#E8A927] uppercase tracking-wider block">
+                  Parent / Guardian Contact
+                </span>
+                <div>
+                  <label className="block text-xs text-[#A1A1AA] mb-1">
+                    Parent Full Name <span className="text-[#F25A19]">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="parentName"
+                    required
+                    placeholder="e.g. Mr. Emmanuel Okafor"
+                    value={formData.parentName}
+                    onChange={handleChange}
+                    className="w-full px-3.5 py-2 bg-[#141418] border border-[#2A2A33] rounded-lg text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-[#A1A1AA] mb-1">
+                    Parent Phone Number <span className="text-[#F25A19]">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    name="parentPhone"
+                    required
+                    placeholder="080 1234 5678"
+                    value={formData.parentPhone}
+                    onChange={handleChange}
+                    className="w-full px-3.5 py-2 bg-[#141418] border border-[#2A2A33] rounded-lg text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-[#A1A1AA] mb-1">
+                    Parent Email <span className="text-[#F25A19]">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="parentEmail"
+                    required
+                    placeholder="parent@example.com"
+                    value={formData.parentEmail}
+                    onChange={handleChange}
+                    className="w-full px-3.5 py-2 bg-[#141418] border border-[#2A2A33] rounded-lg text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="p-4 bg-[#1B1B22] rounded-xl border border-[#2A2A33] space-y-3">
+                <span className="text-xs font-bold text-[#F25A19] uppercase tracking-wider block">
+                  Supervising Teacher / Patron
+                </span>
+                <div>
+                  <label className="block text-xs text-[#A1A1AA] mb-1">
+                    Teacher Full Name <span className="text-[#F25A19]">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="teacherName"
+                    required
+                    placeholder="e.g. Mrs. Ngozi Eze"
+                    value={formData.teacherName}
+                    onChange={handleChange}
+                    className="w-full px-3.5 py-2 bg-[#141418] border border-[#2A2A33] rounded-lg text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-[#A1A1AA] mb-1">
+                    Teacher Phone Number <span className="text-[#F25A19]">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    name="teacherPhone"
+                    required
+                    placeholder="080 9876 5432"
+                    value={formData.teacherPhone}
+                    onChange={handleChange}
+                    className="w-full px-3.5 py-2 bg-[#141418] border border-[#2A2A33] rounded-lg text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-[#A1A1AA] mb-1">Teacher Email (Optional)</label>
+                  <input
+                    type="email"
+                    name="teacherEmail"
+                    placeholder="teacher@school.edu.ng"
+                    value={formData.teacherEmail}
+                    onChange={handleChange}
+                    className="w-full px-3.5 py-2 bg-[#141418] border border-[#2A2A33] rounded-lg text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 4: Motion Selection (Day 1: 3 of 6, Day 2: 2 of 5) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-between pb-3 border-b border-[#2A2A33]">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-[#E8A927]/10 text-[#E8A927] flex items-center justify-center font-heading font-bold text-lg">
+                  4
+                </div>
+                <div>
+                  <h3 className="font-heading text-xl text-[#FAF6EB] uppercase tracking-wide">
+                    Championship Motion Selection
+                  </h3>
+                  <p className="text-xs text-[#A1A1AA]">
+                    Choose your preferred debate motions for Day 1 and Day 2. Debaters are free to defend either stance.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Day 1 Selection */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-heading text-base text-[#E8A927] uppercase tracking-wide">
+                    Day 1 Preliminary Motions
+                  </h4>
+                  <p className="text-xs text-[#A1A1AA]">Choose exactly 3 motions for Day 1&apos;s 3 elimination rounds.</p>
+                </div>
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-mono font-bold ${
+                    formData.day1Motions.length === 3
+                      ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                      : "bg-[#2A2A33] text-[#FAF6EB]"
+                  }`}
+                >
+                  {formData.day1Motions.length} / 3 Selected
+                </span>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-3">
+                {DAY1_MOTIONS.map((m) => {
+                  const isSelected = formData.day1Motions.includes(m.id);
+                  return (
+                    <button
+                      type="button"
+                      key={m.id}
+                      onClick={() => toggleDay1Motion(m.id)}
+                      aria-pressed={isSelected}
+                      className={`p-4 rounded-xl border cursor-pointer transition-all ${
+                        isSelected
+                          ? "bg-[#E8A927]/10 border-[#E8A927] text-[#FAF6EB] shadow-md shadow-[#E8A927]/10"
+                          : "bg-[#1B1B22] border-[#2A2A33] text-[#A1A1AA] hover:border-[#E8A927]/40"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-2 mb-1.5">
+                        <span className="text-xs font-bold text-[#E8A927] uppercase tracking-wider font-mono">
+                          {m.title.split("—")[0]}
+                        </span>
+                        <div
+                          className={`w-5 h-5 rounded-md flex items-center justify-center border text-xs ${
+                            isSelected
+                              ? "bg-[#E8A927] border-[#E8A927] text-[#0A0A0C] font-bold"
+                              : "border-[#3A3A44] bg-[#141418]"
+                          }`}
+                        >
+                          {isSelected && "✓"}
+                        </div>
+                      </div>
+                      <p className="text-xs font-medium text-[#FAF6EB] leading-relaxed">{m.motion}</p>
+                      <span className="inline-block mt-2 text-[10px] px-2 py-0.5 rounded bg-[#141418] text-[#A1A1AA]">
+                        Theme: {m.theme}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Day 2 Selection */}
+            <div className="space-y-3 pt-4 border-t border-[#2A2A33]">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="font-heading text-base text-[#F25A19] uppercase tracking-wide">
+                    Day 2 Grand Finale Motions
+                  </h4>
+                  <p className="text-xs text-[#A1A1AA]">
+                    Choose exactly 2 motions for the Grand Finale rounds. (Top 20 debaters advance).
+                  </p>
+                </div>
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-mono font-bold ${
+                    formData.day2Motions.length === 2
+                      ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
+                      : "bg-[#2A2A33] text-[#FAF6EB]"
+                  }`}
+                >
+                  {formData.day2Motions.length} / 2 Selected
+                </span>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-3">
+                {DAY2_MOTIONS.map((m) => {
+                  const isSelected = formData.day2Motions.includes(m.id);
+                  return (
+                    <button
+                      type="button"
+                      key={m.id}
+                      onClick={() => toggleDay2Motion(m.id)}
+                      aria-pressed={isSelected}
+                      className={`p-4 rounded-xl border cursor-pointer transition-all ${
+                        isSelected
+                          ? "bg-[#F25A19]/10 border-[#F25A19] text-[#FAF6EB] shadow-md shadow-[#F25A19]/10"
+                          : "bg-[#1B1B22] border-[#2A2A33] text-[#A1A1AA] hover:border-[#F25A19]/40"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between gap-2 mb-1.5">
+                        <span className="text-xs font-bold text-[#F25A19] uppercase tracking-wider font-mono">
+                          {m.title.split("—")[0]}
+                        </span>
+                        <div
+                          className={`w-5 h-5 rounded-md flex items-center justify-center border text-xs ${
+                            isSelected
+                              ? "bg-[#F25A19] border-[#F25A19] text-[#FAF6EB] font-bold"
+                              : "border-[#3A3A44] bg-[#141418]"
+                          }`}
+                        >
+                          {isSelected && "✓"}
+                        </div>
+                      </div>
+                      <p className="text-xs font-medium text-[#FAF6EB] leading-relaxed">{m.motion}</p>
+                      <span className="inline-block mt-2 text-[10px] px-2 py-0.5 rounded bg-[#141418] text-[#A1A1AA]">
+                        Theme: {m.theme}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Impromptu Notice */}
+              <div className="p-3.5 bg-[#1B1B22] rounded-xl border border-dashed border-[#E8A927]/40 flex items-center gap-3">
+                <Icons.Sparkles className="w-5 h-5 text-[#E8A927] flex-shrink-0" />
+                <p className="text-xs text-[#FAF6EB]">
+                  <strong className="text-[#E8A927]">The Finals (Apex Stage):</strong> The final championship motion for the top 5 finalists will be an <em>impromptu motion</em> revealed on the spot.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Terms Agreement */}
+          <div className="pt-4 border-t border-[#2A2A33] space-y-4">
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                name="agreedToTerms"
+                checked={formData.agreedToTerms}
+                onChange={handleChange}
+                className="w-4 h-4 mt-1 rounded border-[#2A2A33] bg-[#1B1B22] text-[#E8A927] focus:ring-[#E8A927] focus:ring-offset-0"
+              />
+              <span className="text-xs text-[#A1A1AA] leading-relaxed">
+                I confirm that all provided student, school, and guardian details are accurate, and that this competitor is prepared to participate at HOTR Auditorium, House on the Rock Church, Enugu on 16th & 17th October 2026.
+              </span>
+            </label>
+
+            <button
+              type="submit"
+              disabled={submitting}
+              className="w-full py-4 rounded-xl bg-gradient-to-r from-[#E8A927] to-[#F25A19] text-[#0A0A0C] font-heading font-black text-lg sm:text-xl uppercase tracking-wider hover:opacity-95 transition-opacity flex items-center justify-center gap-2 shadow-xl shadow-[#E8A927]/20 disabled:opacity-50"
+            >
+              {submitting ? (
+                <>
+                  <Icons.Refresh className="w-5 h-5 animate-spin" />
+                  Generating Debater Accreditation...
+                </>
+              ) : (
+                <>
+                  Complete Debater Registration
+                  <Icons.ArrowRight className="w-5 h-5" />
+                </>
+              )}
+            </button>
+          </div>
+        </form>
+      )}
+    </div>
   );
 }

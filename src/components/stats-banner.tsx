@@ -2,10 +2,10 @@ import { Icons } from "@/components/icons";
 
 export default function StatsBanner() {
   const stats = [
-    { number: "16", label: "SCHOOLS", sub: "Elite Senior Teams", icon: Icons.Users, color: "text-essd-gold" },
+    { number: "80+", label: "SCHOOLS", sub: "Enugu Central Secondary Schools", icon: Icons.Users, color: "text-essd-gold" },
     { number: "02", label: "DAYS", sub: "16th & 17th Oct 2026", icon: Icons.Calendar, color: "text-essd-orange" },
-    { number: "01", label: "CHAMPION", sub: "Gold Trophy & Scholarship", icon: Icons.Trophy, color: "text-essd-gold" },
-    { number: "01", label: "STATE-WIDE STAGE", sub: "HOTR Auditorium, Enugu", icon: Icons.Target, color: "text-essd-cream" },
+    { number: "20", label: "GRAND FINALISTS", sub: "Advance to Day 2 Finale", icon: Icons.Trophy, color: "text-essd-gold" },
+    { number: "01", label: "STATE VENUE", sub: "HOTR Auditorium, Enugu", icon: Icons.Target, color: "text-essd-cream" },
   ];
 
   const competencies = [

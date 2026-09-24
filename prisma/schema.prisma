@@ -49,34 +49,33 @@ model TeamMember {
 }
 
 model Registration {
-  id             String   @id @default(cuid())
-  regNumber      String   @unique
-  schoolName     String
-  schoolType     String
-  schoolAddress  String
-  lga            String
-  state          String   @default("Enugu")
-  schoolEmail    String
-  schoolPhone    String
-  contactName    String
-  contactRole    String
-  contactPhone   String
-  contactEmail   String
-  debaterCount   Int
-  debaterNames   String   // JSON string of names
-  debaterClasses String   // JSON string of classes
-  captainName    String
-  teacherName    String
-  debater1ParentName  String?
-  debater1ParentPhone String?
-  debater1ParentEmail String?
-  debater2ParentName  String?
-  debater2ParentPhone String?
-  debater2ParentEmail String?
-  referralSource String?
-  agreedToTerms  Boolean  @default(true)
-  status         String   @default("APPROVED") // "PENDING", "APPROVED", "REJECTED"
-  createdAt      DateTime @default(now())
+  id              String   @id @default(cuid())
+  regNumber       String   @unique
+  studentName     String
+  studentClass    String   // "SS1", "SS2", "SS3"
+  studentGender   String?
+  studentEmail    String?
+  studentPhone    String?
+  schoolName      String
+  schoolType      String   // "PUBLIC", "PRIVATE", "MISSION", "FEDERAL"
+  schoolAddress   String
+  lga             String
+  state           String   @default("Enugu")
+  schoolEmail     String?
+  schoolPhone     String?
+  parentName      String
+  parentPhone     String
+  parentEmail     String?
+  teacherName     String
+  teacherPhone    String
+  teacherEmail    String?
+  day1Motions     String   // JSON array of 3 selected motions for Day 1
+  day2Motions     String   // JSON array of 2 selected motions for Day 2
+  preferredStance String?  // "PROPOSITION", "OPPOSITION", "FREE"
+  referralSource  String?
+  agreedToTerms   Boolean  @default(true)
+  status          String   @default("APPROVED") // "PENDING", "APPROVED", "REJECTED"
+  createdAt       DateTime @default(now())
 }
 
 model Match {

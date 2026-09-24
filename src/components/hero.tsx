@@ -49,7 +49,7 @@ export default function Hero() {
 
         <div className="absolute top-6 right-6 hidden sm:flex items-center gap-2 bg-essd-orange text-white px-4 py-1.5 font-mono text-xs uppercase font-bold border-2 border-essd-black rounded-full shadow-[3px_3px_0px_#0A0A0C] rotate-[2deg]">
           <Icons.Mic className="w-3.5 h-3.5" />
-          <span>16 Elite Secondary Schools</span>
+          <span>80+ Secondary Schools</span>
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
@@ -174,7 +174,7 @@ export default function Hero() {
                   className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-essd-black text-essd-gold hover:bg-essd-orange hover:text-white font-display text-base font-black uppercase tracking-wider rounded-xl border-4 border-essd-cream shadow-[6px_6px_0px_#0A0A0C] hover:shadow-[2px_2px_0px_#0A0A0C] hover:translate-x-1 hover:translate-y-1 transition-all group"
                 >
                   <Icons.Sparkles className="w-5 h-5 mr-2 text-essd-gold group-hover:text-white transition-transform" />
-                  Register Your School
+                  Register Debater
                   <Icons.ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
 
