@@ -1,26 +1,30 @@
 import { RegistrationData } from "./types";
 
 interface EmailPayload {
-  to: string;
+  to: string | string[];
   subject: string;
   html: string;
   type: string;
 }
 
 export async function sendEmail({ to, subject, html, type }: EmailPayload) {
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.BREVO_API_KEY;
+  const recipients = Array.isArray(to) ? to : [to];
 
   if (apiKey) {
     try {
-      const res = await fetch("https://api.resend.com/emails", {
+      const res = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${apiKey}`,
+          "api-key": apiKey,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "ESSD Championship <notifications@essd-championship.ng>",
-          to,
+          sender: {
+            name: process.env.BREVO_SENDER_NAME || "ESSD Championship",
+            email: process.env.BREVO_SENDER_EMAIL || "notifications@essd.com.ng",
+          },
+          to: recipients.map((email) => ({ email })),
           subject,
           html,
         }),
@@ -28,7 +32,7 @@ export async function sendEmail({ to, subject, html, type }: EmailPayload) {
       const data = await res.json();
       return { success: res.ok, data, simulated: false };
     } catch (err) {
-      console.error("Resend dispatch error:", err);
+      console.error("Brevo dispatch error:", err);
     }
   }
 

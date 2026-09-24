@@ -5,8 +5,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider  = "postgresql"
+  url       = env("SUPABASE_DB_URL")
+  directUrl = env("SUPABASE_DIRECT_URL")
 }
 
 model School {
@@ -61,11 +62,11 @@ model Registration {
   schoolAddress   String
   lga             String
   state           String   @default("Enugu")
-  schoolEmail     String?
+  schoolEmail     String
   schoolPhone     String?
   parentName      String
   parentPhone     String
-  parentEmail     String?
+  parentEmail     String
   teacherName     String
   teacherPhone    String
   teacherEmail    String?

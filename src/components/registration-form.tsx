@@ -465,8 +465,23 @@ export default function RegistrationForm() {
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
-                  School Physical Address <span className="text-[#F25A19]">*</span>
+                    <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                      School Email <span className="text-[#F25A19]">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="schoolEmail"
+                      required
+                      placeholder="school@example.com"
+                      value={formData.schoolEmail}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2.5 bg-[#1B1B22] border border-[#2A2A33] rounded-xl text-[#FAF6EB] placeholder-[#71717A] text-sm focus:border-[#E8A927] focus:outline-none transition-colors"
+                    />
+                  </div>
+
+              <div>
+                    <label className="block text-xs font-semibold text-[#FAF6EB] uppercase tracking-wider mb-1.5">
+                      School Physical Address <span className="text-[#F25A19]">*</span>
                 </label>
                 <input
                   type="text"

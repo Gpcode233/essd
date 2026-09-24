@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { prisma, saveRegistrationBackup } from "@/lib/prisma";
 import { sendEmail, generateRegistrationConfirmationEmail, generateAdminNotificationEmail } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     } = body;
 
     // Validation
-    if (!studentName || !studentClass || !schoolName || !schoolAddress || !parentName || !parentPhone || !parentEmail || !teacherName || !teacherPhone) {
+    if (!studentName || !studentClass || !schoolName || !schoolAddress || !schoolEmail || !parentName || !parentPhone || !parentEmail || !teacherName || !teacherPhone) {
       return NextResponse.json(
         { success: false, message: "Missing required registration fields" },
         { status: 400 }
@@ -42,6 +42,13 @@ export async function POST(req: NextRequest) {
     if (typeof parentEmail !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(parentEmail)) {
       return NextResponse.json(
         { success: false, message: "Please provide a valid parent/guardian email address" },
+        { status: 400 }
+      );
+    }
+
+    if (typeof schoolEmail !== "string" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(schoolEmail)) {
+      return NextResponse.json(
+        { success: false, message: "Please provide a valid school email address" },
         { status: 400 }
       );
     }
@@ -65,36 +72,37 @@ export async function POST(req: NextRequest) {
     const lgaPrefix = lga ? lga.substring(0, 2).toUpperCase() : "EN";
     const regNumber = `ESSD-2026-${lgaPrefix}-${randomCode}`;
 
-    // Create Registration record in DB
-    const registration = await prisma.registration.create({
-      data: {
-        regNumber,
-        studentName,
-        studentClass,
-        studentGender: studentGender || null,
-        studentEmail: studentEmail || null,
-        studentPhone: studentPhone || null,
-        schoolName,
-        schoolType: schoolType || "PUBLIC",
-        schoolAddress: schoolAddress || "Enugu State",
-        lga: lga || "Enugu North",
-        state,
-        schoolEmail: schoolEmail || null,
-        schoolPhone: schoolPhone || null,
-        parentName,
-        parentPhone,
-        parentEmail: parentEmail || null,
-        teacherName,
-        teacherPhone,
-        teacherEmail: teacherEmail || null,
-        day1Motions: JSON.stringify(day1Motions),
-        day2Motions: JSON.stringify(day2Motions),
-        preferredStance: preferredStance || "FREE",
-        referralSource: referralSource || "Direct",
-        agreedToTerms: true,
-        status: "APPROVED",
-      },
-    });
+    const registrationData = {
+      regNumber,
+      studentName,
+      studentClass,
+      studentGender: studentGender || null,
+      studentEmail: studentEmail || null,
+      studentPhone: studentPhone || null,
+      schoolName,
+      schoolType: schoolType || "PUBLIC",
+      schoolAddress: schoolAddress || "Enugu State",
+      lga: lga || "Enugu North",
+      state,
+      schoolEmail,
+      schoolPhone: schoolPhone || null,
+      parentName,
+      parentPhone,
+      parentEmail,
+      teacherName,
+      teacherPhone,
+      teacherEmail: teacherEmail || null,
+      day1Motions: JSON.stringify(day1Motions),
+      day2Motions: JSON.stringify(day2Motions),
+      preferredStance: preferredStance || "FREE",
+      referralSource: referralSource || "Direct",
+      agreedToTerms: true,
+      status: "APPROVED",
+    };
+
+    // Supabase is authoritative; the optional backup write never blocks registration.
+    const registration = await prisma.registration.create({ data: registrationData });
+    await saveRegistrationBackup(registrationData);
 
     // Also link / register school if not already existing
     const slug = schoolName
@@ -134,9 +142,9 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    // Send confirmation email to Student/Parent/Teacher if email provided
-    const recipientEmail = studentEmail || parentEmail || teacherEmail || schoolEmail;
-    if (recipientEmail) {
+    // Send the confirmation to the parent and the school's official email.
+    const recipientEmails = [parentEmail, schoolEmail];
+    if (recipientEmails.length > 0) {
       const confirmationEmailHtml = generateRegistrationConfirmationEmail({
         studentName,
         studentClass,
@@ -149,7 +157,7 @@ export async function POST(req: NextRequest) {
       });
 
       await sendEmail({
-        to: recipientEmail,
+        to: recipientEmails,
         subject: `ESSD 2026 — Debater Accreditation Confirmed (${regNumber})`,
         html: confirmationEmailHtml,
         type: "REGISTRATION_CONFIRMATION",
