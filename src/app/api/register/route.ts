@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma, saveRegistrationBackup } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { sendEmail, generateRegistrationConfirmationEmail, generateAdminNotificationEmail } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
@@ -100,9 +100,7 @@ export async function POST(req: NextRequest) {
       status: "APPROVED",
     };
 
-    // Vercel Postgres is authoritative; the optional Supabase backup never blocks registration.
     const registration = await prisma.registration.create({ data: registrationData });
-    await saveRegistrationBackup(registrationData);
 
     // Also link / register school if not already existing
     const slug = schoolName
