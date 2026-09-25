@@ -100,7 +100,7 @@ export async function POST(req: NextRequest) {
       status: "APPROVED",
     };
 
-    // Supabase is authoritative; the optional backup write never blocks registration.
+    // Vercel Postgres is authoritative; the optional Supabase backup never blocks registration.
     const registration = await prisma.registration.create({ data: registrationData });
     await saveRegistrationBackup(registrationData);
 

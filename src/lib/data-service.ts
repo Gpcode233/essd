@@ -115,7 +115,7 @@ export function generateDefaultMatches(): MatchData[] {
       date: "16th Oct 2026",
       time: "09:00 AM",
       venueName: VENUE,
-      judges: "Panel of Certified WSDC Adjudicators",
+      judges: "Panel of Certified Adjudicators",
       status: "UPCOMING",
     },
     {
