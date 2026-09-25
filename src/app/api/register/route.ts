@@ -32,9 +32,24 @@ export async function POST(req: NextRequest) {
     } = body;
 
     // Validation
-    if (!studentName || !studentClass || !schoolName || !schoolAddress || !schoolEmail || !parentName || !parentPhone || !parentEmail || !teacherName || !teacherPhone) {
+    const missingFields = [
+      ["studentName", studentName],
+      ["studentClass", studentClass],
+      ["schoolName", schoolName],
+      ["schoolEmail", schoolEmail],
+      ["schoolAddress", schoolAddress],
+      ["parentName", parentName],
+      ["parentPhone", parentPhone],
+      ["parentEmail", parentEmail],
+      ["teacherName", teacherName],
+      ["teacherPhone", teacherPhone],
+    ]
+      .filter(([, value]) => !value)
+      .map(([field]) => field);
+
+    if (missingFields.length > 0) {
       return NextResponse.json(
-        { success: false, message: "Missing required registration fields" },
+        { success: false, message: `Missing required registration fields: ${missingFields.join(", ")}` },
         { status: 400 }
       );
     }
